@@ -1,0 +1,8 @@
+.env
+.idea
+vendor
+storage
+bootstrap
+test
+database
+assets
