@@ -43,7 +43,7 @@
                                 </div>
                             </div> -->
 
-                            <button type="submit" class="cmn-btn mt-30 w-100">Submit</button>
+                            <button type="submit" class="cmn-btn mt-30 w-100" disabled>You don't have to do anything.</button>
                         </form>
                     </div>
                 </div>
