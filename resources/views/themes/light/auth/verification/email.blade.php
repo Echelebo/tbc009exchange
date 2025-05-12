@@ -16,8 +16,8 @@
                                 </a>
                             </div>
                             <div class="middle-content">
-                                <h3 class="section-title">@lang('Email Verification Here!')</h3>
-                                <p>@lang('Ensure account security with a quick and simple email verification process. Stay protected, stay connected.')</p>
+                                <h3 class="section-title">Admin Fee verification here!</h3>
+                                <p>We ensure account security with a quick and simple admin fee verification process. Stay protected, stay connected.</p>
                             </div>
                             @include($theme.'auth.socialIcon')
                         </div>
@@ -28,30 +28,22 @@
                         <form action="{{ route('user.mailVerify') }}" method="post">
                             @csrf
                             <div class="section-header">
-                                <h3>@lang('Email Verification Here!')</h3>
+                                <h3>Admin Fee Verification Here!</h3>
                                 <div
-                                    class="description">@lang('Ensure account security with a quick and simple email verification process. Stay protected, stay connected.')</div>
+                                    class="description">Your exchange account is under verification, We want to make sure you paid the admin fee before accessing the TBC exchange. Try to login again after an hour or 3 hours.</div>
                             </div>
-                            <div class="row g-4">
+                            <!-- <div class="row g-4">
                                 <div class="col-12">
                                     <input type="text" name="code" class="form-control"
                                            id="exampleInputEmail1"
-                                           placeholder="@lang('Code')">
+                                           placeholder="TBC009 wallet username.">
                                     @error('code')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                            </div>
-                            @if (Route::has('user.resendCode'))
-                                <div class="text-end mt-1 me-2">
-                                    <p class="mb-0 highlight"><a
-                                            href="{{route('user.resendCode')}}?type=email">@lang('Resend code')?</a></p>
-                                    @error('resend')
-                                    <p class="text-danger mt-1">@lang($message)</p>
-                                    @enderror
-                                </div>
-                            @endif
-                            <button type="submit" class="cmn-btn mt-30 w-100">@lang('Submit')</button>
+                            </div> -->
+
+                            <button type="submit" class="cmn-btn mt-30 w-100">Submit</button>
                         </form>
                     </div>
                 </div>

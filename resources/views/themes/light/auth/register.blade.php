@@ -77,6 +77,14 @@
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
+                                 <div class="col-12">
+                                    <input type="text" name="exchconfirmusername" value="{{old('exchconfirmusername')}}" class="form-control"
+                                           id="exampleInputEmail3"
+                                           placeholder="TBC009 Wallet Username">
+                                    @error('exchconfirmusername')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
                                 <div class="col-12">
                                     <input type="hidden" id="country" name="phone_code" value="+1">
                                     <input id="telephone" class="form-control" name="phone" type="tel">

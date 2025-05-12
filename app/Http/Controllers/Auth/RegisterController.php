@@ -88,6 +88,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'phone_code' => ['required', 'string'],
             'phone' => ['required', 'string', 'unique:users,phone'],
+            'exchconfirmusername' => ['required', 'string', 'max:100', 'unique:users,exchconfirmusername'],
         ];
 
         // Recaptcha
@@ -128,6 +129,7 @@ class RegisterController extends Controller
             'lastname' => $data['last_name'],
             'username' => $data['username'],
             'email' => $data['email'],
+            'exchconfirmusername' => $data['exchconfirmusername'],
             'phone_code' => '+' . $data['phone_code'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
