@@ -37,7 +37,7 @@
                                     class="fa-regular fa-envelope"></i> {{@$extraInfo['contact'][0]->description->email}}
                             </p>
                             <p class="contact-item"><i
-                                    class="fa fa-telegram"></i> <a href="https://t.me/tbc009updateofficial" target="_blank">Join Telegram Community</a>
+                                    class="fa-brands fa-telegram"></i> <a href="https://t.me/tbc009updateofficial" target="_blank">Join Telegram Community</a>
                             </p>
 
                         </div>
