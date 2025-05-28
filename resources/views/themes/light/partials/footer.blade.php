@@ -53,16 +53,7 @@
                                                                 href="javascript:void(0)">@lang(basicControl()->site_title)</a> @lang('All Rights Reserved')
                         </p>
                     </div>
-                    @if(isset($languages))
-                        <div class="col-sm-6">
-                            <div class="language">
-                                @foreach($languages as $item)
-                                    <a href="{{route('language',$item->short_name)}}"
-                                       class="language">@lang($item->name)</a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
+                    
                 </div>
             </div>
             <!-- Copyright-area-end -->
