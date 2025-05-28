@@ -48,7 +48,7 @@
 <nav class="navbar sticky-top navbar-expand-lg transparent">
     <div class="container">
         <a class="navbar-brand logo" href="{{url('/')}}"><img
-                src="{{getFile(basicControl()->logo_driver,basicControl()->logo)}}" alt="..." id="logoSet"></a>
+                src="{{getFile(basicControl()->logo_driver,basicControl()->logo)}}" alt="..." width="50" id="logoSet"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar">
             <i class="fa-light fa-list"></i>
@@ -57,7 +57,7 @@
             <div class="offcanvas-header">
                 <a class="navbar-brand" href="{{url('/')}}"><img class="logo"
                                                                  src="{{getFile(basicControl()->logo_driver,basicControl()->logo)}}"
-                                                                 alt="..." id="logoSetMobile"></a>
+                                                                 alt="..." width="50" id="logoSetMobile"></a>
                 <button type="button" class="cmn-btn-close btn-close" data-bs-dismiss="offcanvas"
                         aria-label="Close"><i class="fa-light fa-arrow-right"></i></button>
             </div>

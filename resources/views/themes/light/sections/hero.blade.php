@@ -68,12 +68,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-xxl-12 col-lg-12 mt-4">
-                    <h5>Top Exchangers</h5>
-                </div>
-                <div class="col-xxl-12 col-lg-12 mt-4">
-                    <h5>Latest Exchange</h5>
-                </div>
+                
 
             </div>
         </div>
