@@ -6,9 +6,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="footer-widget">
                         <div class="widget-logo mb-30">
-                            <a href="{{route('page')}}"><img class="logo"
-                                                             src="{{getFile(basicControl()->dark_logo_driver,basicControl()->dark_logo)}}" width="50"
-                                                             alt="..."></a>
+                            <a href="{{route('page')}}"><img class="logo" src="{{getFile(basicControl()->dark_logo_driver,basicControl()->dark_logo)}}" width="50" alt="..."></a>
                         </div>
 
 
