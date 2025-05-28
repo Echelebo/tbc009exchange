@@ -7,7 +7,7 @@
                     <div class="footer-widget">
                         <div class="widget-logo mb-30">
                             <a href="{{route('page')}}"><img class="logo"
-                                                             src="{{getFile(basicControl()->dark_logo_driver,basicControl()->dark_logo)}}"
+                                                             src="{{getFile(basicControl()->dark_logo_driver,basicControl()->dark_logo)}}" width="50"
                                                              alt="..."></a>
                         </div>
 
@@ -24,6 +24,7 @@
                                     {!! $list !!}
                                 @endforeach
                             @endif
+                            <li><a class="widget-link" href="https://tbc009.org">TBC009 Wallet</a></li>
                             <li><a class="widget-link" href="{{route('tracking')}}">@lang('Tracking')</a></li>
                         </ul>
                     </div>
@@ -36,6 +37,9 @@
 
                             <p class="contact-item"><i
                                     class="fa-regular fa-envelope"></i> {{@$extraInfo['contact'][0]->description->email}}
+                            </p>
+                            <p class="contact-item"><i
+                                    class="fa-regular fa-telegram"></i> <a href="https://t.me/tbc009updateofficial" target="_blank">Join Telegram Community</a>
                             </p>
 
                         </div>

@@ -9,9 +9,17 @@
 
         <li class="nav-item">
             <a class="nav-link {{menuActive(['user.exchangeList','user.exchangeDetails'])}}"
-               href="{{route('user.exchangeList')}}">
+               href="/">
                 <i class="fa-light fal fa-exchange"></i>
                 <span>@lang('Exchange')</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{menuActive(['user.exchangeList','user.exchangeDetails'])}}"
+               href="{{route('user.exchangeList')}}">
+                <i class="fa-light fal fa-exchange"></i>
+                <span>Exchange List</span>
             </a>
         </li>
         <li class="nav-item">

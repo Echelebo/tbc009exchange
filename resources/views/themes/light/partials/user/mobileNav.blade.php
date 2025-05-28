@@ -5,7 +5,7 @@
                 class="fa-light fa-list"></i></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{menuActive('user.exchangeList')}}" href="{{route('user.exchangeList')}}"><i
+        <a class="nav-link {{menuActive('user.exchangeList')}}" href="/"><i
                 class="fa-light fal fa-exchange-alt"></i></a>
     </li>
     <li class="nav-item">

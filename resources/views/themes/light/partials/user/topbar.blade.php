@@ -3,7 +3,7 @@
         <div class="logo-container">
             <a href="{{url('/')}}" class="logo d-flex align-items-center">
                 <img src="{{ getFile($basicControl->logo_driver, $basicControl->logo) }}"
-                     alt="@lang(basicControl()->site_title)" id="logoSet">
+                     alt="@lang(basicControl()->site_title)" width="50" id="logoSet">
             </a>
         </div>
         <button onclick="toggleSideMenu()" class="toggle-sidebar toggle-sidebar-btn d-none d-lg-block"><i
@@ -88,12 +88,12 @@
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li>
+                   <!-- <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{route('user.verification.center')}}">
                             <i class="fa-light fa-circle-question"></i>
                             <span>@lang('Verification Center')</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <hr class="dropdown-divider">
                     </li>
