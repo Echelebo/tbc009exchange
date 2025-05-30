@@ -29,6 +29,7 @@
                                             <button type="button" class="cmn-btn3 reset">@lang('reset')</button>
                                         </div>
                                         <small>@lang('Allowed JPG or PNG. Max size of 3 MB')</small>
+                                        <p>{{ $userProfile->account_level }}</p>
                                     </div>
                                 </div>
                             </div>
