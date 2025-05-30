@@ -31,8 +31,22 @@
                                         <small>@lang('Allowed JPG or PNG. Max size of 3 MB')</small>
                                         
                                     </div>
-                                    <p>{{ $userProfile->account_level }}</p>
+                                    <div class="btn-area">
+                                        <div class="btn-area-inner d-flex">
+                                            <div class="cmn-file-input">
+                                                <label for="formFile" class="form-label cmn-btn">@lang('Upload New
+													Photo')</label>
+                                                <input class="form-control file-upload-input" name="profile_picture"
+                                                       type="file" id="formFile">
+                                            </div>
+                                            <button type="button" class="cmn-btn3 reset">@lang('reset')</button>
+                                        </div>
+                                        <small>@lang('Allowed JPG or PNG. Max size of 3 MB')</small>
+                                        
+                                    </div>
+                                    
                                 </div>
+                                <p>{{ $userProfile->account_level }}</p>
                             </div>
                         </div>
                         <div class="card-body pt-0">
