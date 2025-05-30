@@ -46,7 +46,7 @@
                                     </div>
                                     
                                 </div>
-                                <p class="mt-4">{{ $userProfile->account_level }} User @if ($userProfile->tagged_account_level != "NULL") <font color="green" size="2"> -  {{ $userProfile->account_level }}  </font> @else @endif</p>
+                                <p class="mt-4">{{ $userProfile->account_level }} User @if ($userProfile->tagged_account_level != NULL) <font color="green" size="2"> -  {{ $userProfile->account_level }}  </font> @else @endif</p>
                             </div>
                         </div>
                         <div class="card-body pt-0">
