@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-sm-auto"> 
                     
-                    <h6 class="page-header-title">{{$user->account_level}} @if ($user->tagged_account_level != NULL) ({{ $user->tagged_account_level }}) @else @endif</h6>
+                    <h6 class="page-header-title">{{$user->account_level}} user @if ($user->tagged_account_level != NULL) - ({{ $user->tagged_account_level }}) @else @endif</h6>
                     <a class="btn btn-primary" href="{{ route('admin.user.view.profile', $user->id) }}">
                         <i class="bi-eye-fill me-1"></i> @lang('View Profile')
                     </a>
