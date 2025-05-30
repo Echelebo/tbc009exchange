@@ -46,7 +46,7 @@
                                     </div>
                                     
                                 </div>
-                                <p>{{ $userProfile->account_level }}</p>
+                                <p class="mt-4">{{ $userProfile->account_level }} User @if ($userProfile->account_level != "NULL") - ( {{ $userProfile->account_level }} ) @else @endif</p>
                             </div>
                         </div>
                         <div class="card-body pt-0">
