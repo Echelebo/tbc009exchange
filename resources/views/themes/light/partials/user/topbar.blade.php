@@ -62,6 +62,8 @@
                         <div class="profile-content">
                             <h6>{{auth()->user()->fullname}}</h6>
                             <span>{{auth()->user()->email}}</span>
+                             <p class="mt-4" style="background_color: #b59245; padding: 8px;"><strong><font size="5">{{ auth()->user()->account_level }} User </font> @if (auth()->user()->tagged_account_level != NULL) <font color="green" size="2"> -  {{ auth()->user()->tagged_account_level }}  </font> @else @endif</strong></p>
+                            
                         </div>
                     </li>
                     <li>
