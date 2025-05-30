@@ -35,7 +35,7 @@
                                     
                                 </div>
                                 <div class="col-md-6">
-                                <p align="center" class="mt-4" style="background-color: #b59245; padding: 4px; border-radius: 15px; font-family: Monotype-Corsiva;"><strong><font size="2">{{ $userProfile->account_level }} User </font> @if ($userProfile->tagged_account_level != NULL) <font size="2">({{ $userProfile->tagged_account_level }})  </font> @else @endif </strong></p>
+                                <p align="center" class="mt-4" style="background-color: #b59245; padding: 4px; border-radius: 15px; font-family: Monotype-Corsiva;"><strong><font size="3">{{ $userProfile->account_level }} User </font> @if ($userProfile->tagged_account_level != NULL) <font size="3">({{ $userProfile->tagged_account_level }})  </font> @else @endif </strong></p>
                             </div>
                                
                             </div>
