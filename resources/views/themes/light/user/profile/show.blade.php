@@ -31,22 +31,13 @@
                                         <small>@lang('Allowed JPG or PNG. Max size of 3 MB')</small>
                                         
                                     </div>
-                                    <div class="btn-area">
-                                        <div class="btn-area-inner d-flex">
-                                            <div class="cmn-file-input">
-                                                <label for="formFile" class="form-label cmn-btn">@lang('Upload New
-													Photo')</label>
-                                                <input class="form-control file-upload-input" name="profile_picture"
-                                                       type="file" id="formFile">
-                                            </div>
-                                            <button type="button" class="cmn-btn3 reset">@lang('reset')</button>
-                                        </div>
-                                        <small>@lang('Allowed JPG or PNG. Max size of 3 MB')</small>
-                                        
-                                    </div>
+                                
                                     
                                 </div>
-                                <p class="mt-4" style="background-color: #b59245"><strong><font size="4">{{ $userProfile->account_level }} User </font> @if ($userProfile->tagged_account_level != NULL) <font color="green" size="2"> -  {{ $userProfile->tagged_account_level }}  </font> @else @endif</strong></p>
+                                <div class="col-md-6">
+                                <p align="center" class="mt-4" style="background-color: #b59245; padding: 4px; border-radius: 15px; font-family: Monotype-Corsiva;"><strong><font size="2">{{ $userProfile->account_level }} User </font> @if ($userProfile->tagged_account_level != NULL) <font size="2">({{ $userProfile->tagged_account_level }})  </font> @else @endif </strong></p>
+                            </div>
+                               
                             </div>
                         </div>
                         <div class="card-body pt-0">
