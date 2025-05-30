@@ -62,7 +62,7 @@
                         <div class="profile-content">
                             <h6>{{auth()->user()->fullname}}</h6>
                             <span>{{auth()->user()->email}}</span>
-                             <p align="center" class="mt-4" style="background-color: #b59245; padding: 4px; border-radius: 15px; font-family: Monotype-Corsiva;"><font size="2">{{ auth()->user()->account_level }} User </font> @if (auth()->user()->tagged_account_level != NULL) <font color="green" size="1.5"> -  {{ auth()->user()->tagged_account_level }}  </font> @else @endif</p>
+                             <p align="center" class="mt-4" style="background-color: #b59245; padding: 4px; border-radius: 15px; font-family: Monotype-Corsiva;"><font size="2">{{ auth()->user()->account_level }} User </font> @if (auth()->user()->account_level != NULL) <font color="green" size="1.5"> -  {{ auth()->user()->account_level }}  </font> @else @endif</p>
                             
                         </div>
                     </li>
