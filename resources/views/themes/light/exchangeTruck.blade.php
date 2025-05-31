@@ -3,7 +3,7 @@
         <div class="checkout-section">
             <div class="checkout-header">
                 <div class="d-flex justify-content-end">
-                    {!! $object->tracking_status !!}
+                    
                 </div>
             </div>
             <div class="checkout-table">
