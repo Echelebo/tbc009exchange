@@ -10,7 +10,7 @@ class CryptoCurrency extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'code', 'symbol', 'rate', 'usd_rate', 'service_fee', 'service_fee_type', 'network_fee', 'network_fee_type', 'min_send', 'max_send', 'image', 'driver', 'status', 'sort_by'];
+    protected $fillable = ['name', 'code', 'symbol', 'rate', 'usd_rate', 'service_fee', 'service_fee_type', 'network_fee', 'network_fee_type', 'min_send', 'max_send', 'to_send_get', 'image', 'driver', 'status', 'sort_by'];
     protected $appends = ['image_path', 'currency_name'];
 
     public function getImagePathAttribute()
