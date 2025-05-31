@@ -7,9 +7,9 @@
                 </div>
             </div>
             <div class="checkout-table">
-                <div class="table-row"> 
+                <div class="table-row">
                     <div class="item">
-                        <span>come</span>
+                        <span>@lang("You send")</span>
                         <h6>{{rtrim(rtrim($object->send_amount, 0), '.')}} {{optional($object->sendCurrency)->code}}</h6>
                         <span
                             class="highlight">{{optional($object->sendCurrency)->currency_name}}</span>

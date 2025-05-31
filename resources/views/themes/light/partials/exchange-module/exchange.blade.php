@@ -3,7 +3,7 @@
         <div class="input-amount-box" id="inputAmountBox">
             <span class="linear-gradient"></span>
             <div class="input-amount-wrapper">
-                <label class="form-label mb-2">@lang('You send')</label>
+                <label class="form-label mb-2">come</label>
                 <div class="input-amount-box-inner"
                      id="inputAmountBoxInner">
                     <a href="#" class="icon-area" data-bs-toggle="modal"
