@@ -26,7 +26,7 @@ class ExchangeController extends Controller
     public function getExchangeCurrency()
     {
         $queryClone = CryptoCurrency::query()->where('status', 1)->orderBy('sort_by', 'ASC')->get();
-        $sendCurrencies = $queryClone->where('to_send_get', 1);
+        $sendCurrencies = $queryClone;
         $getCurrencies = $queryClone;
         $secondObject = $getCurrencies->splice(1, 1);
         $getCurrencies = $getCurrencies->sortBy('sort_by');
