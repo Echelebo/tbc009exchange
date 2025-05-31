@@ -3,13 +3,13 @@
         <div class="checkout-section">
             <div class="checkout-header">
                 <div class="d-flex justify-content-end">
-                    
+                    {!! $object->tracking_status !!}
                 </div>
             </div>
             <div class="checkout-table">
-                <div class="table-row">
+                <div class="table-row"> 
                     <div class="item">
-                        <span>@lang("You send")</span>
+                        <span>come</span>
                         <h6>{{rtrim(rtrim($object->send_amount, 0), '.')}} {{optional($object->sendCurrency)->code}}</h6>
                         <span
                             class="highlight">{{optional($object->sendCurrency)->currency_name}}</span>
