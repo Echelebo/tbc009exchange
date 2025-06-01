@@ -7,7 +7,6 @@ use App\Http\Requests\ExchangeStoreRequest;
 use App\Models\CryptoCurrency;
 use App\Models\CryptoMethod;
 use App\Models\ExchangeRequest;
-use App\Models\ExchangeRate;
 use App\Traits\CalculateFees;
 use App\Traits\CryptoWalletGenerate;
 use App\Traits\SendNotification;
@@ -77,6 +76,7 @@ class ExchangeController extends Controller
         $sendCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeSendCurrency);
         $getCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeGetCurrency);
 
+        if (Auth::check()){
         $userAccountLevel = Auth::user()->account_level;
 
         if ($userAccountLevel == "Starter") {
@@ -101,6 +101,12 @@ class ExchangeController extends Controller
             $min_send = 10;
             $max_send = 500;
             $ratex = 12;
+        }
+        }
+
+        if (Auth::guest()){
+            $min_send = 100;
+            $max_send = 100;
         }
 
         if ($min_send > $request->exchangeSendAmount) {
@@ -146,47 +152,54 @@ class ExchangeController extends Controller
             $sendCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeSendCurrency);
             $getCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeGetCurrency);
 
-            if ($sendCurrency->min_send > $request->exchangeSendAmount) {
-                return back()->withInput()->with('error', 'Min is ' . $sendCurrency->min_send . ' ' . $sendCurrency->code);
-            }
-
-            if ($sendCurrency->max_send < $request->exchangeSendAmount) {
-                return back()->withInput()->with('error', 'Max is ' . $sendCurrency->max_send . ' ' . $sendCurrency->code);
-            }
-
-            if (!$request->destination_wallet) {
-                return back()->withInput()->with('error', 'Destination wallet address is required');
-            }
-
-            if (!$request->refund_wallet && basicControl()->refund_exchange_status) {
-                return back()->withInput()->with('error', 'Refund wallet address is required');
-            }
-
+        if (Auth::check()){
             $userAccountLevel = Auth::user()->account_level;
 
-        if ($userAccountLevel == "Starter") {
+            if ($userAccountLevel == "Starter") {
             $min_send = 2;
             $max_send = 10;
             $ratex = 10;
-        }
+            }
 
-        if ($userAccountLevel == "Basic") {
+            if ($userAccountLevel == "Basic") {
             $min_send = 5;
             $max_send = 25;
             $ratex = 10.5;
-        }
+            }
 
-        if ($userAccountLevel == "Advanced") {
+            if ($userAccountLevel == "Advanced") {
             $min_send = 10;
             $max_send = 200;
             $ratex = 11;
-        }
+            }
 
-        if ($userAccountLevel == "Pro") {
+            if ($userAccountLevel == "Pro") {
             $min_send = 10;
             $max_send = 500;
             $ratex = 12;
+            }
         }
+
+        if (Auth::guest()){
+            $min_send = 100;
+            $max_send = 100;
+        }
+
+        if ($min_send > $request->exchangeSendAmount) {
+                return back()->withInput()->with('error', 'Min is ' . $min_send . ' ' . $sendCurrency->code);
+        }
+
+        if ($max_send < $request->exchangeSendAmount) {
+                return back()->withInput()->with('error', 'Max is ' . $max_send . ' ' . $sendCurrency->code);
+        }
+
+        if (!$request->destination_wallet) {
+                return back()->withInput()->with('error', 'Destination wallet address is required');
+        }
+
+        if (!$request->refund_wallet && basicControl()->refund_exchange_status) {
+                return back()->withInput()->with('error', 'Refund wallet address is required');
+         }
 
             $sendAmount = $request->exchangeSendAmount;
             $exchangeRate = $ratex;
