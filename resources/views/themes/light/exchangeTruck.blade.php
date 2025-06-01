@@ -89,6 +89,7 @@
                         </div>
 
                         <form class="search-box2" method="GET" action="{{route('trackingx')}}">
+                            @csrf
                             <input type="hidden" value="{{$object->utr}}" name="trx_id">
                             <input type="text" value="" name="hash_id" class="form-control"
                                    id="search-box2"
