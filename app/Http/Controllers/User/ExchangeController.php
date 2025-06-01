@@ -77,7 +77,7 @@ class ExchangeController extends Controller
         $sendCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeSendCurrency);
         $getCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeGetCurrency);
 
-        $userAccountLevel = Auth::user()->account_level;
+        $userAccountLevel = Auth()->account_level() ?? null;
 
         if ($userAccountLevel == "Starter") {
             $min_send = 2;
