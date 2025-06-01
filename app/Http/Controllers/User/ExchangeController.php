@@ -162,12 +162,40 @@ class ExchangeController extends Controller
                 return back()->withInput()->with('error', 'Refund wallet address is required');
             }
 
+            $userAccountLevel = Auth::user()->account_level;
+
+        if ($userAccountLevel == "Starter") {
+            $min_send = 2;
+            $max_send = 10;
+            $ratex = 10;
+        }
+
+        if ($userAccountLevel == "Basic") {
+            $min_send = 5;
+            $max_send = 25;
+            $ratex = 10.5;
+        }
+
+        if ($userAccountLevel == "Advanced") {
+            $min_send = 10;
+            $max_send = 200;
+            $ratex = 11;
+        }
+
+        if ($userAccountLevel == "Pro") {
+            $min_send = 10;
+            $max_send = 500;
+            $ratex = 12;
+        }
+
             $sendAmount = $request->exchangeSendAmount;
-            $exchangeRate = $sendCurrency->usd_rate / $getCurrency->usd_rate;
+            $exchangeRate = $ratex;
             $getAmount = $sendAmount * $exchangeRate;
             $service_fee = $this->getCryptoFees($getAmount, $getCurrency)['serviceFees'];
             $network_fee = $this->getCryptoFees($getAmount, $getCurrency)['networkFees'];
             $finalAmount = $getAmount - ($service_fee + $network_fee);
+
+            $dailyRate = $exchangeRate/4;
 
             $exchangeRequest->send_currency_id = $sendCurrency->id;
             $exchangeRequest->get_currency_id = $getCurrency->id;
@@ -181,6 +209,7 @@ class ExchangeController extends Controller
             $exchangeRequest->rate_type = $request->rate_type;
             $exchangeRequest->destination_wallet = $request->destination_wallet;
             $exchangeRequest->refund_wallet = $request->refund_wallet ?? null;
+            $exchangeRequest->daily_rate = $dailyRate;
             $exchangeRequest->save();
 
             return redirect()->route('exchangeProcessingOverview', $exchangeRequest->utr);
