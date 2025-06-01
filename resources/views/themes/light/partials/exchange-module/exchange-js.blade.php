@@ -1,3 +1,8 @@
+ <?php
+        $user = "auth()->user()";
+        $accountLevel = "$user()->account_level";
+    ?>
+
 <script>
     Notiflix.Block.dots('#showLoader', {
         backgroundColor: loaderColor,
@@ -61,10 +66,33 @@
         $("#exchangeMessage").text('');
         $("#submitBtn").attr('disabled', false);
 
-        let sendMinLimit = activeSendCurrency.min_send;
-        let sendMaxLimit = activeSendCurrency.max_send;
+        let accountLevel = "<?php echo"$accountLevel"?>";
+
+        if (accountLevel == "Starter") {
+            let minSend = 2;
+            let maxSend = 10;
+            let ratex = 10;
+        }
+        if (accountLevel == "Basic") {
+            let minSend = 5;
+            let maxSend = 25;
+            let ratex = 10.5;
+        }
+        if (accountLevel == "Advanced") {
+            let minSend = 10;
+            let maxSend = 200;
+            let ratex = 11;
+        }
+        if (accountLevel == "Pro") {
+            let minSend = 10;
+            let maxSend = 500;
+            let ratex = 12;
+        }
+
+        let sendMinLimit = minSend;
+        let sendMaxLimit = maxSend;
         let sendCode = activeSendCurrency.code;
-        let sendUsdRate = activeSendCurrency.usd_rate;
+        let sendUsdRate = ratex;
         let getUsdRate = activeGetCurrency.usd_rate;
         let getAmount = getAmountCal(sendAmount, sendUsdRate, getUsdRate);
         $("input[name='exchangeGetAmount']").val(getAmount);
@@ -95,10 +123,33 @@
         $("#exchangeMessage").text('');
         $("#submitBtn").attr('disabled', false);
 
-        let sendMinLimit = activeSendCurrency.min_send;
-        let sendMaxLimit = activeSendCurrency.max_send;
+        let accountLevel = "<?php echo"$accountLevel"?>";
+
+        if (accountLevel == "Starter") {
+            let minSend = 2;
+            let maxSend = 10;
+            let ratex = 10;
+        }
+        if (accountLevel == "Basic") {
+            let minSend = 5;
+            let maxSend = 25;
+            let ratex = 10.5;
+        }
+        if (accountLevel == "Advanced") {
+            let minSend = 10;
+            let maxSend = 200;
+            let ratex = 11;
+        }
+        if (accountLevel == "Pro") {
+            let minSend = 10;
+            let maxSend = 500;
+            let ratex = 12;
+        }
+
+        let sendMinLimit = minSend;
+        let sendMaxLimit = maxSend;
         let sendCode = activeSendCurrency.code;
-        let sendUsdRate = activeSendCurrency.usd_rate;
+        let sendUsdRate = ratex;
         let getUsdRate = activeGetCurrency.usd_rate;
         let sendAmount = sendAmountCal(getAmount, sendUsdRate, getUsdRate);
         $("input[name='exchangeSendAmount']").val(sendAmount);
