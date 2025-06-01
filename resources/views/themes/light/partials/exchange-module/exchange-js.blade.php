@@ -1,7 +1,14 @@
  <?php
-        $user = "auth()->user()";
-        $accountLevel = "$user()->account_level";
-    ?>
+    $accountLevel = null;
+    if (auth()->check()) {
+        $user = auth()->user();
+        $accountLevel = $user->account_level;
+    }
+
+    if (auth()->guest()) {
+        $accountLevel = "Guest";
+    }
+?>
 
 <script>
     Notiflix.Block.dots('#showLoader', {
@@ -65,50 +72,48 @@
     function getCalculation(sendAmount) {
         $("#exchangeMessage").text('');
         $("#submitBtn").attr('disabled', false);
-
-        
-    let accountLevel = <?php echo json_encode($accountLevel); ?>;
-    let minSend, maxSend, ratex;
-
-    if (accountLevel === "Starter") {
-        minSend = 2;
-        maxSend = 10;
-        ratex = 10;
-    } else if (accountLevel === "Basic") {
-        minSend = 5;
-        maxSend = 25;
-        ratex = 10.5;
-    } else if (accountLevel === "Advanced") {
-        minSend = 10;
-        maxSend = 200;
-        ratex = 11;
-    } else if (accountLevel === "Pro") {
-        minSend = 10;
-        maxSend = 500;
-        ratex = 12;
-    } else {
-        console.error("Unknown account level: " + accountLevel);
+ 
+        let accountLevel = <?php echo json_encode($accountLevel); ?>;
+        if (!accountLevel) {
+        console.error("Account level is not set.");
+        $("#submitBtn").attr('disabled', true);
+        $("#exchangeMessage").text("Contact support.");
+        return;
     }
 
-        let sendMinLimit = minSend;
-        let sendMaxLimit = maxSend;
-        let sendMinLimit = minSend;
-        let sendMaxLimit = maxSend;
-        let sendCode = activeSendCurrency.code;
-        let sendUsdRate = ratex;
-        let getUsdRate = activeGetCurrency.usd_rate;
-        let getAmount = getAmountCal(sendAmount, sendUsdRate, getUsdRate);
-        $("input[name='exchangeGetAmount']").val(getAmount);
+    const levels = {
+        "Guest": { minSend: 2, maxSend: 500, ratex: 10 },
+        "Starter": { minSend: 2, maxSend: 10, ratex: 10 },
+        "Basic": { minSend: 5, maxSend: 25, ratex: 10.5 },
+        "Advanced": { minSend: 10, maxSend: 200, ratex: 11 },
+        "Pro": { minSend: 10, maxSend: 500, ratex: 12 }
+    };
+    const levelData = levels[accountLevel];
+    if (!levelData) {
+        console.error("Unknown account level: " + accountLevel);
+        $("#submitBtn").attr('disabled', true);
+        $("#exchangeMessage").text("Invalid account level.");
+        return;
+    }
 
-        if (parseFloat(sendAmount) < parseFloat(sendMinLimit)) {
-            $("#submitBtn").attr('disabled', true);
-            $("#exchangeMessage").text(`Min is ${sendMinLimit} ${sendCode}`);
-        }
+    const { minSend, maxSend, ratex } = levelData;
+    let sendMinLimit = minSend;
+    let sendMaxLimit = maxSend;
+    let sendCode = activeSendCurrency.code;
+    let sendUsdRate = ratex;
+    let getUsdRate = activeGetCurrency.usd_rate;
+    let getAmount = getAmountCal(sendAmount, sendUsdRate, getUsdRate);
+    $("input[name='exchangeGetAmount']").val(getAmount);
 
-        if (parseFloat(sendAmount) > parseFloat(sendMaxLimit)) {
-            $("#submitBtn").attr('disabled', true);
-            $("#exchangeMessage").text(`Max is ${sendMaxLimit} ${sendCode}`);
-        }
+    if (parseFloat(sendAmount) < parseFloat(sendMinLimit)) {
+        $("#submitBtn").attr('disabled', true);
+        $("#exchangeMessage").text(`Min is ${sendMinLimit} ${sendCode}`);
+    }
+
+    if (parseFloat(sendAmount) > parseFloat(sendMaxLimit)) {
+        $("#submitBtn").attr('disabled', true);
+        $("#exchangeMessage").text(`Max is ${sendMaxLimit} ${sendCode}`);
+    }
     }
 
     function getAmountCal(sendAmount, sendUsdRate, getUsdRate) {
@@ -126,34 +131,35 @@
         $("#exchangeMessage").text('');
         $("#submitBtn").attr('disabled', false);
 
-        let accountLevel = "<?php echo"$accountLevel"?>";
+        let accountLevel = <?php echo json_encode($accountLevel); ?>;
+        if (!accountLevel) {
+        console.error("Account level is not set.");
+        $("#submitBtn").attr('disabled', true);
+        $("#exchangeMessage").text("Contact support.");
+        return;
+    }
 
-        if (accountLevel == "Starter") {
-            let minSend = 2;
-            let maxSend = 10;
-            let ratex = 10;
-        }
-        if (accountLevel == "Basic") {
-            let minSend = 5;
-            let maxSend = 25;
-            let ratex = 10.5;
-        }
-        if (accountLevel == "Advanced") {
-            let minSend = 10;
-            let maxSend = 200;
-            let ratex = 11;
-        }
-        if (accountLevel == "Pro") {
-            let minSend = 10;
-            let maxSend = 500;
-            let ratex = 12;
-        }
+    const levels = {
+        "Guest": { minSend: 2, maxSend: 500, ratex: 10 },
+        "Starter": { minSend: 2, maxSend: 10, ratex: 10 },
+        "Basic": { minSend: 5, maxSend: 25, ratex: 10.5 },
+        "Advanced": { minSend: 10, maxSend: 200, ratex: 11 },
+        "Pro": { minSend: 10, maxSend: 500, ratex: 12 }
+    };
+    const levelData = levels[accountLevel];
+    if (!levelData) {
+        console.error("Unknown account level: " + accountLevel);
+        $("#submitBtn").attr('disabled', true);
+        $("#exchangeMessage").text("Invalid account level.");
+        return;
+    }
 
-        let sendMinLimit = minSend;
-        let sendMaxLimit = maxSend;
-        let sendCode = activeSendCurrency.code;
-        let sendUsdRate = ratex;
-        let getUsdRate = activeGetCurrency.usd_rate;
+    const { minSend, maxSend, ratex } = levelData;
+    let sendMinLimit = minSend;
+    let sendMaxLimit = maxSend;
+    let sendCode = activeSendCurrency.code;
+    let sendUsdRate = ratex;
+    let getUsdRate = activeGetCurrency.usd_rate;
         let sendAmount = sendAmountCal(getAmount, sendUsdRate, getUsdRate);
         $("input[name='exchangeSendAmount']").val(sendAmount);
 
