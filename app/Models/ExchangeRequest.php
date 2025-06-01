@@ -15,7 +15,7 @@ class ExchangeRequest extends Model
     use HasFactory, SoftDeletes, Status, Prunable;
 
     protected $fillable = ['user_id', 'send_currency_id', 'get_currency_id', 'send_amount', 'get_amount',
-        'exchange_rate', 'service_fee', 'network_fee', 'final_amount', 'daily_rate', 'balance', 'expires_in', 'next_trade', 'status', 'utr', 'deleted_at'];
+        'exchange_rate', 'service_fee', 'network_fee', 'final_amount', 'daily_rate', 'balance', 'hash_id', 'expires_in', 'next_trade', 'status', 'utr', 'deleted_at'];
 
     protected $appends = ['tracking_status', 'admin_status', 'user_status'];
 

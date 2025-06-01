@@ -63,13 +63,29 @@
                     @endif
                 </div>
 
+                @if ($object->status == 9)
+                <div class="table-row">
+                    <div class="item">
+                        <span>Daily(24 Hours) return</span>
+                        <h6>{{$object->get_amount/4}}</h6>
+                    </div>
+                    
+                    <div class="item">
+                        <span>Next return time</span>
+                        <h6>{{$object->next_trade}}</h6>
+                    </div>
+                   
+                </div>
+                @endif
+                @if ($object->status < 8)
                 <div class="table-row">
                     <div class="itemx">
-                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you are to stake USDT equivalent to the exchange outcome.
+                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
 
-                        <p>Make the staking payment to any of our addresses below to finalize your exchange.</p>
+                        <p>Make the staking payment to any of our addresses below and submit to finalize your exchange.</p>
                         <div><p>USDT-TRC20: TBFLFQGifn29ZrJS2Mk6UXQYHRjs8yVmG9</p>
                             <p>USDT-BEP20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
+                            <p>USDT-ERC20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
                         </div>
 
                         <form class="search-box2" method="GET" action="{{route('trackingx')}}">
@@ -83,6 +99,35 @@
                     </div>
 
                 </div>
+                @endif
+
+                @if ($object->status == 8)
+
+                <div class="table-row">
+                    <div class="itemx">
+                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are confirming your stake. You wil receive a notification once your stake has been approved.
+
+                        
+
+                    </div>
+
+                </div>
+
+                @endif
+
+                @if ($object->status == 9)
+
+                <div class="table-row">
+                    <div class="itemx">
+                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, your exchange has been confirmed. Click Exchange List from your account to view exchange.
+
+                        
+
+                    </div>
+
+                </div>
+
+                @endif
 
             </div>
         </div>
