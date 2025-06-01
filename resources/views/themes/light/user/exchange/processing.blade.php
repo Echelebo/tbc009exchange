@@ -184,6 +184,10 @@
                                     <span id="showNetworkType"></span>
                                     <h6 id="showNetworkFee"></h6>
                                 </div>
+                                <div class="item">
+                                    <span>Daily(24 Hours) return</span>
+                                    <h6 id="showDailyRate"></h6>
+                                </div>
 
                                 <div class="item">
                                     <span>@lang("You get")</span>
@@ -479,6 +483,7 @@
 
         function tradeShow(sendAmount, getAmount, sendCurrencyCode, getCurrencyCode, serviceFee, serviceFeeType, networkFee, networkFeeType) {
             let exchangeRate = (getAmount / sendAmount).toFixed(8);
+            let dailyRate = (getAmount/4).toFixed(8);
             $("#showSendAmount").text(`${sendAmount} ${sendCurrencyCode}`);
             $("#showExchangeRate").text(`1 ${sendCurrencyCode} ~ ${exchangeRate} ${getCurrencyCode}`);
             if (serviceFeeType === 'percent') {
@@ -500,9 +505,9 @@
             $("#showNetworkFee").text(`${networkFee} ${getCurrencyCode}`);
 
             finalAmount = (parseFloat(getAmount) - (parseFloat(serviceFee) + parseFloat(networkFee))).toFixed(8);
-
             $(".showFloatingRate").text(`~ ${finalAmount} ${getCurrencyCode}`);
             $(".showFixedRate").text(`${finalAmount} ${getCurrencyCode}`);
+            $(".showDailyRate").text(`${dailyRate} ${getCurrencyCode}`);
             showFinalRate();
         }
 
