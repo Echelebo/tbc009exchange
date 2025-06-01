@@ -66,29 +66,32 @@
         $("#exchangeMessage").text('');
         $("#submitBtn").attr('disabled', false);
 
-        let accountLevel = "<?php echo"$accountLevel"?>";
+        
+    let accountLevel = <?php echo json_encode($accountLevel); ?>;
+    let minSend, maxSend, ratex;
 
-        if (accountLevel == "Starter") {
-            let minSend = 2;
-            let maxSend = 10;
-            let ratex = 10;
-        }
-        if (accountLevel == "Basic") {
-            let minSend = 5;
-            let maxSend = 25;
-            let ratex = 10.5;
-        }
-        if (accountLevel == "Advanced") {
-            let minSend = 10;
-            let maxSend = 200;
-            let ratex = 11;
-        }
-        if (accountLevel == "Pro") {
-            let minSend = 10;
-            let maxSend = 500;
-            let ratex = 12;
-        }
+    if (accountLevel === "Starter") {
+        minSend = 2;
+        maxSend = 10;
+        ratex = 10;
+    } else if (accountLevel === "Basic") {
+        minSend = 5;
+        maxSend = 25;
+        ratex = 10.5;
+    } else if (accountLevel === "Advanced") {
+        minSend = 10;
+        maxSend = 200;
+        ratex = 11;
+    } else if (accountLevel === "Pro") {
+        minSend = 10;
+        maxSend = 500;
+        ratex = 12;
+    } else {
+        console.error("Unknown account level: " + accountLevel);
+    }
 
+        let sendMinLimit = minSend;
+        let sendMaxLimit = maxSend;
         let sendMinLimit = minSend;
         let sendMaxLimit = maxSend;
         let sendCode = activeSendCurrency.code;
