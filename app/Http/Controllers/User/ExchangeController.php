@@ -7,7 +7,6 @@ use App\Http\Requests\ExchangeStoreRequest;
 use App\Models\CryptoCurrency;
 use App\Models\CryptoMethod;
 use App\Models\ExchangeRequest;
-use App\Models\ExchangeRate;
 use App\Traits\CalculateFees;
 use App\Traits\CryptoWalletGenerate;
 use App\Traits\SendNotification;
