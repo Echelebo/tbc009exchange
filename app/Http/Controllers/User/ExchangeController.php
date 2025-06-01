@@ -33,7 +33,7 @@ class ExchangeController extends Controller
         $getCurrencies = $getCurrencies->where('to_send_get', 2)->sortBy('sort_by');
         $getCurrencies = $secondObject->merge($getCurrencies);
 
-        if (Auth::check()){
+        
         $userAccountLevel = Auth::user()->account_level;
 
         if ($userAccountLevel == "Starter") {
@@ -55,12 +55,7 @@ class ExchangeController extends Controller
             $min_send = 10;
             $max_send = 500;
         }
-        }
-
-        if (Auth::guest()){
-            $min_send = 100;
-            $max_send = 100;
-        }
+        
 
         return response()->json([
             'sendCurrencies' => $sendCurrencies,
