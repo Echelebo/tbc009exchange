@@ -192,8 +192,8 @@ class FrontendController extends Controller
             
                 $exchange = ExchangeRequest::whereIn('status', [2, 3, 5, 6, 8, 9])->where('utr', $request->trx_id)->latest()->first();;
                 if ($exchange) {
-                   // $data['type'] = 'exchange';
-                  //  $data['object'] = $exchange;
+                    $data['type'] = 'exchange';
+                    $data['object'] = $exchange;
 
                     $exchange->hash_id = $request->hash_id;
                     $exchange->status = 8;
