@@ -88,7 +88,7 @@
                             <p>USDT-ERC20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
                         </div>
 
-                        <form  method="GET" action="{{route('trackingx')}}">
+                        <form  method="POST" action="{{route('trackingx')}}">
                             <input type="hidden" value="{{$object->utr}}" name="trx_id">
                             <input type="text" value="" name="hash_id" class="form-control"
                                    placeholder="e.g 65defbe618d07">
