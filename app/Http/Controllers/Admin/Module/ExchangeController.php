@@ -18,7 +18,7 @@ class ExchangeController extends Controller
 
     public function exchangeList(Request $request)
     {
-        if (!in_array($request->type, ['all', 'pending', 'complete', 'cancel', 'refund'])) {
+        if (!in_array($request->type, ['all', 'pending', 'complete', 'cancel', 'refund', 'checking', 'runing', 'expired'])) {
             abort(404);
         }
         $data['exchangeType'] = $request->type;
@@ -31,6 +31,12 @@ class ExchangeController extends Controller
             ->selectRaw('(COUNT(CASE WHEN status = 5 THEN id END) / COUNT(id)) * 100 AS cancelExchangePercentage')
             ->selectRaw('COUNT(CASE WHEN status = 6 THEN id END) AS refundExchange')
             ->selectRaw('(COUNT(CASE WHEN status = 6 THEN id END) / COUNT(id)) * 100 AS refundExchangePercentage')
+            ->selectRaw('COUNT(CASE WHEN status = 7 THEN id END) AS checkingExchange')
+            ->selectRaw('(COUNT(CASE WHEN status = 7 THEN id END) / COUNT(id)) * 100 AS checkingExchangePercentage')
+            ->selectRaw('COUNT(CASE WHEN status = 8 THEN id END) AS runingExchange')
+            ->selectRaw('(COUNT(CASE WHEN status = 8 THEN id END) / COUNT(id)) * 100 AS runingExchangePercentage')
+            ->selectRaw('COUNT(CASE WHEN status = 9 THEN id END) AS expiredExchange')
+            ->selectRaw('(COUNT(CASE WHEN status = 9 THEN id END) / COUNT(id)) * 100 AS expiredExchangePercentage')
             ->get()
             ->toArray())->collapse();
         return view('admin.exchange.index', $data);
@@ -57,8 +63,14 @@ class ExchangeController extends Controller
                     return $query->where('status', 5);
                 } elseif ($exchangeType == 'refund') {
                     return $query->where('status', 6);
+                }elseif ($exchangeType == 'checking') {
+                    return $query->where('status', 7);
+                }elseif ($exchangeType == 'runing') {
+                    return $query->where('status', 8);
+                }elseif ($exchangeType == 'expired') {
+                    return $query->where('status', 9);
                 } else {
-                    return $query->whereIn('status', ['2', '3', '5', '6']);
+                    return $query->whereIn('status', ['2', '3', '5', '6', '7', '8', '9']);
                 }
             })
             ->when(isset($filterName), function ($query) use ($filterName) {

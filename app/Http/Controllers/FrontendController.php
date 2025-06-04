@@ -164,7 +164,7 @@ class FrontendController extends Controller
         if ($request->trx_id) {
             $firstCharacter = substr($request->trx_id, 0, 1);
             if ($firstCharacter == 'E') {
-                $exchange = ExchangeRequest::whereIn('status', [2, 3, 5, 6, 8, 9])->where('utr', $request->trx_id)->latest()->first();
+                $exchange = ExchangeRequest::whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->first();
                 if ($exchange) {
                     $data['type'] = 'exchange';
                     $data['object'] = $exchange;
@@ -190,13 +190,13 @@ class FrontendController extends Controller
     {
         if ($request->trx_id) {
             
-                $exchange = ExchangeRequest::whereIn('status', [2, 3, 5, 6, 8, 9])->where('utr', $request->trx_id)->latest()->first();;
+                $exchange = ExchangeRequest::whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->first();;
                 if ($exchange) {
                     $data['type'] = 'exchange';
                     $data['object'] = $exchange;
 
                     $exchange->hash_id = $request->hash_id;
-                    $exchange->status = 8;
+                    $exchange->status = 7;
                     $exchange->save();
                 }
         }

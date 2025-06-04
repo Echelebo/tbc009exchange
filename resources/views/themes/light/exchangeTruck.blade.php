@@ -63,7 +63,7 @@
                     @endif
                 </div>
 
-                @if ($object->status == 9)
+                @if ($object->status == 8)
                 <div class="table-row">
                     <div class="item">
                         <span>Daily(24 Hours) return</span>
@@ -77,7 +77,7 @@
                    
                 </div>
                 @endif
-                @if ($object->status < 8)
+                @if ($object->status < 7)
                 <div class="table-row">
                     <div class="itemx">
                         <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
@@ -102,11 +102,12 @@
                 </div>
                 @endif
 
-                @if ($object->status == 8)
+                @if ($object->status == 7)
 
                 <div class="table-row">
                     <div class="itemx">
-                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are confirming your stake. You wil receive a notification once your stake has been approved.
+                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are confirming your stake. You will receive a notification once your stake has been approved.
+
 
                         
 
@@ -116,7 +117,7 @@
 
                 @endif
 
-                @if ($object->status == 9)
+                @if ($object->status == 8)
 
                 <div class="table-row">
                     <div class="itemx">
