@@ -88,11 +88,13 @@
                             <p>USDT-ERC20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
                         </div>
 
-                        <form  method="POST" action="{{route('trackingx')}}">
+                        <form class="search-box2" method="POST" action="{{route('trackingx')}}">
+                            @csrf
                             <input type="hidden" value="{{$object->utr}}" name="trx_id">
                             <input type="text" value="" name="hash_id" class="form-control"
+                                   id="search-box2"
                                    placeholder="e.g 65defbe618d07">
-                            <button type="submit">Submit</button>
+                            <button type="submit" class="search-btn2">Submit</button>
                         </form>
 
                     </div>
