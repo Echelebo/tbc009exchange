@@ -54,7 +54,13 @@
                                     @elseif ($exchange->status == 5)
                                         <span class="legend-indicator bg-danger"></span>@lang("Trade Cancel")
                                     @elseif ($exchange->status == 6)
-                                        <span class="legend-indicator bg-primary"></span>@lang("Trade Refunded")
+                                    <span class="legend-indicator bg-primary"></span>@lang("Trade Refunded")
+                                    @elseif ($exchange->status == 7)
+                                    <span class="legend-indicator bg-primary"></span>@lang("Checking")
+                                    @elseif ($exchange->status == 8)
+                                    <span class="legend-indicator bg-primary"></span>@lang("Running")
+                                    @elseif ($exchange->status == 9)
+                                    <span class="legend-indicator bg-primary"></span>@lang("Expired")
                                     @endif
                                 </div>
 
@@ -179,6 +185,17 @@
                                                 class="text-dark font-weight-bold"
                                                 id="receiveId">{{$exchange->admin_wallet}}</strong>
                                         </li>
+                                        <li class="list-checked-item">@lang('Hash ID')
+                                            
+                                            <a href="javascript:void(0)"
+                                               onclick="copyHash()"
+                                               data-bs-toggle="tooltip"
+                                               data-bs-placement="top"
+                                               title="@lang("copy to clipboard")"><i
+                                                    class="fas fa-copy"></i></a><strong
+                                                class="text-dark font-weight-bold"
+                                                id="hashId">{{$exchange->hash_id}}</strong>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="alert alert-soft-secondary" role="alert">
@@ -295,6 +312,11 @@
 
         function copyReceiveAddress() {
             var textToCopy = document.getElementById('receiveId').innerText;
+            copyExe(textToCopy);
+        }
+
+        function copyHash() {
+            var textToCopy = document.getElementById('hashId').innerText;
             copyExe(textToCopy);
         }
 
