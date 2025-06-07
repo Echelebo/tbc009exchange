@@ -106,7 +106,7 @@
 
                 <div class="table-row">
                     <div class="itemx">
-                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are confirming your stake. You will receive a notification once your stake has been approved.
+                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are checking your stake. You will receive a notification once your stake has been approved.
 
 
                         
@@ -121,7 +121,20 @@
 
                 <div class="table-row">
                     <div class="itemx">
-                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, your exchange has been confirmed. Click Exchange List from your account to view exchange.
+                        <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(63, 193, 87)"></i>Exchange has been confirmed. Click Exchange List from your account to view exchange.
+
+                        
+
+                    </div>
+
+                </div>
+
+                @endif
+                @if ($object->status == 9)
+
+                <div class="table-row">
+                    <div class="itemx">
+                        <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(203, 40, 43)"></i>Exchange has expired.
 
                         
 

@@ -40,11 +40,17 @@
                             <option value="">@lang('All Status')</option>
                             <option value="2" {{ @request()->status == '2' ? 'selected' : '' }}>@lang('Awaiting Complete')
                             </option>
-                            <option value="3" {{ @request()->status == '3' ? 'selected' : '' }}>@lang('Trade Completed')
+                            <option value="3" {{ @request()->status == '3' ? 'selected' : '' }}>Trade Initiated
                             </option>
                             <option value="5" {{ @request()->status == '5' ? 'selected' : '' }}>@lang('Trade Cancel')
                             </option>
                             <option value="6" {{ @request()->status == '6' ? 'selected' : '' }}>@lang('Trade Refunded')
+                            </option>
+                            <option value="7" {{ @request()->status == '7' ? 'selected' : '' }}>Checking
+                            </option>
+                            <option value="8" {{ @request()->status == '8' ? 'selected' : '' }}>Running
+                            </option>
+                            <option value="9" {{ @request()->status == '9' ? 'selected' : '' }}>Trade Expired
                             </option>
                         </select>
                     </div>

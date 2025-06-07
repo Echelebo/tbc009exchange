@@ -15,6 +15,12 @@ trait Status
             return '<h4 class="mb-0 text-danger">'.trans('Canceled').'</h4>';
         } elseif ($this->status == 6) {
             return '<h4 class="mb-0 text-warning">'.trans('Refunded').'</h4>';
+        } elseif ($this->status == 7) {
+            return '<h4 class="mb-0 text-warning">'.trans('Checking').'</h4>';
+        } elseif ($this->status == 8) {
+            return '<h4 class="mb-0 text-success">'.trans('Running').'</h4>';
+        } elseif ($this->status == 9) {
+            return '<h4 class="mb-0 text-warning">'.trans('Expired').'</h4>';
         }
     }
 
@@ -28,6 +34,12 @@ trait Status
             return '<span class="badge text-bg-danger">'.trans('Canceled').'</span>';
         } elseif ($this->status == 6) {
             return '<span class="badge text-bg-warning">'.trans('Refunded').'</span>';
+        } elseif ($this->status == 7) {
+            return '<h4 class="mb-0 text-warning">'.trans('Checking').'</h4>';
+        } elseif ($this->status == 8) {
+            return '<h4 class="mb-0 text-success">'.trans('Running').'</h4>';
+        } elseif ($this->status == 9) {
+            return '<h4 class="mb-0 text-warning">'.trans('Expired').'</h4>';
         }
     }
 
@@ -49,6 +61,18 @@ trait Status
         } elseif ($this->status == 6) {
             return '<span class="badge bg-soft-primary text-primary">
                     <span class="legend-indicator bg-primary"></span>' . trans('Refunded') . '
+                  </span>';
+        } elseif ($this->status == 7) {
+            return '<span class="badge bg-soft-primary text-primary">
+                    <span class="legend-indicator bg-primary"></span>' . trans('Checking') . '
+                  </span>';
+        } elseif ($this->status == 8) {
+            return '<span class="badge bg-soft-primary text-primary">
+                    <span class="legend-indicator bg-primary"></span>' . trans('Running') . '
+                  </span>';
+        } elseif ($this->status == 9) {
+            return '<span class="badge bg-soft-primary text-primary">
+                    <span class="legend-indicator bg-primary"></span>' . trans('Expired') . '
                   </span>';
         }
     }
