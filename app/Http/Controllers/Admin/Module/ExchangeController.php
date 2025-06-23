@@ -271,7 +271,7 @@ class ExchangeController extends Controller
 
     public function exchangeSend(Request $request, $utr)
     {
-        $exchange = ExchangeRequest::where(['status' => 2, 'utr' => $utr])->latest()->firstOrFail();
+        $exchange = ExchangeRequest::where(['status' => 7, 'utr' => $utr])->latest()->firstOrFail();
         if ($request->btnValue == 'automatic' && optional($exchange->cryptoMethod)->is_automatic) {
             $methodObj = 'Facades\\App\\Services\\CryptoMethod\\' . optional($exchange->cryptoMethod)->code . '\\Service';
             $data = $methodObj::withdrawCrypto($exchange, $exchange->final_amount, optional($exchange->getCurrency)->code, $exchange->destination_wallet, 'exchange');
@@ -279,16 +279,16 @@ class ExchangeController extends Controller
                 return back()->with('error', 'The automatic cryptocurrency exchange could not be executed.');
             }
         }
-        $exchange->status = 3;
+        $exchange->status = 8;
         $exchange->save();
 
         $amount = getBaseAmount($exchange->final_amount, optional($exchange->getCurrency)->code, 'crypto');
 
-        BasicService::makeTransaction($amount, 0, '+', 'Crypto Exchange Complete',
+        BasicService::makeTransaction($amount, 0, '+', 'Crypto Exchange Running',
             $exchange->id, ExchangeRequest::class, $exchange->user_id, $exchange->final_amount, optional($exchange->getCurrency)->code);
 
         $this->sendUserNotification($exchange, 'userExchange', 'EXCHANGE_COMPLETE');
-        return back()->with('success', 'Exchange Complete Successfully');
+        return back()->with('success', 'Exchange Running Successfully');
     }
 
     public function exchangeCancel($utr)

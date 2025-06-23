@@ -33,31 +33,31 @@ class ExchangeController extends Controller
         $getCurrencies = $getCurrencies->where('to_send_get', 2)->sortBy('sort_by');
         $getCurrencies = $secondObject->merge($getCurrencies);
 
-        if (Auth::check()){
-        $userAccountLevel = Auth::user()->account_level;
+        if (Auth::check()) {
+            $userAccountLevel = Auth::user()->account_level;
 
-        if ($userAccountLevel == "Starter") {
-            $min_send = 2;
-            $max_send = 10;
+            if ($userAccountLevel == "Starter") {
+                $min_send = 2;
+                $max_send = 10;
+            }
+
+            if ($userAccountLevel == "Basic") {
+                $min_send = 5;
+                $max_send = 25;
+            }
+
+            if ($userAccountLevel == "Advanced") {
+                $min_send = 10;
+                $max_send = 200;
+            }
+
+            if ($userAccountLevel == "Pro") {
+                $min_send = 10;
+                $max_send = 500;
+            }
         }
 
-        if ($userAccountLevel == "Basic") {
-            $min_send = 5;
-            $max_send = 25;
-        }
-
-        if ($userAccountLevel == "Advanced") {
-            $min_send = 10;
-            $max_send = 200;
-        }
-
-        if ($userAccountLevel == "Pro") {
-            $min_send = 10;
-            $max_send = 500;
-        }
-        }
-
-        if (Auth::guest()){
+        if (Auth::guest()) {
             $min_send = 100;
             $max_send = 100;
         }
@@ -65,8 +65,8 @@ class ExchangeController extends Controller
         return response()->json([
             'sendCurrencies' => $sendCurrencies,
             'getCurrencies' => $getCurrencies,
-            'selectedSendCurrency' => $sendCurrencies[0]??null,
-            'selectedGetCurrency' => $getCurrencies[0]??null,
+            'selectedSendCurrency' => $sendCurrencies[0] ?? null,
+            'selectedGetCurrency' => $getCurrencies[0] ?? null,
             'initialSendAmount' => isset($sendCurrencies[0]) ? (($min_send + $max_send) / 2) : 2,
         ]);
     }
@@ -76,37 +76,50 @@ class ExchangeController extends Controller
         $sendCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeSendCurrency);
         $getCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeGetCurrency);
 
-        if (Auth::check()){
-        $userAccountLevel = Auth::user()->account_level;
+        if (Auth::check()) {
+            $userAccountLevel = Auth::user()->account_level;
 
-        if ($userAccountLevel == "Starter") {
-            $min_send = 2;
-            $max_send = 10;
-            $ratex = 10;
+            $active = ExchangeRequest::where('status', 8)->where('user_id', Auth::user()->id)->get();
+            $pending = ExchangeRequest::where('status', 7)->where('user_id', Auth::user()->id)->get();
+
+            if ($userAccountLevel == "Starter") {
+                $min_send = 2;
+                $max_send = 10;
+                $ratex = 10;
+                $maxActive = 1;
+                $maxPending = 2;
+            }
+
+            if ($userAccountLevel == "Basic") {
+                $min_send = 5;
+                $max_send = 25;
+                $ratex = 10.5;
+                $maxActive = 2;
+                $maxPending = 2;
+            }
+
+            if ($userAccountLevel == "Advanced") {
+                $min_send = 10;
+                $max_send = 200;
+                $ratex = 11;
+                $maxActive = 3;
+                $maxPending = 2;
+            }
+
+            if ($userAccountLevel == "Pro") {
+                $min_send = 10;
+                $max_send = 500;
+                $ratex = 12;
+                $maxActive = 5;
+                $maxPending = 2;
+            }
         }
 
-        if ($userAccountLevel == "Basic") {
-            $min_send = 5;
-            $max_send = 25;
-            $ratex = 10.5;
-        }
-
-        if ($userAccountLevel == "Advanced") {
-            $min_send = 10;
-            $max_send = 200;
-            $ratex = 11;
-        }
-
-        if ($userAccountLevel == "Pro") {
-            $min_send = 10;
-            $max_send = 500;
-            $ratex = 12;
-        }
-        }
-
-        if (Auth::guest()){
+        if (Auth::guest()) {
             $min_send = 100;
             $max_send = 100;
+            $maxActive = 5;
+            $maxPending = 2;
         }
 
         if ($min_send > $request->exchangeSendAmount) {
@@ -117,13 +130,22 @@ class ExchangeController extends Controller
             return back()->with('error', 'The maximum exchange for ' . $userAccountLevel . ' User is ' . $max_send . ' ' . $sendCurrency->code);
         }
 
+        if (count($pending) >= $maxPending) {
+            return back()->with('error', 'The maximum pending exchange is ' . $maxPending);
+        }
+
+        if (count($active) >= $maxActive) {
+            return back()->with('error', 'The maximum active exchange is ' . $maxActive);
+        }
+
+
         $sendAmount = $request->exchangeSendAmount;
         $exchangeRate = $ratex;
         $getAmount = $sendAmount * $exchangeRate;
         $service_fee = $this->getCryptoFees($getAmount, $getCurrency)['serviceFees'];
         $network_fee = $this->getCryptoFees($getAmount, $getCurrency)['networkFees'];
         $finalAmount = $getAmount - ($service_fee + $network_fee);
-        $dailyRate = $exchangeRate/4;
+        $dailyRate = $exchangeRate / 4;
 
         $exchangeRequest = ExchangeRequest::create([
             'user_id' => auth()->id() ?? null,
@@ -152,54 +174,75 @@ class ExchangeController extends Controller
             $sendCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeSendCurrency);
             $getCurrency = CryptoCurrency::where('status', 1)->findOrFail($request->exchangeGetCurrency);
 
-        if (Auth::check()){
-            $userAccountLevel = Auth::user()->account_level;
+            if (Auth::check()) {
+                $userAccountLevel = Auth::user()->account_level;
 
-            if ($userAccountLevel == "Starter") {
-            $min_send = 2;
-            $max_send = 10;
-            $ratex = 10;
+                $active = ExchangeRequest::where('status', 8)->where('user_id', Auth::user()->id)->get();
+                $pending = ExchangeRequest::where('status', 7)->where('user_id', Auth::user()->id)->get();
+
+                if ($userAccountLevel == "Starter") {
+                    $min_send = 2;
+                    $max_send = 10;
+                    $ratex = 10;
+                    $maxActive = 1;
+                    $maxPending = 2;
+                }
+
+                if ($userAccountLevel == "Basic") {
+                    $min_send = 5;
+                    $max_send = 25;
+                    $ratex = 10.5;
+                    $maxActive = 2;
+                    $maxPending = 2;
+                }
+
+                if ($userAccountLevel == "Advanced") {
+                    $min_send = 10;
+                    $max_send = 200;
+                    $ratex = 11;
+                    $maxActive = 3;
+                    $maxPending = 2;
+                }
+
+                if ($userAccountLevel == "Pro") {
+                    $min_send = 10;
+                    $max_send = 500;
+                    $ratex = 12;
+                    $maxActive = 5;
+                    $maxPending = 2;
+                }
             }
 
-            if ($userAccountLevel == "Basic") {
-            $min_send = 5;
-            $max_send = 25;
-            $ratex = 10.5;
+            if (Auth::guest()) {
+                $min_send = 100;
+                $max_send = 100;
+                $maxActive = 5;
+                $maxPending = 2;
             }
 
-            if ($userAccountLevel == "Advanced") {
-            $min_send = 10;
-            $max_send = 200;
-            $ratex = 11;
-            }
-
-            if ($userAccountLevel == "Pro") {
-            $min_send = 10;
-            $max_send = 500;
-            $ratex = 12;
-            }
-        }
-
-        if (Auth::guest()){
-            $min_send = 100;
-            $max_send = 100;
-        }
-
-        if ($min_send > $request->exchangeSendAmount) {
+            if ($min_send > $request->exchangeSendAmount) {
                 return back()->withInput()->with('error', 'Min is ' . $min_send . ' ' . $sendCurrency->code);
-        }
+            }
 
-        if ($max_send < $request->exchangeSendAmount) {
+            if ($max_send < $request->exchangeSendAmount) {
                 return back()->withInput()->with('error', 'Max is ' . $max_send . ' ' . $sendCurrency->code);
-        }
+            }
 
-        if (!$request->destination_wallet) {
+            if (count($pending) >= $maxPending) {
+                return back()->with('error', 'The maximum pending exchange is ' . $maxPending);
+            }
+
+            if (count($active) >= $maxActive) {
+                return back()->with('error', 'The maximum active exchange is ' . $maxActive);
+            }
+
+            if (!$request->destination_wallet) {
                 return back()->withInput()->with('error', 'Destination wallet address is required');
-        }
+            }
 
-        if (!$request->refund_wallet && basicControl()->refund_exchange_status) {
+            if (!$request->refund_wallet && basicControl()->refund_exchange_status) {
                 return back()->withInput()->with('error', 'Refund wallet address is required');
-         }
+            }
 
             $sendAmount = $request->exchangeSendAmount;
             $exchangeRate = $ratex;
@@ -208,7 +251,7 @@ class ExchangeController extends Controller
             $network_fee = $this->getCryptoFees($getAmount, $getCurrency)['networkFees'];
             $finalAmount = $getAmount - ($service_fee + $network_fee);
 
-            $dailyRate = $exchangeRate/4;
+            $dailyRate = $exchangeRate / 4;
 
             $exchangeRequest->send_currency_id = $sendCurrency->id;
             $exchangeRequest->get_currency_id = $getCurrency->id;
@@ -241,7 +284,7 @@ class ExchangeController extends Controller
         if ($request->method() == 'GET') {
 
             if (!$exchangeRequest->admin_wallet) {
-                $response = $this->getCryptoWallet($exchangeRequest->sendCurrency->code,'exchange');
+                $response = $this->getCryptoWallet($exchangeRequest->sendCurrency->code, 'exchange');
                 if (!$response['status']) {
                     return back()->with('error', 'Unable to generate an address. Please contact the administration for assistance.');
                 }
@@ -270,8 +313,17 @@ class ExchangeController extends Controller
             $amount = getBaseAmount($exchangeRequest->send_amount, optional($exchangeRequest->sendCurrency)->code, 'crypto');
             $charge = getBaseAmount($exchangeRequest->service_fee + $exchangeRequest->network_fee, optional($exchangeRequest->getCurrency)->code, 'crypto');
 
-            BasicService::makeTransaction($amount, $charge, '-', 'Manual Crypto Deposit For Exchange',
-                $exchangeRequest->id, ExchangeRequest::class, $exchangeRequest->user_id, $exchangeRequest->send_amount, optional($exchangeRequest->sendCurrency)->code);
+            BasicService::makeTransaction(
+                $amount,
+                $charge,
+                '-',
+                'Manual Crypto Deposit For Exchange',
+                $exchangeRequest->id,
+                ExchangeRequest::class,
+                $exchangeRequest->user_id,
+                $exchangeRequest->send_amount,
+                optional($exchangeRequest->sendCurrency)->code
+            );
 
             $this->sendAdminNotification($exchangeRequest, 'exchange');
             return redirect()->route('exchangeFinal', $exchangeRequest->utr);
