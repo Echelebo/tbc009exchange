@@ -395,8 +395,7 @@
          $("#submitFormId").attr("action", formSubmitRoute);
 
          activeTab = 'buy';
-         let route = "{{route("
-         getBuyCurrency ")}}";
+         let route = "{{route("getBuyCurrency")}}";
          getExchangeCurrency(route);
          $("#submitBtn").text("Buy Now");
      });
@@ -410,8 +409,7 @@
          $("#submitFormId").attr("action", formSubmitRoute);
 
          activeTab = 'sell';
-         let route = "{{route("
-         getSellCurrency ")}}";
+         let route = "{{route("getSellCurrency")}}";
          getExchangeCurrency(route);
          $("#submitBtn").text("Sell Now");
      });
