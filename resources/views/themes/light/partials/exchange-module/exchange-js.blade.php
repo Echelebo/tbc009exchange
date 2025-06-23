@@ -294,24 +294,23 @@
      }
 
 
-     function getExchangeCurrency(route = "{{route("
-         getExchangeCurrency ")}}") {
-         axios.get(route)
-             .then(function(response) {
-                 Notiflix.Block.remove('#showLoader');
-                 activeSendCurrency = response.data.selectedSendCurrency;
-                 activeGetCurrency = response.data.selectedGetCurrency;
-                 setSendCurrency(activeSendCurrency);
-                 setGetCurrency(activeGetCurrency);
-                 showSend(response.data.sendCurrencies);
-                 showGet(response.data.getCurrencies);
-                 $("input[name='exchangeSendAmount']").val((response.data.initialSendAmount).toFixed(2));
-                 getCalculation(response.data.initialSendAmount);
-             })
-             .catch(function(error) {
+     function getExchangeCurrency(route = "{{route("getExchangeCurrency")}}") {
+        axios.get(route)
+            .then(function (response) {
+                Notiflix.Block.remove('#showLoader');
+                activeSendCurrency = response.data.selectedSendCurrency;
+                activeGetCurrency = response.data.selectedGetCurrency;
+                setSendCurrency(activeSendCurrency);
+                setGetCurrency(activeGetCurrency);
+                showSend(response.data.sendCurrencies);
+                showGet(response.data.getCurrencies);
+                $("input[name='exchangeSendAmount']").val((response.data.initialSendAmount).toFixed(2));
+                getCalculation(response.data.initialSendAmount);
+            })
+            .catch(function (error) {
 
-             });
-     }
+            });
+    }
 
      function showSend(currencies) {
          $('#show-send').html(``);
