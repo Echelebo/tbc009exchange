@@ -86,6 +86,14 @@
                                     @enderror
                                 </div>
                                 <div class="col-12">
+                                    <input type="text" name="ref_id" value="" class="form-control"
+                                           id="exampleInputEmail3"
+                                           placeholder="Referral ID(Leave empty if not referred)">
+                                    @error('ref_id')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-12">
                                     <input type="hidden" id="country" name="phone_code" value="+1">
                                     <input id="telephone" class="form-control" name="phone" type="tel">
                                     <div class="text-danger">@error('phone') @lang($message) @enderror</div>

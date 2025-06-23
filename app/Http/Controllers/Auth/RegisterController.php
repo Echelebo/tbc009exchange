@@ -130,6 +130,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'exchconfirmusername' => $data['exchconfirmusername'],
+            'referral_by' => $data['ref_id'],
             'phone_code' => '+' . $data['phone_code'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
