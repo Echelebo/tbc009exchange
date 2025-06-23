@@ -381,8 +381,7 @@
          $("#submitFormId").attr("action", formSubmitRoute);
 
          activeTab = 'exchange';
-         let route = "{{route("
-         getExchangeCurrency ")}}";
+         let route = "{{route("getExchangeCurrency")}}";
          getExchangeCurrency(route);
          $("#submitBtn").text("Exchange Now");
      });
