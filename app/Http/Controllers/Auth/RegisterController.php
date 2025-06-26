@@ -174,10 +174,6 @@ class RegisterController extends Controller
         $in_app_key = [];
 
         foreach ($notificationTemplates as $template) {
-            if ($template->status['mail']) {
-                array_push($email_key, $template->template_key);
-            }
-
             if ($template->status['sms']) {
                 array_push($sms_key, $template->template_key);
             }
