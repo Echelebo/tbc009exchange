@@ -83,7 +83,7 @@
                         <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
 
                         
-<form class="search-box2" method="POST" action="{{route('trackingx')}}">
+<form class="search-box2-x" method="POST" action="{{route('trackingx')}}">
                             @csrf
 
                            
