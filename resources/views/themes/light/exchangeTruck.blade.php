@@ -98,14 +98,15 @@
   </div>
                             
 
-                        <div id="usdtid" style="display: none;">
+                        <div id="usdtid" style="display: none; width: full;" class="mb-4">
+                            <div>
                         <p class="mb-4">Make the staking payment to any of our addresses below and submit to finalize your exchange.</p>
                         <p>USDT-TRC20: TBFLFQGifn29ZrJS2Mk6UXQYHRjs8yVmG9</p>
                             <p>USDT-BEP20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
                             <p class="mb-4">USDT-ERC20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
                         
 
-                        
+</div>
                             <input type="hidden" value="{{$object->utr}}" name="trx_id">
                             <input type="text" value="" name="hash_id" class="form-control"
                                    id="search-box2"
