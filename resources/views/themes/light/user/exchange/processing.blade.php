@@ -223,8 +223,8 @@
      var intervalTime = "{{basicControl()->floating_rate_update_time}}";
      var isFixed = false;
      var finalAmount = 0;
-     var activeSendCurrency = @json($exchangeRequest - > sendCurrency);
-     var activeGetCurrency = @json($exchangeRequest - > getCurrency);
+     var activeSendCurrency = @json($exchangeRequest->sendCurrency);
+     var activeGetCurrency = @json($exchangeRequest->getCurrency);
      getExchangeCurrency();
      setSendCurrency(activeSendCurrency);
      setGetCurrency(activeGetCurrency);
