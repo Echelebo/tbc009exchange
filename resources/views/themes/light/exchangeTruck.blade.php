@@ -79,7 +79,7 @@
                 @endif
                 @if ($object->status < 7)
                 <div class="table-row">
-                    <div class="itemx">
+                    <div class="col-12">
                         <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
 
                         
@@ -89,18 +89,18 @@
                            
 
                             
-  <div>
-    <select id="mySelect" name="stakingMode">
+  
+    <select id="mySelect" name="stakingMode" class="form-control">
                                 <option value="">Select Staking Mode</option>
                                 <option value="balance">Stake Using Balance</option>
                                 <option value="usdt">Stake Using USDT</option>
                             </select>
-  </div>
+ 
                             
 
-                        <div id="usdtid" style="display: none; width: full;" class="mb-4">
+                        <div id="usdtid" style="display: none; width: 80%;" class="mb-4">
                             <div>
-                        <p class="mb-4">Make the staking payment to any of our addresses below and submit to finalize your exchange.</p>
+                        <p class="mb-4 mt-4">Make the staking payment to any of our addresses below and submit to finalize your exchange.</p>
                         <p>USDT-TRC20: TBFLFQGifn29ZrJS2Mk6UXQYHRjs8yVmG9</p>
                             <p>USDT-BEP20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
                             <p class="mb-4">USDT-ERC20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
