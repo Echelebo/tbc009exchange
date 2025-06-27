@@ -482,8 +482,7 @@
          return (getAmount * getUsdRate / sendUsdRate).toFixed(8);
      }
 
-     function getExchangeCurrency(route = "{{route("
-         getExchangeCurrency ")}}") {
+     function getExchangeCurrency(route = "{{route("getExchangeCurrency")}}") {
          axios.get(route)
              .then(function(response) {
                  Notiflix.Block.remove('#calLoader');
