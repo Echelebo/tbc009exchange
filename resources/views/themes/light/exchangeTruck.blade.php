@@ -78,12 +78,12 @@
                 </div>
                 @endif
                 @if ($object->status < 7)
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="table-row">
+                    
                         <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
 
                         
-<form class="search-box2" method="POST" action="{{route('trackingx')}}">
+<form class="search-box-x" method="POST" action="{{route('trackingx')}}">
                             @csrf
 
                            
@@ -98,24 +98,24 @@
  
                             
 
-                        <div id="usdtid" style="display: none; width: 80%;" class="mb-4">
-                            <div>
+                        <div id="usdtid" style="display: none;" class="mb-4">
+                            
                         <p class="mb-4 mt-4">Make the staking payment to any of our addresses below and submit to finalize your exchange.</p>
                         <p>USDT-TRC20: TBFLFQGifn29ZrJS2Mk6UXQYHRjs8yVmG9</p>
                             <p>USDT-BEP20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
                             <p class="mb-4">USDT-ERC20: 0x4ec85660f919367f4a5f11860e828405c7b06cbf</p>
                         
 
-</div>
+
                             <input type="hidden" value="{{$object->utr}}" name="trx_id">
                             <input type="text" value="" name="hash_id" class="form-control"
-                                   id="search-box2"
+                                   id="search-box-x"
                                    placeholder="e.g 65defbe618d07">
                         </div>
-                            <button type="submit" class="search-btn2">Submit</button>
+                            <button type="submit" class="search-btn">Submit</button>
                         </form>
 
-                    </div>
+                    
 
                 </div>
                 @endif
