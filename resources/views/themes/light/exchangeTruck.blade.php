@@ -89,12 +89,14 @@
                            
 
                             
-  
-                            <select id="mySelect" name="stakingMode">
+  <div>
+    <select id="mySelect" name="stakingMode">
                                 <option value="">Select Staking Mode</option>
                                 <option value="balance">Stake Using Balance</option>
                                 <option value="usdt">Stake Using USDT</option>
                             </select>
+  </div>
+                            
 
                         <div id="usdtid" style="display: none;">
                         <p class="mb-4">Make the staking payment to any of our addresses below and submit to finalize your exchange.</p>
