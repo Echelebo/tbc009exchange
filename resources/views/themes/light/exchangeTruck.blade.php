@@ -78,7 +78,7 @@
                 </div>
                 @endif
                 @if ($object->status < 7)
-                <div class="table-row">
+                <div>
                     
                         <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
 
@@ -109,10 +109,10 @@
 
                             <input type="hidden" value="{{$object->utr}}" name="trx_id">
                             <input type="text" value="" name="hash_id" class="form-control"
-                                   id="search-box-x"
+                                   id="search-box2"
                                    placeholder="e.g 65defbe618d07">
                         </div>
-                            <button type="submit" class="search-btn">Submit</button>
+                            <button type="submit" class="search-btn2">Submit</button>
                         </form>
 
                     
