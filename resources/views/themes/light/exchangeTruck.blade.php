@@ -112,7 +112,7 @@
                                    id="search-box2"
                                    placeholder="e.g 65defbe618d07">
                         </div>
-                            <button type="submit" class="search-btn2">Submit</button>
+                            <button type="submit" class="search-btn">Submit</button>
                         </form>
 
                     
