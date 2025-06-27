@@ -78,8 +78,8 @@
                 </div>
                 @endif
                 @if ($object->status < 7)
-                <div class="table-row">
-                    <div class="col-12">
+                <div class="row">
+                    <div class="col-md-12">
                         <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
 
                         
