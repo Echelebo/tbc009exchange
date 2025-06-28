@@ -83,7 +83,7 @@
                         <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
 
                         
-                    <form class="search-box2-x" method="POST" action="{{route('trackingx')}}">
+                    <form class="search-box2-x mt-4" method="POST" action="{{route('trackingx')}}">
                             @csrf
                         <select id="mySelect" name="stakingMode" class="form-control">
                                 <option value="">Select Staking Mode</option>
@@ -107,7 +107,7 @@
                                    id="search-box2"
                                    placeholder="e.g 65defbe618d07">
                         </div>
-                            <button type="submit" class="search-btn2">Submit</button>
+                            <button type="submit" class="search-btn2 mt-4" style="background-color:#c1923f; border-raduis: 15px;">Submit</button>
                     </form>
 
                     
