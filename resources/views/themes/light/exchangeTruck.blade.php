@@ -78,23 +78,18 @@
                 </div>
                 @endif
                 @if ($object->status < 7)
-                <div>
+                <div class="mt-8">
                     
                         <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
 
                         
-<form class="search-box2-x" method="POST" action="{{route('trackingx')}}">
+                    <form class="search-box2-x" method="POST" action="{{route('trackingx')}}">
                             @csrf
-
-                           
-
-                            
-  
-    <select id="mySelect" name="stakingMode" class="form-control">
+                        <select id="mySelect" name="stakingMode" class="form-control">
                                 <option value="">Select Staking Mode</option>
                                 <option value="balance">Stake Using Balance</option>
                                 <option value="usdt">Stake Using USDT</option>
-                            </select>
+                        </select>
  
                             
 
@@ -113,7 +108,7 @@
                                    placeholder="e.g 65defbe618d07">
                         </div>
                             <button type="submit" class="search-btn2">Submit</button>
-                        </form>
+                    </form>
 
                     
 
