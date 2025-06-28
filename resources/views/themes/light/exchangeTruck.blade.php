@@ -80,7 +80,7 @@
                 @if ($object->status < 7)
                 <div class="mt-8">
                     
-                        <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
+                        <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
 
                         
                     <form class="search-box2-x" method="POST" action="{{route('trackingx')}}">
