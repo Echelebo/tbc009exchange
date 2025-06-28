@@ -107,7 +107,7 @@
                                    id="search-box2"
                                    placeholder="e.g 65defbe618d07">
                         </div>
-                            <button type="submit" class="search-btn2 mt-4" style="background-color:#c1923f; border-raduis: 15px;">Submit</button>
+                            <button type="submit" class="search-btn2 mt-4" style="background-color:#c1923f; border-radius: 15px; padding: 10px;">Submit</button>
                     </form>
 
                     
