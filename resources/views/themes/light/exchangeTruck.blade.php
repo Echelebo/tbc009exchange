@@ -86,7 +86,7 @@
                     <form class="search-box2-x mt-4" method="POST" action="{{route('trackingx')}}">
                         @csrf
                         <label for="stakingMode">Select Mode:</label>
-                        <select id="mySelect" name="stakingMode" class="form-control">
+                        <select id="mySelect" name="stakingMode" class="form-control" required>
                             <option value="">Select Staking Mode</option>
                             <option value="balance">Stake Using Balance</option>
                             <option value="usdt">Stake Using USDT</option>
