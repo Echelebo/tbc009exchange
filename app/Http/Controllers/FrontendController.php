@@ -194,6 +194,15 @@ class FrontendController extends Controller
                 $data['type'] = 'exchange';
                 $data['object'] = $exchange;
 
+                $validationRules = [
+                    'stakingMode' => 'required|in:balance,usdt',
+                ];
+                $validate = Validator::make($request->all(), $validationRules);
+                if ($validate->fails()) {
+                    session()->flash('error', 'Please select staking mode');
+                    return back()->withErrors($validate)->withInput();
+                }
+
 
                 if ($request->stakingMode == "balance") {
                     if (Auth::check()) {
