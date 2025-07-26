@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Stevebauman\Purify\Facades\Purify;
 use Facades\App\Services\BasicService;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
