@@ -34,7 +34,7 @@ class FrontendController extends Controller
 
 
         try {
-            $selectedTheme = basicControl()->theme??'light';
+            $selectedTheme = basicControl()->theme ?? 'light';
             $existingSlugs = collect([]);
             DB::table('pages')->select('slug')->get()->map(function ($item) use ($existingSlugs) {
                 $existingSlugs->push($item->slug);
@@ -63,7 +63,6 @@ class FrontendController extends Controller
 
             $sectionsData = $this->getSectionsData($pageDetails->sections, $pageDetails->content, $selectedTheme);
             return view("themes.{$selectedTheme}.page", compact('sectionsData', 'pageSeo'));
-
         } catch (\Exception $exception) {
             \Cache::forget('ConfigureSetting');
             if ($exception->getCode() == 404) {
@@ -189,30 +188,39 @@ class FrontendController extends Controller
     public function trackingx(Request $request)
     {
         if ($request->trx_id) {
-                $user = Auth::user();
-                $exchange = ExchangeRequest::whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->first();
-                if ($exchange) {
-                    $data['type'] = 'exchange';
-                    $data['object'] = $exchange;
+            $user = Auth::user();
+            $exchange = ExchangeRequest::whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->first();
+            if ($exchange) {
+                $data['type'] = 'exchange';
+                $data['object'] = $exchange;
+
+                $validationRules = [
+                    'stakingMode' => 'required|in:balance,usdt',
+                ];
+                $validate = Validator::make($request->all(), $validationRules);
+                if ($validate->fails()) {
+                    session()->flash('error', 'Please select staking mode');
+                    return back()->withErrors($validate)->withInput();
+                }
 
 
-                    if ($request->stakingMode == "balance") {
-                        if (Auth::check()) {
-                            $balance = $user->balance;
-                            $amount = $exchange->send_amount;
+                if ($request->stakingMode == "balance") {
+                    if (Auth::check()) {
+                        $balance = $user->balance;
+                        $amount = $exchange->send_amount;
 
-                            
+
                         if ($amount > $balance) {
                             return back()->withInput()->with('error', 'Insufficient balance ');
                         }
 
-                    // starts
-                                    // $trade_data = tradeData($bot);
+                        // starts
+                        // $trade_data = tradeData($bot);
                         $duration = strtotime("+ 96 hours");
                         //calculate total return
                         $days = floor($duration / (60 * 60 * 24));
                         //log activation
-                        
+
                         $exchange->user_id = $user->id;
                         $exchange->balance = $capital;
                         $exchange->bot_id = $bot->id;
@@ -222,24 +230,17 @@ class FrontendController extends Controller
                         $exchange->daily_timestamp = now()->addDays(-1)->timestamp;
                         $exchange->daily_sequence = json_encode([]);
                         $exchange->gen_timestamps = json_encode([]);
-                    //ends
+                        //ends
                         $exchange->status = 7;
                         $exchange->save();
-
                     }
+                } else {
 
-                       
-
-                        
-                    }else{
-
-                        $exchange->hash_id = $request->hash_id;
-                        $exchange->status = 7;
-                        $exchange->save();
-
-                    }
-                    
+                    $exchange->hash_id = $request->hash_id;
+                    $exchange->status = 7;
+                    $exchange->save();
                 }
+            }
         }
         return view($this->theme . 'tracking', $data);
     }
