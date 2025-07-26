@@ -130,4 +130,74 @@ class User extends Authenticatable
             'message' => '<a href="' . url('password/reset', $token) . '?email=' . $this->email . '" target="_blank">Click To Reset Password</a>'
         ]);
     }
+
+    //referral relationship using the 'referral_by' column
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referral_by', 'id');
+    }
+
+    public function referredUsers()
+    {
+        return $this->hasMany(User::class, 'referral_by', 'id');
+    }
+
+    public function getReferralTree($level = 1, $maxLevel = 10)
+    {
+        $tree = [];
+
+        if ($level > $maxLevel) {
+            return $tree;
+        }
+
+        $referrals = $this->referredUsers;
+
+        foreach ($referrals as $referral) {
+            $referralData = [
+                'user' => $referral,
+                'level' => $level,
+                'children' => $referral->getReferralTree($level + 1, $maxLevel),
+            ];
+
+            $tree[] = $referralData;
+        }
+
+        return $tree;
+    }
+
+    // give referral bonus
+    public function giveReferralBonus($depositAmount, $depth = 1)
+    {
+        if ($depth > 10 || !$this->referrer) {
+            return;
+        }
+
+        // Calculate and award the bonus to the current upline member
+        $percentage_bonus = 5;
+        $percentage_bonus = $percentage_bonus[$depth - 1];
+
+        if ($percentage_bonus > 0) {
+            $amount = $percentage_bonus / 100 * $depositAmount;
+            $this->referrer->balance += $amount;
+            $this->referrer->save();
+
+            BasicService::makeTransaction(
+                $amount,
+                '0',
+                'Credit',
+                'Referral Bonus',
+                uniqid('R'),
+                'Stake Trans',
+                $this->referrer->id,
+                $depositAmount,
+                'USD'
+            );
+
+            //Notifications goes in here...
+
+            // Recursively call the function for the next upline member
+            $this->referrer->giveReferralBonus($depositAmount, $depth + 1);
+        }
+    }
+
 }

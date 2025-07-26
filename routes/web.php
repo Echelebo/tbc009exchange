@@ -62,6 +62,8 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
             Route::get('verification/center', 'verificationCenter')->name('verification.center');
             Route::get('funds', 'fund')->name('fund.index');
             Route::get('transaction', 'transaction')->name('transaction.index');
+            Route::get('referral', 'referral')->name('referral.index');
+            Route::get('referral/bonus', 'referralBonus')->name('referral.bonus');
 
         });
 

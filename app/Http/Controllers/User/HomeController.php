@@ -11,6 +11,7 @@ use App\Models\Kyc;
 use App\Models\SellRequest;
 use App\Models\Transaction;
 use App\Models\UserKyc;
+use App\Models\User;
 use App\Traits\Upload;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -458,6 +459,24 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(basicControl()->paginate);
         return view($this->theme . 'user.transaction.index', compact('transactions'));
+    }
+
+    public function referral()
+    {
+        $userId = Auth::id();
+        $commission = Transaction::where('user_id', $userId)->where('remarks', 'Referral Bonus')->sum('amount');
+        $referrals = User::where('referral_by', $userId)->orderBy('id', 'desc')->paginate(basicControl()->paginate);
+        
+        return view($this->theme . 'user.referral.index', compact('commission, referrals'));
+    }
+
+    public function referralBonus()
+    {
+        $userId = Auth::id();
+        $transactions = Transaction::where('user_id', $userId)->where('remarks', 'Referral Bonus')
+            ->orderBy('id', 'desc')
+            ->paginate(basicControl()->paginate);
+        return view($this->theme . 'user.referral.bonus', compact('transactions'));
     }
 
 }
