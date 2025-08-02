@@ -39,10 +39,7 @@
                     <form class="request-found-form" method="POST"
                         action="{{route('exchangeInitPayment',$exchangeRequest->utr)}}">
                         @csrf
-                        <label for="wallet">Enter your TBC wallet address to confirm your TBC payment. </label>
-                        <input type="text" value="" name="wallet" class="form-control"
-                            id="wallet"
-                            placeholder="Enter your TBC wallet" required>
+
                         <button type="submit" class="cmn-btn w-100">@lang('Payment Done')</button>
                     </form>
                     @endif
