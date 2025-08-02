@@ -204,39 +204,22 @@ class FrontendController extends Controller
                     return back()->withErrors($validate)->withInput();
                 }
 
-
                 if ($request->stakingMode == "balance") {
                     if (Auth::check()) {
                         $balance = $user->balance;
-                        $amount = $exchange->send_amount;
+                        $amount = $exchange->send_amount * 10;
 
 
                         if ($amount > $balance) {
-                            return back()->withInput()->with('error', 'Insufficient balance ');
+                            return back()->withInput()->with('error', 'Insufficient available stake');
                         }
 
-                        // starts
-                        // $trade_data = tradeData($bot);
-                        $duration = strtotime("+ 96 hours");
-                        //calculate total return
-                        $days = floor($duration / (60 * 60 * 24));
-                        //log activation
-
-                        $exchange->user_id = $user->id;
-                        $exchange->balance = $capital;
-                        $exchange->bot_id = $bot->id;
-                        $exchange->capital = $capital;
-                        $exchange->profit = 0;
-                        $exchange->expires_in = $duration;
-                        $exchange->daily_timestamp = now()->addDays(-1)->timestamp;
-                        $exchange->daily_sequence = json_encode([]);
-                        $exchange->gen_timestamps = json_encode([]);
-                        //ends
+                        $exchange->staking_mode = "balance";
                         $exchange->status = 7;
                         $exchange->save();
                     }
                 } else {
-
+                    $exchange->staking_mode = "usdt";
                     $exchange->hash_id = $request->hash_id;
                     $exchange->status = 7;
                     $exchange->save();

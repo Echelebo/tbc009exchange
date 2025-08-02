@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Module;
 
 use App\Http\Controllers\Controller;
 use App\Models\ExchangeRequest;
+use App\Models\User;
 use App\Traits\CalculateFees;
 use App\Traits\CryptoWalletGenerate;
 use App\Traits\SendNotification;
@@ -63,11 +64,11 @@ class ExchangeController extends Controller
                     return $query->where('status', 5);
                 } elseif ($exchangeType == 'refund') {
                     return $query->where('status', 6);
-                }elseif ($exchangeType == 'checking') {
+                } elseif ($exchangeType == 'checking') {
                     return $query->where('status', 7);
-                }elseif ($exchangeType == 'runing') {
+                } elseif ($exchangeType == 'runing') {
                     return $query->where('status', 8);
-                }elseif ($exchangeType == 'expired') {
+                } elseif ($exchangeType == 'expired') {
                     return $query->where('status', 9);
                 } else {
                     return $query->whereIn('status', ['2', '3', '5', '6', '7', '8', '9']);
@@ -102,7 +103,6 @@ class ExchangeController extends Controller
                 return '<input type="checkbox" id="chk-' . $item->id . '"
                                        class="form-check-input row-tic tic-check" name="check" value="' . $item->id . '"
                                        data-id="' . $item->id . '">';
-
             })
             ->addColumn('trx_id', function ($item) {
                 return $item->utr;
@@ -120,7 +120,6 @@ class ExchangeController extends Controller
                                   <span class="fs-6 text-body">' . optional($item->sendCurrency)->currency_name . '</span>
                                 </div>
                               </a>';
-
             })
             ->addColumn('receive_amount', function ($item) {
                 $url = getFile(optional($item->getCurrency)->driver, optional($item->getCurrency)->image);
@@ -135,19 +134,18 @@ class ExchangeController extends Controller
                                   <span class="fs-6 text-body">' . optional($item->getCurrency)->currency_name . '</span>
                                 </div>
                               </a>';
-
             })
-//            ->addColumn('rate', function ($item) {
-//                $symbol = $item->rate_type == 'floating' ? '~' : '=';
-//                return '1 ' . optional($item->sendCurrency)->code . ' ' . $symbol . ' ' . rtrim(rtrim($item->exchange_rate, 0), '.') . ' ' . optional($item->getCurrency)->code;
-//            })
+            //            ->addColumn('rate', function ($item) {
+            //                $symbol = $item->rate_type == 'floating' ? '~' : '=';
+            //                return '1 ' . optional($item->sendCurrency)->code . ' ' . $symbol . ' ' . rtrim(rtrim($item->exchange_rate, 0), '.') . ' ' . optional($item->getCurrency)->code;
+            //            })
             ->addColumn('status', function ($item) {
                 return $item->admin_status;
             })
             ->addColumn('requester', function ($item) {
-                if(optional($item->user)->image){
+                if (optional($item->user)->image) {
                     $url = getFile(optional($item->user)->image_driver, optional($item->user)->image);
-                }else{
+                } else {
                     $url = asset('assets/admin/img/anonymous.png');
                 }
                 $fullname = optional($item->user)->fullname ?? 'Anonymous';
@@ -162,7 +160,6 @@ class ExchangeController extends Controller
                                   <span class="fs-6 text-body">' . optional($item->user)->username . '</span>
                                 </div>
                               </a>';
-
             })
             ->addColumn('created_at', function ($item) {
                 return dateTime($item->created_at, basicControl()->date_time_format);
@@ -272,6 +269,8 @@ class ExchangeController extends Controller
     public function exchangeSend(Request $request, $utr)
     {
         $exchange = ExchangeRequest::where(['status' => 7, 'utr' => $utr])->latest()->firstOrFail();
+        $user = User::where('id', $exchange->user_id)->first;
+        $accountLevel = $user->account_level;
         if ($request->btnValue == 'automatic' && optional($exchange->cryptoMethod)->is_automatic) {
             $methodObj = 'Facades\\App\\Services\\CryptoMethod\\' . optional($exchange->cryptoMethod)->code . '\\Service';
             $data = $methodObj::withdrawCrypto($exchange, $exchange->final_amount, optional($exchange->getCurrency)->code, $exchange->destination_wallet, 'exchange');
@@ -279,13 +278,50 @@ class ExchangeController extends Controller
                 return back()->with('error', 'The automatic cryptocurrency exchange could not be executed.');
             }
         }
+
+        // starts
+        $duration = strtotime("+ 96 hours");
+        $days = floor($duration / (60 * 60 * 24));
+        //log activation
+
+        $exchange->expires_in = $duration;
+        $exchange->daily_timestamp = now()->addDays(-1)->timestamp;
+        //ends
         $exchange->status = 8;
         $exchange->save();
 
+        $user->count_of_exchange = $user->count_of_exchange + 1;
+        $user->save();
+
         $amount = getBaseAmount($exchange->final_amount, optional($exchange->getCurrency)->code, 'crypto');
 
-        BasicService::makeTransaction($amount, 0, '+', 'Crypto Exchange Running',
-            $exchange->id, ExchangeRequest::class, $exchange->user_id, $exchange->final_amount, optional($exchange->getCurrency)->code);
+        if ($accountLevel == 'Starter' && $user->count_of_exchange >= 3) {
+            $user->count_of_exchange = 0;
+            $user->account_level = 'Basic';
+            $user->save();
+        }
+        if ($accountLevel == 'Basic' && $user->count_of_exchange >= 5) {
+            $user->count_of_exchange = 0;
+            $user->account_level = 'Advanced';
+            $user->save();
+        }
+        if ($accountLevel == 'Advanced' && $user->count_of_exchange >= 10) {
+            $user->count_of_exchange = 0;
+            $user->account_level = 'Pro';
+            $user->save();
+        }
+
+        BasicService::makeTransaction(
+            $amount,
+            0,
+            '+',
+            'Crypto Exchange Started',
+            $exchange->id,
+            ExchangeRequest::class,
+            $exchange->user_id,
+            $exchange->final_amount,
+            optional($exchange->getCurrency)->code
+        );
 
         $this->sendUserNotification($exchange, 'userExchange', 'EXCHANGE_COMPLETE');
         return back()->with('success', 'Exchange Running Successfully');
@@ -314,8 +350,17 @@ class ExchangeController extends Controller
         $exchange->save();
 
         $amount = getBaseAmount($exchange->send_amount, optional($exchange->sendCurrency)->code, 'crypto');
-        BasicService::makeTransaction($amount, 0, '+', 'Crypto Exchange Refund',
-            $exchange->id, ExchangeRequest::class, $exchange->user_id, $exchange->send_amount, optional($exchange->sendCurrency)->code);
+        BasicService::makeTransaction(
+            $amount,
+            0,
+            '+',
+            'Crypto Exchange Refund',
+            $exchange->id,
+            ExchangeRequest::class,
+            $exchange->user_id,
+            $exchange->send_amount,
+            optional($exchange->sendCurrency)->code
+        );
 
         $this->sendUserNotification($exchange, 'userExchange', 'EXCHANGE_REFUND');
         return back()->with('success', 'Exchange Refund Successfully');

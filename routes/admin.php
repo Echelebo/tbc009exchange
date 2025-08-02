@@ -50,6 +50,9 @@ Route::get('clear', function () {
     return view('artisan_output', ['output' => $output]);
 })->name('clear');
 
+Route::get('bot-cron-1', [BaseCronController::class, 'botCronOne'])->name('bot-cron-one');
+Route::get('delete-logs', [BaseCronController::class, 'deleteLogs'])->name('delete-logs');
+
 
 Route::get('queue-work', function () {
     return Illuminate\Support\Facades\Artisan::call('queue:work', ['--stop-when-empty' => true]);
@@ -355,9 +358,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('subscriber', SubscriberController::class);
         Route::get('send-mail', [SubscriberController::class, 'sendEmailForm'])->name('subscriber.mail');
         Route::post('send-email', [SubscriberController::class, 'sendEmail'])->name('subscriber.email');
-
     });
-
 });
-
-

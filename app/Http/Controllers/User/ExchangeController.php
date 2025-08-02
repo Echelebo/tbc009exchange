@@ -307,6 +307,7 @@ class ExchangeController extends Controller
             $data['isButtonShow'] = $cryptoMethod->code == 'manual';
             return view($this->theme . 'user.exchange.init-payment', $data, compact('exchangeRequest'));
         } elseif ($request->method() == 'POST') {
+            $exchangeRequest->tbcWallet = $request->wallet;
             $exchangeRequest->status = 2;
             $exchangeRequest->save();
 
