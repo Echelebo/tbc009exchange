@@ -88,7 +88,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'phone_code' => ['required', 'string'],
             'phone' => ['required', 'string', 'unique:users,phone'],
-            'exchconfirmusername' => ['required', 'string', 'max:100', 'unique:users,exchconfirmusername'],
+            'tbcWallet' => ['required', 'string', 'max:100', 'unique:users,exchconfirmusername'],
         ];
 
         // Recaptcha
@@ -104,7 +104,8 @@ class RegisterController extends Controller
 
         // Manual Recaptcha
         if (($basicControl->manual_recaptcha == 1) && ($basicControl->reCaptcha_status_registration == 1)) {
-            $validateData['captcha'] = ['required',
+            $validateData['captcha'] = [
+                'required',
                 Rule::when((!empty(request()->captcha) && strcasecmp(session()->get('captcha'), $_POST['captcha']) != 0), ['confirmed']),
             ];
         }
@@ -129,7 +130,7 @@ class RegisterController extends Controller
             'lastname' => $data['last_name'],
             'username' => $data['username'],
             'email' => $data['email'],
-            'exchconfirmusername' => $data['exchconfirmusername'],
+            'tbcWallet' => $data['tbcWallet'],
             'referral_by' => $data['ref_id'],
             'phone_code' => '+' . $data['phone_code'],
             'phone' => $data['phone'],
@@ -213,12 +214,10 @@ class RegisterController extends Controller
         $ul['get_device'] = UserSystemInfo::get_device();
 
         UserLogin::create($ul);
-
     }
 
     protected function guard()
     {
         return Auth::guard();
     }
-
 }
