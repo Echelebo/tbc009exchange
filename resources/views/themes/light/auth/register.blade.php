@@ -82,7 +82,7 @@
                             <div class="col-12">
                                 <input type="text" name="tbcWallet" value="" class="form-control"
                                     id="exampleInputEmail3"
-                                    placeholder="TBC009 Wallet" required>
+                                    placeholder="TBC009 Wallet now now" required>
                                 @error('exchconfirmusername')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
