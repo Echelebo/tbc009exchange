@@ -6,12 +6,10 @@
 @section('content')
 @if(isset($template['login-register']) && $loginRegister = $template['login-register'][0])
 <style>
-    .login-signup-page .login-signup-thums {
-        background-image: url({{getFile(@$loginRegister->content->media->register_page_image->driver,@$loginRegister->content->media->register_page_image->path)
-    }
-    });
-    }
-</style>
+            .login-signup-page .login-signup-thums {
+                background-image: url({{getFile(@$loginRegister->content->media->register_page_image->driver,@$loginRegister->content->media->register_page_image->path)}});
+            }
+        </style>
 @endif
 <section class="login-signup-page pt-0 pb-0 min-vh-100 h-100">
     <div class="container-fluid h-100">
@@ -82,7 +80,7 @@
                             <div class="col-12">
                                 <input type="text" name="tbcWallet" value="" class="form-control"
                                     id="exampleInputEmail3"
-                                    placeholder="TBC009 Wallet" required>
+                                    placeholder="TBC009 Wallet now now" required>
                                 @error('exchconfirmusername')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
