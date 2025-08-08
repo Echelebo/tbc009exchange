@@ -122,7 +122,7 @@
                 enabled: false
             },
             title: {
-                text: "{{trans('Buy Crypto Figures')}}",
+                text: "Top Up Figures",
                 align: 'left',
                 style: {
                     color: labelColor, // Set your desired color here
@@ -189,7 +189,7 @@
                 enabled: false
             },
             title: {
-                text: "{{trans('Sell Crypto Figures')}}",
+                text: "Payout Figures",
                 align: 'left',
                 style: {
                     color: labelColor, // Set your desired color here

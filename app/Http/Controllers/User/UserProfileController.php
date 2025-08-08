@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kyc;
 use App\Models\Language;
 use App\Models\NotificationTemplate;
+use App\Models\AccountLevel;
 use App\Traits\Activity;
 use App\Traits\Upload;
 use Illuminate\Http\Request;
@@ -66,10 +67,11 @@ class UserProfileController extends Controller
         $userProfile = $this->user;
         $countries = config('country');
         $country_code = $userProfile->phone_code;
+        $userAccountLevel = AccountLevel::where('level_name', $userProfile->account_level)->first();
         if ($request->isMethod('get')) {
             $data['kycs'] = Kyc::where('status', 1)->get();
             $languages = Language::select('id', 'name')->where('status', 1)->orderBy('name', 'ASC')->get();
-            return view($this->theme . 'user.profile.show', $data, compact('country_code', 'userProfile', 'countries', 'languages'));
+            return view($this->theme . 'user.profile.show', $data, compact('country_code', 'userProfile', 'countries', 'languages', 'userAccountLevel'));
         } elseif ($request->isMethod('post')) {
             $purifiedData = Purify::clean($request->all());
 
@@ -83,6 +85,7 @@ class UserProfileController extends Controller
                 'address' => 'nullable|max:250',
             ]);
 
+            
             if ($validator->fails()) {
                 $validator->errors()->add('profile', '1');
                 return back()->withErrors($validator)->withInput();

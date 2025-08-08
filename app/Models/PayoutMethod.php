@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class AccountLevel extends Model
+class PayoutMethod extends Model
 {
     use HasFactory, SoftDeletes, Status, Prunable;
 
-    protected $fillable = ['level_name', 'min_exchange', 'max_exchange', 'max_count_exchange', 'max_running_exchange', 'max_pending_exchange', 'rate', 'daily_rate', 'stake_daily_rate', 'exchange_duration'];
+    protected $fillable = ['user_id', 'crypto', 'address'];
 
     protected $appends = ['tracking_status', 'admin_status', 'user_status'];
 

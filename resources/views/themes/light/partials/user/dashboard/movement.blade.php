@@ -96,7 +96,7 @@
 
         var options5 = {
             series: [{
-                name: "Buy Request",
+                name: "Top Up Request",
                 data: [],
                 color: '{{$baseColor}}'
             }],
@@ -116,7 +116,7 @@
                 curve: 'straight'
             },
             title: {
-                text: 'Buy Request by Month',
+                text: 'Top Up Request by Month',
                 align: 'left',
                 style: {
                     color: labelColor , // Set your desired color here
@@ -164,7 +164,7 @@
 
         var options6 = {
             series: [{
-                name: "Sell Request",
+                name: "Payout Request",
                 data: [],
                 color: '{{$baseColor}}'
             }],
@@ -184,7 +184,7 @@
                 curve: 'straight'
             },
             title: {
-                text: 'Sell Request by Month',
+                text: 'Payout Request by Month',
                 align: 'left',
                 style: {
                     color: labelColor // Title color

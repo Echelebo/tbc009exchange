@@ -15,14 +15,6 @@
                         class="fa-light fa-link"></i>@lang('Notification')</a>
             </li>
         @endif
-        @isset($kycs)
-            @foreach($kycs as $item)
-                <li class="nav-item">
-                    <a class="nav-link {{request()->segment(count(request()->segments())) == $item->id ? 'active':''}}"
-                       href="{{route('user.kyc',[$item->slug,$item->id])}}"><i
-                            class="fa-light fa-id-card"></i> {{$item->name}}</a>
-                </li>
-            @endforeach
-        @endisset
+        
     </ul>
 </div>

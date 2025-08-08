@@ -36,6 +36,15 @@
                                 </div>
                                 <div class="col-md-6">
                                 <p align="center" class="mt-4" style="background-color: #b59245; padding: 4px; border-radius: 15px; font-family: Monotype-Corsiva;"><strong><font size="3">{{ $userProfile->account_level }} User </font> @if ($userProfile->tagged_account_level != NULL) <font size="3">({{ $userProfile->tagged_account_level }})  </font> @else @endif </strong></p>
+                                <p>
+                                    <ul>
+                                        <li><strong>@lang('Level Name'):</strong> {{ $userAccountLevel->level_name }}</li>
+                                        <li><strong>@lang('Minimum Exchange'):</strong> {{ $userAccountLevel->min_exchange }}</li>
+                                        <li><strong>@lang('Maximum Exchange'):</strong> {{ $userAccountLevel->max_exchange }}</li>
+                                        <li><strong>@lang('Max. Active Exchange'):</strong> {{ $userAccountLevel->max_running_exchange }}</li>
+                                        <li><strong>@lang('Exchange Rate'):</strong> {{ $userAccountLevel->rate }}</li>
+                                    </ul>
+                                </p>
                             </div>
                                
                             </div>

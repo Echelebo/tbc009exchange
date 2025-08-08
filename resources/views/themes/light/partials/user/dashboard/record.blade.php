@@ -93,13 +93,13 @@
 </div>
 
 <div class="col-12 d-none d-lg-block mt-30">
-    <h5 class="mb-10"> @lang('Buy Crypto Statistics')</h5>
+    <h5 class="mb-10"> @lang('Top Up Statistics')</h5>
     <div class="row g-4">
         <div class="col-xxl-3 col-sm-6 box-item">
             <div class="box-card strong-orange-card  exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-spinner"></i>@lang('Pending Buy')
+                            class="fa-light fas fa-spinner"></i>@lang('Pending Top Up')
                     </h5>
                 </div>
                 <div class="box-card-body">
@@ -121,7 +121,7 @@
             <div class="box-card grayish-green-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-check"></i>@lang('Complete Buy')
+                            class="fa-light fas fa-check"></i>@lang('Complete Top Up')
                     </h5>
                 </div>
                 <div class="box-card-body">
@@ -143,7 +143,7 @@
             <div class="box-card grayish-blue-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fa-exclamation-triangle"></i>@lang('Cancel Buy')
+                            class="fa-light fa-exclamation-triangle"></i>@lang('Cancel Top Up')
                     </h5>
                 </div>
                 <div class="box-card-body">
@@ -165,7 +165,7 @@
             <div class="box-card grayish-custom-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-undo-alt"></i>@lang('Refund Buy')</h5>
+                            class="fa-light fas fa-undo-alt"></i>@lang('Refund Top Up')</h5>
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"> <span class="refundBuy"></span>
@@ -185,13 +185,13 @@
     </div>
 </div>
 <div class="col-12 d-none d-lg-block mt-30">
-    <h5 class="mb-10"> @lang('Sell Crypto Statistics')</h5>
+    <h5 class="mb-10"> @lang('Payout Statistics')</h5>
     <div class="row g-4">
         <div class="col-xxl-3 col-sm-6 box-item">
             <div class="box-card grayish-custom-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-spinner"></i>@lang('Pending Sell')
+                            class="fa-light fas fa-spinner"></i>@lang('Pending Payout')
                     </h5>
                 </div>
                 <div class="box-card-body">
@@ -213,7 +213,7 @@
             <div class="box-card grayish-blue-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-check"></i>@lang('Complete Sell')
+                            class="fa-light fas fa-check"></i>@lang('Complete Payout')
                     </h5>
                 </div>
                 <div class="box-card-body">
@@ -235,7 +235,7 @@
             <div class="box-card strong-orange-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fa-exclamation-triangle"></i>@lang('Cancel Sell')
+                            class="fa-light fa-exclamation-triangle"></i>@lang('Cancel Payout')
                     </h5>
                 </div>
                 <div class="box-card-body">
@@ -256,7 +256,7 @@
             <div class="box-card grayish-green-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-undo-alt"></i>@lang('Refund Sell')</h5>
+                            class="fa-light fas fa-undo-alt"></i>@lang('Refund Payout')</h5>
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"> <span class="refundSell"></span>
@@ -267,6 +267,100 @@
                         <p class="growth"><i
                                 class="fa-light fa-chart-line-up"></i><span
                                 class="last30DaysRefundPercentageSell"></span>
+                            %</p>
+                        <div class="time">@lang('last 30 days')</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 d-none d-lg-block">
+    <h5 class="mb-10 mt-4"> @lang('Other Wallet Statistics')</h5>
+    <div class="row g-4">
+
+        <div class="col-xxl-3 col-sm-6 box-item">
+            <div class="box-card grayish-custom-card exchangeRecord">
+                <div class="box-card-header">
+                    <h5 class="box-card-title"><i
+                            class="fa-light fas fa-spinner"></i>@lang('Balance')
+                    </h5>
+                </div>
+                <div class="box-card-body">
+                    <h4 class="mb-0"><span class="pendingExchange"></span>
+                        <sub><small>@lang('from') <span
+                                    class="totalExchange"></span></small></sub>
+                    </h4>
+                    <div class="statistics">
+                        <p class="growth"><i
+                                class="fa-light fa-chart-line-up"></i><span
+                                class="last30DaysPendingPercentage"></span>
+                            %</p>
+                        <div class="time">@lang('last 30 days')</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-sm-6 box-item">
+            <div class="box-card grayish-blue-card exchangeRecord">
+                <div class="box-card-header">
+                    <h5 class="box-card-title"><i
+                            class="fa-light fas fa-check"></i>@lang('Referral Bonus')
+                    </h5>
+                </div>
+                <div class="box-card-body">
+                    <h4 class="mb-0"><span class="completeExchange"></span>
+                        <sub><small>@lang('from') <span
+                                    class="totalExchange"></span></small></sub>
+                    </h4>
+                    <div class="statistics">
+                        <p class="growth"><i
+                                class="fa-light fa-chart-line-up"></i><span
+                                class="last30DaysCompletePercentage"></span>
+                            %</p>
+                        <div class="time">@lang('last 30 days')</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-sm-6 box-item">
+            <div class="box-card grayish-green-card exchangeRecord">
+                <div class="box-card-header">
+                    <h5 class="box-card-title"><i
+                            class="fa-light fa-exclamation-triangle"></i>@lang('Total Return')
+                    </h5>
+                </div>
+                <div class="box-card-body">
+                    <h4 class="mb-0"><span class="cancelExchange"></span>
+                        <sub><small>@lang('from') <span
+                                    class="totalExchange"></span></small></sub>
+                    </h4>
+                    <div class="statistics">
+                        <p class="growth down"><i
+                                class="fa-light fa-chart-line-down"></i><span
+                                class="last30DaysCancelPercentage"></span>
+                            %</p>
+                        <div class="time">@lang('last 30 days')</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-sm-6 box-item">
+            <div class="box-card strong-orange-card exchangeRecord">
+                <div class="box-card-header">
+                    <h5 class="box-card-title"><i
+                            class="fa-light fas fa-undo-alt"></i>@lang('Total Exchange')</h5>
+                </div>
+                <div class="box-card-body">
+                    <h4 class="mb-0"><span class="refundExchange"></span>
+                        <sub><small>@lang('from') <span
+                                    class="totalExchange"></span></small></sub>
+                    </h4>
+                    <div class="statistics">
+                        <p class="growth"><i
+                                class="fa-light fa-chart-line-up"></i><span
+                                class="last30DaysRefundPercentage"></span>
                             %</p>
                         <div class="time">@lang('last 30 days')</div>
                     </div>
