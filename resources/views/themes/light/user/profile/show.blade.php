@@ -39,10 +39,10 @@
                                 <p>
                                     <ul>
                                         <li><strong>@lang('Level Name'):</strong> {{ $userAccountLevel->level_name }}</li>
-                                        <li><strong>@lang('Minimum Exchange'):</strong> {{ $userAccountLevel->min_exchange }}</li>
-                                        <li><strong>@lang('Maximum Exchange'):</strong> {{ $userAccountLevel->max_exchange }}</li>
+                                        <li><strong>@lang('Minimum Exchange'):</strong> {{ $userAccountLevel->min_exchange/10 }} Kringles (${{ $userAccountLevel->min_exchange }})</li>
+                                        <li><strong>@lang('Maximum Exchange'):</strong> {{ $userAccountLevel->max_exchange/10 }} Kringles (${{ $userAccountLevel->max_exchange }})</li>
                                         <li><strong>@lang('Max. Active Exchange'):</strong> {{ $userAccountLevel->max_running_exchange }}</li>
-                                        <li><strong>@lang('Exchange Rate'):</strong> {{ $userAccountLevel->rate }}</li>
+                                        <li><strong>@lang('Exchange Rate'):</strong> ${{ $userAccountLevel->rate }} </li>
                                     </ul>
                                 </p>
                             </div>
