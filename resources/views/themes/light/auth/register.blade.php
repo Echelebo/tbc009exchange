@@ -88,7 +88,7 @@
                             <div class="col-12">
                                 <input type="text" name="ref_id" value="" class="form-control"
                                     id="exampleInputEmail3"
-                                    placeholder="Referral ID*)">
+                                    placeholder="Referral ID*">
                                 @error('ref_id')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror

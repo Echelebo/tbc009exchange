@@ -57,6 +57,8 @@
             <label class="row form-check form-switch mb-4" for="emailVerificationSwitch">
                     <span class="col-8 col-sm-9 ms-0">
                       <span class="d-block text-dark">@lang('Email Verification')</span>
+                      <span class="d-block text-dark fs-5">User TBC wallet: {{$user->tbcWallet}}</span>
+                      
                       <span
                           class="d-block fs-5">@lang('Email verification codes add reliable security to your systems.')</span>
                     </span>
