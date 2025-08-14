@@ -295,7 +295,7 @@
                  minSend: 2,
                  maxSend: 10,
                  ratex: 10,
-                 maxActive: 1,
+                 maxActive: 2,
                  maxPending: 2
              },
              "Basic": {

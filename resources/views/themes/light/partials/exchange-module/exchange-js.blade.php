@@ -3,6 +3,7 @@
     if (auth()->check()) {
         $user = auth()->user();
         $accountLevel = $user->account_level;
+        $accountLevelx = \App\Models\AccountLevel::where('level_name', $accountLevel)->first();
 
         $pending = \App\Models\ExchangeRequest::where('status', 7)->where('user_id', $user->id)->get();
         $active = \App\Models\ExchangeRequest::where('status', 8)->where('user_id', $user->id)->get();
@@ -100,7 +101,7 @@
                  minSend: 2,
                  maxSend: 10,
                  ratex: 10,
-                 maxActive: 1,
+                 maxActive: 2,
                  maxPending: 2
              },
              "Basic": {

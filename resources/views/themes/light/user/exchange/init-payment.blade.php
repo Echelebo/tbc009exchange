@@ -33,8 +33,10 @@
                     </div>
                     <div class="alert-message mt-20">
                         <i class="fa-solid fa-circle-info fa-rotate-180"></i>
-                        <span>@lang("Please note that you can send funds to the address above only once.")</span>
+                        <span>@lang("Please note that you should send TBC from your own TBC wallet and can send funds to the address above only once.")</span>
                     </div>
+
+                    
                     @if($isButtonShow)
                     <form class="request-found-form" method="POST"
                         action="{{route('exchangeInitPayment',$exchangeRequest->utr)}}">
