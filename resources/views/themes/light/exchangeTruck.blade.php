@@ -67,12 +67,7 @@
                 <div class="table-row">
                     <div class="item">
                         <span>Daily(24 Hours) return</span>
-                        <h6>{{$object->get_amount/4}}</h6>
-                    </div>
-
-                    <div class="item">
-                        <span>Next return time</span>
-                        <h6>{{$object->next_trade}}</h6>
+                        <h6>${{$object->get_amount/4}}</h6>
                     </div>
 
                 </div>
@@ -83,7 +78,7 @@
                     <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
                     @if (Auth::check())
                     @if (Auth::user->id == $object->user_id)
-                    <p class="mt-4">Available Stake: {{Auth::user()->available_stake}} USDT</p>
+                    <p class="mt-4">Balance: {{Auth::user()->balance}} USDT</p>
 
                     @endif
                     @endif
@@ -123,7 +118,7 @@
 
             <div class="table-row">
                 <div class="itemx">
-                    <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are checking your stake. You will receive a notification once your stake has been approved.
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are checking your stake. You will receive a notification once your exchange has been approved.
 
 
 
@@ -138,10 +133,7 @@
 
             <div class="table-row">
                 <div class="itemx">
-                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(63, 193, 87)"></i>Exchange has been confirmed. Click Exchange List from your account to view exchange.
-
-
-
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(63, 193, 87)"></i>Exchange running. Go to Exchange List from your dashboard to view exchange.
                 </div>
 
             </div>
@@ -151,7 +143,7 @@
 
             <div class="table-row">
                 <div class="itemx">
-                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(203, 40, 43)"></i>Exchange has expired.
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(203, 40, 43)"></i>Expired.
 
 
 

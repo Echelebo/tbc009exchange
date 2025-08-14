@@ -219,6 +219,15 @@ class FrontendController extends Controller
                         $exchange->save();
                     }
                 } else {
+
+                    $validationRulesx = [
+                    'hash_id' => 'required',
+                ];
+                $validatex = Validator::make($request->all(), $validationRulesx);
+                if ($validatex->fails()) {
+                    session()->flash('error', 'Hash ID is required');
+                    return back()->withErrors($validate)->withInput();
+                }
                     $exchange->staking_mode = "usdt";
                     $exchange->hash_id = $request->hash_id;
                     $exchange->status = 7;
