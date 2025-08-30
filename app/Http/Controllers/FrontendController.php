@@ -208,6 +208,7 @@ class FrontendController extends Controller
                     if (Auth::check()) {
                         $balance = $user->balance;
                         $amount = $exchange->send_amount * 10;
+                        $stakingMode = "Balance";
 
 
                         if ($amount > $balance) {
@@ -228,12 +229,29 @@ class FrontendController extends Controller
                     session()->flash('error', 'Hash ID is required');
                     return back()->withErrors($validate)->withInput();
                 }
+
+                $stakingMode = "USDT";
+
                     $exchange->staking_mode = "usdt";
                     $exchange->hash_id = $request->hash_id;
                     $exchange->status = 7;
                     $exchange->save();
                 }
             }
+
+            BasicService::makeTransaction(
+                $amount,
+                0,
+                '-',
+                $stakingMode,
+                $exchange->id,
+                ExchangeRequest::class,
+                $exchange->user_id,
+                $exchange->send_amount,
+                optional($exchange->sendCurrency)->code
+            );
+
+            $this->sendAdminNotification($exchange, 'staking');
         }
         return view($this->theme . 'tracking', $data);
     }

@@ -103,6 +103,27 @@ trait SendNotification
         $this->adminFirebasePushNotification('EXCHANGE_REQUEST', $params, $action);
     }
 
+    public function staking($exchange): void
+    {
+        $params = [
+            'user' => optional($exchange->user)->username ?? 'Anonymous',
+            'sendAmount' => rtrim(rtrim($exchange->send_amount, 0), '.'),
+            'getAmount' => rtrim(rtrim($exchange->get_amount, 0), '.'),
+            'sendCurrency' => optional($exchange->sendCurrency)->code,
+            'getCurrency' => optional($exchange->getCurrency)->code,
+            'transaction' => $exchange->utr,
+        ];
+
+        $action = [
+            "link" => route('admin.exchangeView') . '?id=' . $exchange->id,
+            "icon" => "fa fa-money-bill-alt text-white"
+        ];
+
+        $this->adminMail('EXCHANGE_STAKING', $params);
+        $this->adminPushNotification('EXCHANGE_STAKING', $params, $action);
+        $this->adminFirebasePushNotification('EXCHANGE_STAKING', $params, $action);
+    }
+
     public function buy($buyRequest): void
     {
         $params = [
