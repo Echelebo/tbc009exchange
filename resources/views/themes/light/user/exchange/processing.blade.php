@@ -3,7 +3,7 @@
     if (auth()->check()) {
         $user = auth()->user();
         $accountLevel = $user->account_level;
-
+        $accountLevelx = \App\Models\AccountLevel::where('level_name', $accountLevel)->first();
         $pending = \App\Models\ExchangeRequest::where('status', 7)->where('user_id', $user->id)->get();
         $active = \App\Models\ExchangeRequest::where('status', 8)->where('user_id', $user->id)->get();
         $pendings = count($pending);
@@ -11,8 +11,7 @@
     }
 
     if (auth()->guest()) {
-        $accountLevel = "Guest";
-
+        $accountLevelx = \App\Models\AccountLevel::where('level_name', 'Guest')->first();
         $actives = 0;
         $pendings = 0;
     }
@@ -192,10 +191,7 @@
                                  <span id="showNetworkType"></span>
                                  <h6 id="showNetworkFee"></h6>
                              </div>
-                             <div class="item">
-                                 <span>Daily(24 Hours) return</span>
-                                 <h6 id="showDailyRate"></h6>
-                             </div>
+                             
 
                              <div class="item">
                                  <span>@lang("You get")</span>
@@ -275,7 +271,7 @@
          $("#exchangeMessage").text('');
          $("#submitBtn").attr('disabled', false);
 
-         let accountLevel = <?php echo json_encode($accountLevel); ?>;
+         let accountLevel = <?php echo json_encode($accountLevelx); ?>;
          if (!accountLevel) {
              console.error("Account level is not set.");
              $("#submitBtn").attr('disabled', true);
@@ -283,64 +279,13 @@
              return;
          }
 
-         const levels = {
-             "Guest": {
-                 minSend: 2,
-                 maxSend: 500,
-                 ratex: 10,
-                 maxActive: 100,
-                 maxPending: 2
-             },
-             "Starter": {
-                 minSend: 2,
-                 maxSend: 10,
-                 ratex: 10,
-                 maxActive: 2,
-                 maxPending: 2
-             },
-             "Basic": {
-                 minSend: 5,
-                 maxSend: 25,
-                 ratex: 10.5,
-                 maxActive: 2,
-                 maxPending: 2
-             },
-             "Advanced": {
-                 minSend: 10,
-                 maxSend: 200,
-                 ratex: 11,
-                 maxActive: 3,
-                 maxPending: 2
-             },
-             "Pro": {
-                 minSend: 10,
-                 maxSend: 500,
-                 ratex: 12,
-                 maxActive: 5,
-                 maxPending: 2
-             }
-         };
-         const levelData = levels[accountLevel];
-         if (!levelData) {
-             console.error("Unknown account level: " + accountLevel);
-             $("#submitBtn").attr('disabled', true);
-             $("#exchangeMessage").text("Invalid account level.");
-             return;
-         }
-
-         const {
-             minSend,
-             maxSend,
-             ratex,
-             maxActive,
-             maxPending
-         } = levelData;
-         let sendMinLimit = minSend;
-         let sendMaxLimit = maxSend;
-         let sendMaxActive = maxActive;
-         let sendMaxPending = maxPending;
+        
+         let sendMinLimit = accountLevel.min_exchange;
+         let sendMaxLimit = accountLevel.max_exchange;
+         let sendMaxActive = accountLevel.max_running_exchange;
+         let sendMaxPending = accountLevel.max_pending_exchange;
          let sendCode = activeSendCurrency.code;
-         let sendUsdRate = ratex;
+         let sendUsdRate = accountLevel.rate;
          let getUsdRate = activeGetCurrency.usd_rate;
          let getCode = activeGetCurrency.code;
          let getServiceFee = activeGetCurrency.service_fee;
@@ -380,7 +325,7 @@
          $("#exchangeMessage").text('');
          $("#submitBtn").attr('disabled', false);
 
-         let accountLevel = <?php echo json_encode($accountLevel); ?>;
+         let accountLevel = <?php echo json_encode($accountLevelx); ?>;
          if (!accountLevel) {
              console.error("Account level is not set.");
              $("#submitBtn").attr('disabled', true);
@@ -388,64 +333,13 @@
              return;
          }
 
-         const levels = {
-             "Guest": {
-                 minSend: 2,
-                 maxSend: 500,
-                 ratex: 10,
-                 maxActive: 100,
-                 maxPending: 2
-             },
-             "Starter": {
-                 minSend: 2,
-                 maxSend: 10,
-                 ratex: 10,
-                 maxActive: 1,
-                 maxPending: 2
-             },
-             "Basic": {
-                 minSend: 5,
-                 maxSend: 25,
-                 ratex: 10.5,
-                 maxActive: 2,
-                 maxPending: 2
-             },
-             "Advanced": {
-                 minSend: 10,
-                 maxSend: 200,
-                 ratex: 11,
-                 maxActive: 3,
-                 maxPending: 2
-             },
-             "Pro": {
-                 minSend: 10,
-                 maxSend: 500,
-                 ratex: 12,
-                 maxActive: 5,
-                 maxPending: 2
-             }
-         };
-         const levelData = levels[accountLevel];
-         if (!levelData) {
-             console.error("Unknown account level: " + accountLevel);
-             $("#submitBtn").attr('disabled', true);
-             $("#exchangeMessage").text("Invalid account level.");
-             return;
-         }
-
-         const {
-             minSend,
-             maxSend,
-             ratex,
-             maxActive,
-             maxPending
-         } = levelData;
-         let sendMinLimit = minSend;
-         let sendMaxLimit = maxSend;
-         let sendMaxActive = maxActive;
-         let sendMaxPending = maxPending;
+        
+         let sendMinLimit = accountLevel.min_exchange;
+         let sendMaxLimit = accountLevel.max_exchange;
+         let sendMaxActive = accountLevel.max_running_exchange;
+         let sendMaxPending = accountLevel.max_pending_exchange;
          let sendCode = activeSendCurrency.code;
-         let sendUsdRate = ratex;
+         let sendUsdRate = accountLevel.rate;
          let getUsdRate = activeGetCurrency.usd_rate;
          let sendAmount = sendAmountCal(getAmount, sendUsdRate, getUsdRate);
          $("input[name='exchangeSendAmount']").val(sendAmount);
@@ -593,8 +487,7 @@
 
      function tradeShow(sendAmount, getAmount, sendCurrencyCode, getCurrencyCode, serviceFee, serviceFeeType, networkFee, networkFeeType) {
          let exchangeRate = (getAmount / sendAmount).toFixed(8);
-         let dailyRate = (getAmount / 4).toFixed(8);
-         $("#showDailyRate").text(`${dailyRate} ${getCurrencyCode}`);
+         
          $("#showSendAmount").text(`${sendAmount} ${sendCurrencyCode}`);
          $("#showExchangeRate").text(`1 ${sendCurrencyCode} ~ ${exchangeRate} ${getCurrencyCode}`);
          if (serviceFeeType === 'percent') {
