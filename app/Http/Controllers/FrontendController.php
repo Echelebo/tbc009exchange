@@ -189,7 +189,7 @@ class FrontendController extends Controller
     public function trackingx(Request $request)
     {
         if ($request->trx_id) {
-            $user = Auth::user();
+           $data['user'] = $user = Auth::user();
             $data['exchange'] = $exchange = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->firstOrFail();
             if ($exchange) {
                 $data['type'] = 'exchange';
