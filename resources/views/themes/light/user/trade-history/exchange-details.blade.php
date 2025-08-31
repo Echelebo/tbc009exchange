@@ -161,12 +161,12 @@
                                     </ul>
                                 </div>
 
-                                @if ($object->status == 2)
+                                @if ($exchange->status == 2)
                     <div class="mt-8">
 
                     <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
                     @if (Auth::check())
-                    @if (Auth::user->id == $object->user_id)
+                    @if (Auth::user->id == $exchange->user_id)
                     <p class="mt-4">Balance: {{Auth::user()->balance}} USDT</p>
 
                     @endif
