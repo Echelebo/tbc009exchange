@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        @if($exchange->status == 2)
+        @if($exchange->status == 7)
             <div class="row mx-4">
                 <div class="d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-soft-success" id="send" data-bs-target="#confirmation"

@@ -218,6 +218,9 @@ class FrontendController extends Controller
                         $exchange->staking_mode = "balance";
                         $exchange->status = 7;
                         $exchange->save();
+                        
+                        $user->balance = $user->balance - $amount;
+                        $user->save();
                     }
                 } else {
 
@@ -243,7 +246,7 @@ class FrontendController extends Controller
                 $amount,
                 0,
                 '-',
-                $stakingMode,
+                'Staking With' .$stakingMode,
                 $exchange->id,
                 ExchangeRequest::class,
                 $exchange->user_id,

@@ -200,6 +200,21 @@
 
             </div>
             @endif
+
+            @if ($object->status == 7)
+
+            <div class="table-row">
+                <div class="itemx">
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are checking your stake. You will receive a notification once your exchange has been approved.
+
+
+
+
+                </div>
+
+            </div>
+
+            @endif
                             </div>
                         </div>
                     </div>
