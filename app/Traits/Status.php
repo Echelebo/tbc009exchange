@@ -8,7 +8,7 @@ trait Status
     public function getTrackingStatusAttribute()
     {
         if ($this->status == 2) {
-            return '<h4 class="mb-0 text-primary">'.trans('Awaiting').'</h4>';
+            return '<h4 class="mb-0 text-primary">'.trans('Awaiting Stake').'</h4>';
         } elseif ($this->status == 3) {
             return '<h4 class="mb-0 text-success">'.trans('Completed').'</h4>';
         } elseif ($this->status == 5) {
@@ -16,9 +16,9 @@ trait Status
         } elseif ($this->status == 6) {
             return '<h4 class="mb-0 text-warning">'.trans('Refunded').'</h4>';
         } elseif ($this->status == 7) {
-            return '<h4 class="mb-0 text-warning">'.trans('Checking').'</h4>';
+            return '<h4 class="mb-0 text-warning">'.trans('Checking Stake').'</h4>';
         } elseif ($this->status == 8) {
-            return '<h4 class="mb-0 text-success">'.trans('Running').'</h4>';
+            return '<h4 class="mb-0 text-success">'.trans('Active').'</h4>';
         } elseif ($this->status == 9) {
             return '<h4 class="mb-0 text-warning">'.trans('Expired').'</h4>';
         }
@@ -27,7 +27,7 @@ trait Status
     public function getUserStatusAttribute()
     {
         if ($this->status == 2) {
-            return '<span class="badge text-bg-primary">'.trans('Awaiting').'</span>';
+            return '<span class="badge text-bg-primary">'.trans('Awaiting Stake').'</span>';
         } elseif ($this->status == 3) {
             return '<span class="badge text-bg-success">'.trans('Completed').'</span>';
         } elseif ($this->status == 5) {
@@ -35,7 +35,7 @@ trait Status
         } elseif ($this->status == 6) {
             return '<span class="badge text-bg-warning">'.trans('Refunded').'</span>';
         } elseif ($this->status == 7) {
-            return '<h4 class="mb-0 text-warning">'.trans('Checking').'</h4>';
+            return '<h4 class="mb-0 text-warning">'.trans('Checking Stake').'</h4>';
         } elseif ($this->status == 8) {
             return '<h4 class="mb-0 text-success">'.trans('Running').'</h4>';
         } elseif ($this->status == 9) {
@@ -47,7 +47,7 @@ trait Status
     {
         if ($this->status == 2) {
             return '<span class="badge bg-soft-warning text-warning">
-                    <span class="legend-indicator bg-warning"></span>' . trans('Pending') . '
+                    <span class="legend-indicator bg-warning"></span>' . trans('Awaiting Stake') . '
                   </span>';
 
         } elseif ($this->status == 3) {
@@ -64,11 +64,11 @@ trait Status
                   </span>';
         } elseif ($this->status == 7) {
             return '<span class="badge bg-soft-primary text-primary">
-                    <span class="legend-indicator bg-primary"></span>' . trans('Checking') . '
+                    <span class="legend-indicator bg-primary"></span>' . trans('Checking Stake') . '
                   </span>';
         } elseif ($this->status == 8) {
             return '<span class="badge bg-soft-primary text-primary">
-                    <span class="legend-indicator bg-primary"></span>' . trans('Running') . '
+                    <span class="legend-indicator bg-primary"></span>' . trans('Active') . '
                   </span>';
         } elseif ($this->status == 9) {
             return '<span class="badge bg-soft-primary text-primary">
