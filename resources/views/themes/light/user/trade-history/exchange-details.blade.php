@@ -201,7 +201,7 @@
             </div>
             @endif
 
-            @if ($object->status == 7)
+            @if ($exchange->status == 7)
 
             <div class="table-row">
                 <div class="itemx">
