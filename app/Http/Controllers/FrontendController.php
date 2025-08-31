@@ -190,7 +190,7 @@ class FrontendController extends Controller
     {
         if ($request->trx_id) {
             $user = Auth::user();
-            $exchange = ExchangeRequest::whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->first();
+            $data['exchange'] = $exchange = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->firstOrFail();
             if ($exchange) {
                 $data['type'] = 'exchange';
                 $data['object'] = $exchange;
@@ -212,7 +212,7 @@ class FrontendController extends Controller
 
 
                         if ($amount > $balance) {
-                            return back()->withInput()->with('error', 'Insufficient available stake');
+                            return back()->withInput()->with('error', 'Insufficient balance');
                         }
 
                         $exchange->staking_mode = "balance";
@@ -252,7 +252,8 @@ class FrontendController extends Controller
             );
 
             $this->sendAdminNotification($exchange, 'staking');
-        }
-        return view($this->theme . 'tracking', $data);
+
+        
+        return view($this->theme . 'user.trade-history.exchange-details', $data);
     }
 }

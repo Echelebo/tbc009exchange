@@ -11,6 +11,8 @@ trait Status
             return '<h4 class="mb-0 text-primary">'.trans('Awaiting Stake').'</h4>';
         } elseif ($this->status == 3) {
             return '<h4 class="mb-0 text-success">'.trans('Completed').'</h4>';
+        }elseif ($this->status == 4) {
+            return '<h4 class="mb-0 text-primary">'.trans('Awaiting TBC').'</h4>';
         } elseif ($this->status == 5) {
             return '<h4 class="mb-0 text-danger">'.trans('Canceled').'</h4>';
         } elseif ($this->status == 6) {
@@ -30,6 +32,8 @@ trait Status
             return '<span class="badge text-bg-primary">'.trans('Awaiting Stake').'</span>';
         } elseif ($this->status == 3) {
             return '<span class="badge text-bg-success">'.trans('Completed').'</span>';
+        } elseif ($this->status == 4) {
+            return '<span class="badge text-bg-primary">'.trans('Awaiting TBC').'</span>';
         } elseif ($this->status == 5) {
             return '<span class="badge text-bg-danger">'.trans('Canceled').'</span>';
         } elseif ($this->status == 6) {
@@ -37,7 +41,7 @@ trait Status
         } elseif ($this->status == 7) {
             return '<h4 class="mb-0 text-warning">'.trans('Checking Stake').'</h4>';
         } elseif ($this->status == 8) {
-            return '<h4 class="mb-0 text-success">'.trans('Running').'</h4>';
+            return '<h4 class="mb-0 text-success">'.trans('Active').'</h4>';
         } elseif ($this->status == 9) {
             return '<h4 class="mb-0 text-warning">'.trans('Expired').'</h4>';
         }
@@ -53,6 +57,10 @@ trait Status
         } elseif ($this->status == 3) {
             return '<span class="badge bg-soft-success text-success">
                     <span class="legend-indicator bg-success"></span>' . trans('Completed') . '
+                  </span>';
+         } elseif ($this->status == 4) {
+            return '<span class="badge bg-soft-success text-warning">
+                    <span class="legend-indicator bg-warning"></span>' . trans('Awaiting TBC') . '
                   </span>';
         } elseif ($this->status == 5) {
             return '<span class="badge bg-soft-danger text-danger">

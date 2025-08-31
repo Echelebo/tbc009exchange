@@ -38,19 +38,19 @@
                     <div class="col-md-2">
                         <select class="cmn-select2" name="status">
                             <option value="">@lang('All Status')</option>
-                            <option value="2" {{ @request()->status == '2' ? 'selected' : '' }}>@lang('Awaiting Complete')
+                            <option value="2" {{ @request()->status == '2' ? 'selected' : '' }}>@lang('Awaiting Stake')
                             </option>
-                            <option value="3" {{ @request()->status == '3' ? 'selected' : '' }}>Trade Initiated
+                            <option value="3" {{ @request()->status == '3' ? 'selected' : '' }}>Initiated
                             </option>
-                            <option value="5" {{ @request()->status == '5' ? 'selected' : '' }}>@lang('Trade Cancel')
+                            <option value="5" {{ @request()->status == '5' ? 'selected' : '' }}>@lang('Canceled')
                             </option>
-                            <option value="6" {{ @request()->status == '6' ? 'selected' : '' }}>@lang('Trade Refunded')
+                            <option value="6" {{ @request()->status == '6' ? 'selected' : '' }}>@lang('Refunded')
                             </option>
-                            <option value="7" {{ @request()->status == '7' ? 'selected' : '' }}>Checking
+                            <option value="7" {{ @request()->status == '7' ? 'selected' : '' }}>Checking Stake
                             </option>
-                            <option value="8" {{ @request()->status == '8' ? 'selected' : '' }}>Running
+                            <option value="8" {{ @request()->status == '8' ? 'selected' : '' }}>Active
                             </option>
-                            <option value="9" {{ @request()->status == '9' ? 'selected' : '' }}>Trade Expired
+                            <option value="9" {{ @request()->status == '9' ? 'selected' : '' }}>Expired
                             </option>
                         </select>
                     </div>

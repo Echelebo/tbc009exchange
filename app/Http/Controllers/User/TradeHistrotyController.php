@@ -49,7 +49,7 @@ class TradeHistrotyController extends Controller
                 if (@$search['status']) {
                     return $query->where('status', $search['status']);
                 } else {
-                    return $query->whereIn('status', ['2', '3', '5', '6', '7', '8', '9']);
+                    return $query->whereIn('status', ['2', '3',  '4', '5', '6', '7', '8', '9']);
                 }
             })
             ->orderBy('id', 'desc')
@@ -61,7 +61,7 @@ class TradeHistrotyController extends Controller
 
     public function exchangeDetails($utr)
     {
-        $data['exchange'] = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3', '5', '6', '7', '8', '9'])
+        $data['exchange'] = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3',  '4', '5', '6', '7', '8', '9'])
             ->where('utr', $utr)->firstOrFail();
         return view($this->theme . 'user.trade-history.exchange-details', $data);
     }
