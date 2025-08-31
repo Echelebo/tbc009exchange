@@ -57,9 +57,9 @@
                     </div>
                     <div class="alert-message mt-20">
                         <i class="fa-solid fa-circle-info fa-rotate-180"></i>
-                        <span>@lang("Please wait for a moment. "){{basicControl()->site_title}} is actively processing your trade. Copy your transaction ID and track the progress of your trade from this location. <a
-                                href="{{route('tracking')}}" target="_blank"
-                                class="text-primary">@lang("click here")</a></span>
+                        <span>@lang("Please wait for a moment. "){{basicControl()->site_title}} is actively processing your trade. <a
+                                href="{{route('user.exchangeList')}}" target="_blank"
+                                class="text-primary">@lang("View exchange")</a></span>
                     </div>
                 </div>
             </div>
