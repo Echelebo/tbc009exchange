@@ -257,3 +257,4 @@ class FrontendController extends Controller
         return view($this->theme . 'user.trade-history.exchange-details', $data);
     }
 }
+}

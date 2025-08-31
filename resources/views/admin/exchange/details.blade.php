@@ -48,15 +48,17 @@
                                 <h4 class="card-title mt-2">@lang("Trade Information's")</h4>
                                 <div>
                                     @if ($exchange->status == 2)
-                                        <span class="legend-indicator bg-warning"></span>@lang("Awaiting Complete")
+                                        <span class="legend-indicator bg-warning"></span>@lang("Awaiting Stake")
                                     @elseif ($exchange->status == 3)
                                         <span class="legend-indicator bg-success"></span>@lang("Trade Completed")
+                                        @elseif ($exchange->status == 4)
+                                        <span class="legend-indicator bg-warning"></span>@lang("Awaiting TBC")
                                     @elseif ($exchange->status == 5)
                                         <span class="legend-indicator bg-danger"></span>@lang("Trade Cancel")
                                     @elseif ($exchange->status == 6)
                                     <span class="legend-indicator bg-primary"></span>@lang("Trade Refunded")
                                     @elseif ($exchange->status == 7)
-                                    <span class="legend-indicator bg-primary"></span>@lang("Checking")
+                                    <span class="legend-indicator bg-primary"></span>@lang("Checking Stake")
                                     @elseif ($exchange->status == 8)
                                     <span class="legend-indicator bg-primary"></span>@lang("Running")
                                     @elseif ($exchange->status == 9)
@@ -133,6 +135,10 @@
                                         <li class="list-checked-item">@lang('Payable Amount') : <strong
                                                 class="text-danger font-weight-bold"
                                                 id="payableAmount">{{rtrim(rtrim(getAmount($exchange->final_amount,8),0),'.')}} {{optional($exchange->getCurrency)->code}}</strong>
+                                        </li>
+                                        <li class="list-checked-item">@lang('Staking Mode') : <strong
+                                                class="text-dark font-weight-bold"
+                                                >{{ $exchange->staking_mode}}</strong>
                                         </li>
                                     </ul>
                                 </div>

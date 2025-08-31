@@ -37,7 +37,7 @@
                                             <span class="font-weight-bold"><i
                                                     class="fas fa-check-circle me-2 text-base"></i> @lang("Exchange Rate") : <span
                                                     class="font-weight-medium" id="exchangeRate">1 {{optional($exchange->sendCurrency)->code}}
-                                                    {{$exchange->rate_type == 'floating' ? '~':'='}} {{rtrim(rtrim(getAmount($exchange->exchange_rate,8),0),'.')}} {{optional($exchange->getCurrency)->code}}</span></span>
+                                                    {{$exchange->rate_type == 'floating' ? '~':'='}} {{getAmount($exchange->exchange_rate,8)}} {{optional($exchange->getCurrency)->code}}</span></span>
                                         </li>
 
                                         <li class="my-3">
@@ -98,7 +98,7 @@
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Get Amount') : <span
                                                     class="font-weight-bold"
-                                                    id="receiveAmount">{{rtrim(rtrim(getAmount($exchange->get_amount,8),0),'.')}} {{optional($exchange->getCurrency)->code}}
+                                                    id="receiveAmount">{{getAmount($exchange->get_amount,8)}} {{optional($exchange->getCurrency)->code}}
                                                 </span>
                                             </span>
                                         </li>
@@ -164,10 +164,10 @@
                                 @if ($exchange->status == 2)
                     <div class="mt-8">
 
-                    <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
+                    <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i><font color="red">Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.</font>
                     
                     
-                    <p class="mt-4">User Balance: {{ $user->balance }} USDT</p>
+                    <p class="mt-4">User Balance: {{ $user->balance }} USD</p>
 
 
                     <form class="search-box2-x mt-4" method="POST" action="{{route('trackingx')}}">
