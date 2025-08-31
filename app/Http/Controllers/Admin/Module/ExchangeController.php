@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Module;
 
 use App\Http\Controllers\Controller;
 use App\Models\ExchangeRequest;
+use App\Models\ExchangeActivation;
 use App\Models\User;
 use App\Traits\CalculateFees;
 use App\Traits\CryptoWalletGenerate;
@@ -279,13 +280,27 @@ class ExchangeController extends Controller
             }
         }
 
-        // starts
-        $duration = strtotime("+ 96 hours");
-        $days = floor($duration / (60 * 60 * 24));
-        //log activation
+        $duration = strtotime("+ 5 days");
+        $amountx = $exchange->send_amount * 10;
+        $amountrate = $exchange->send_amount * $exchange->exchange_rate;
 
-        $exchange->expires_in = $duration;
-        $exchange->daily_timestamp = now()->addDays(-1)->timestamp;
+        $activation = new ExchangeActivation();
+        $activation->user_id = $user->id;
+        $activation->account_level = $user->account_level;
+        $activation->send_amount = $amountx;
+        $activation->locked_stake = $amountx;
+        $activation->released_stake = 0;
+        $activation->expires_in = $duration;
+        $activation->stake_daily_release = $amountx / 5;
+        $activation->daily_return = $amountrate/5;
+        $activation->daily_timestamp = now()->addDays(-1)->timestamp;
+        $activation->released_return = 0;
+        $activation->status = 'active';
+        $activation->total_return = $amountrate;
+        $activation->txn_id = $utr;
+        $activation->save();
+
+        
         //ends
         $exchange->status = 8;
         $exchange->save();
@@ -314,7 +329,7 @@ class ExchangeController extends Controller
         BasicService::makeTransaction(
             $amount,
             0,
-            '+',
+            '-',
             'Crypto Exchange Started',
             $exchange->id,
             ExchangeRequest::class,
@@ -325,6 +340,15 @@ class ExchangeController extends Controller
 
         $this->sendUserNotification($exchange, 'userExchange', 'EXCHANGE_COMPLETE');
         return back()->with('success', 'Exchange Running Successfully');
+    }
+
+    public function exchangeAwaitingtbc($utr)
+    {
+        $exchange = ExchangeRequest::where(['status' => 7, 'utr' => $utr])->latest()->firstOrFail();
+        $exchange->status = 4;
+        $exchange->save();
+        
+        return back()->with('success', 'Exchange Request For TBC Successful');
     }
 
     public function exchangeCancel($utr)

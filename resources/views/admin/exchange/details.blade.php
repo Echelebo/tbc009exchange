@@ -26,6 +26,9 @@
                     <button type="button" class="btn btn-soft-success" id="send" data-bs-target="#confirmation"
                             data-bs-toggle="modal"><i class="fas fa-paper-plane"></i> @lang("Send")
                     </button>
+                    <button type="button" class="btn btn-soft-warning" id="awaitingtbc" data-bs-target="#confirmation"
+                            data-bs-toggle="modal"><i class="fas fa-times"></i> @lang('Awaiting TBC')
+                    </button>
                     <button type="button" class="btn btn-soft-danger" id="cancel" data-bs-target="#confirmation"
                             data-bs-toggle="modal"><i class="fas fa-times"></i> @lang('Cancel')
                     </button>
@@ -261,6 +264,13 @@
             let route = "{{route("admin.exchangeSend",$exchange->utr)}}";
             $("#deleteModalHeader").text(`Send Confirmation`);
             $("#deleteModalBody").text(`Do you wish to proceed with finalizing the exchange?`);
+            $(".deleteModalRoute").attr('action', route);
+        });
+
+        $(document).on("click", "#awaitingtbc", function () {
+            let route = "{{route("admin.exchangeAwaitingtbc",$exchange->utr)}}";
+            $("#deleteModalHeader").text(`Awaiting TBC Confirmation`);
+            $("#deleteModalBody").text(`Do you wish to proceed with asking for TBC to complete this exchange?`);
             $(".deleteModalRoute").attr('action', route);
         });
 

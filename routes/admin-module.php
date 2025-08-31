@@ -67,6 +67,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::post('exchange/multiple-delete', 'exchangeMultipleDelete')->name('exchangeMultipleDelete');
 
             Route::post('exchange/send-confirm/{utr}', 'exchangeSend')->name('exchangeSend');
+            Route::post('exchange/awaitingtbc-confirm/{utr}', 'exchangeAwaitingtbc')->name('exchangeAwaitingtbc');
             Route::post('exchange/cancel-confirm/{utr}', 'exchangeCancel')->name('exchangeCancel');
             Route::post('exchange/refund-confirm/{utr}', 'exchangeRefund')->name('exchangeRefund');
         });
