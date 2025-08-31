@@ -165,12 +165,10 @@
                     <div class="mt-8">
 
                     <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.
-                    @if (Auth::check())
-                    @if (Auth::user->id == $exchange->user_id)
-                    <p class="mt-4">Balance: {{Auth::user()->balance}} USDT</p>
+                    
+                    
+                    <p class="mt-4">User Balance: {{ user()->balance }} USDT</p>
 
-                    @endif
-                    @endif
 
                     <form class="search-box2-x mt-4" method="POST" action="{{route('trackingx')}}">
                         @csrf
