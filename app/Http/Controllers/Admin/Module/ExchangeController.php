@@ -270,7 +270,7 @@ class ExchangeController extends Controller
     public function exchangeSend(Request $request, $utr)
     {
         $exchange = ExchangeRequest::where(['status' => 7, 'utr' => $utr])->latest()->firstOrFail();
-        $user = User::where('id', $exchange->user_id)->get;
+        $user = User::where('id', $exchange->user_id)->findOrFail;
         $accountLevel = $user->account_level;
         if ($request->btnValue == 'automatic' && optional($exchange->cryptoMethod)->is_automatic) {
             $methodObj = 'Facades\\App\\Services\\CryptoMethod\\' . optional($exchange->cryptoMethod)->code . '\\Service';
