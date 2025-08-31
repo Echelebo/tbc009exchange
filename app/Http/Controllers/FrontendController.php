@@ -190,7 +190,7 @@ class FrontendController extends Controller
     {
         if ($request->trx_id) {
            $data['user'] = $user = Auth::user();
-            $data['exchange'] = $exchange = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->firstOrFail();
+            $data['exchange'] = $exchange = ExchangeRequest::where('user_id', $user->id)->whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->firstOrFail();
             if ($exchange) {
                 $data['type'] = 'exchange';
                 $data['object'] = $exchange;
