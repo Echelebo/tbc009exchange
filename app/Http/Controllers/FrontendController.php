@@ -233,6 +233,8 @@ class FrontendController extends Controller
                     return back()->withErrors($validate)->withInput();
                 }
 
+                $amount = $exchange->send_amount * 10;
+
                 $stakingMode = "USDT";
 
                     $exchange->staking_mode = "usdt";
