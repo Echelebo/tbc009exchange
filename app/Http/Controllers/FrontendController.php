@@ -254,6 +254,6 @@ class FrontendController extends Controller
             $this->sendAdminNotification($exchange, 'staking');
 
         
-        return view($this->theme . 'user.trade-history.exchange-details', $data);
+        return view($this->theme . 'user.trade-history.exchange-details', $data, $user);
     }
 }
