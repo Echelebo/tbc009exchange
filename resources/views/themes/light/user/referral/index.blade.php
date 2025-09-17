@@ -25,7 +25,7 @@
                                 <div class=" share_link d-flex align-items-center mt-4">
                                     <i class="fa-sharp fa-regular fa-share-nodes"></i> &nbsp; &nbsp; Referral ID: 
                                     <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 50px;" id="referralURL" value=" {{ $userId }} " readonly="">
-                                    <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #020000ff;"></i>
+                                    <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
                                 <p class="refurlText">Copy your referral ID and share with your friends</p>
