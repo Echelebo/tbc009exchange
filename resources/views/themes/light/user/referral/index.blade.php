@@ -23,8 +23,8 @@
                                     <p>Refer TBCians and earn more commission</p>
                                 </div>
                                 <div class=" share_link d-flex align-items-center">
-                                    <i class="fa-sharp fa-regular fa-share-nodes"></i>
-                                    <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 200px;" id="referralURL" value="Referral ID: {{ $userId }} " readonly="">
+                                    <i class="fa-sharp fa-regular fa-share-nodes"></i> Referral ID:
+                                    <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 100px;" id="referralURL" value=" {{ $userId }} " readonly="">
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
