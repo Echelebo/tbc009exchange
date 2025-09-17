@@ -23,7 +23,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('user.referral.index')}}">
+            <a class="nav-link {{menuActive('user.referral.index')}}" href="{{route('user.referral.index')}}">
                 <i class="fa-light fal fa-wallet"></i>
                 <span>Referrals</span>
             </a>
