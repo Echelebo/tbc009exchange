@@ -52,7 +52,7 @@
                                                
                                                 
                                                     <tbody class="block-statistics">
-                                                        @if(count($transactions) > 0)
+                                                        @if(count($referrals) > 0)
                                                         @foreach ( $referrals as $referral)
                                                         <tr id="user-{{ $referral->id}}" data-level="0" data-loaded="false">
                                                         <td data-label="Username">
