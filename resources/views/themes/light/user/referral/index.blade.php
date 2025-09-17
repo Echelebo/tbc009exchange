@@ -19,7 +19,7 @@
                                     
                                 </div>
                                 <div class="qna">
-                                    <h5>Referral bonus is 5% of your downliners staked amount.</h5>
+                                    <h5>Referral bonus is 5% of your downlines staked amount.</h5>
                                     <p>Refer TBCians and earn more commission</p>
                                 </div>
                                 <div class=" share_link d-flex align-items-center">

@@ -23,13 +23,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{menuActive(['user.buyList','user.buyDetails'])}}" href="{{route('user.buyList')}}">
+            <a class="nav-link {{menuActive('user.referral.index')}}" href="{{route('user.referral.index')}}">
                 <i class="fa-light fal fa-wallet"></i>
                 <span>Referrals</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{menuActive(['user.sellList','user.sellDetails'])}}" href="{{route('user.sellList')}}">
+            <a class="nav-link {{menuActive('user.topup.index')}}" href="{{route('user.topup.index')}}">
                 <i class="fa-light fal fa-tags"></i>
                 <span>Top Up</span>
             </a>
@@ -45,8 +45,8 @@
 
 
         <li class="nav-item">
-            <a class="nav-link {{menuActive(['user.fund.index'])}}"
-               href="{{route('user.fund.index')}}">
+            <a class="nav-link {{menuActive(['user.payout.index'])}}"
+               href="{{route('user.payout.index')}}">
                 <i class="fa-light fal fa-spinner"></i>
                 <span>Payout Request</span>
             </a>

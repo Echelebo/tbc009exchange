@@ -439,6 +439,34 @@ class HomeController extends Controller
 
     }
 
+    public function payout(Request $request)
+    {
+        $basic = basicControl();
+        $userId = Auth::id();
+        $funds = Deposit::with(['depositable', 'gateway'])
+            ->where('user_id', $userId)
+            ->where('payment_method_id', '>', 999)
+            ->orderBy('id', 'desc')
+            ->latest()->paginate($basic->paginate);
+        return view($this->theme . 'user.payout.index', compact('funds'));
+
+    }
+
+
+    public function topup(Request $request)
+    {
+        $basic = basicControl();
+        $userId = Auth::id();
+        $funds = Deposit::with(['depositable', 'gateway'])
+            ->where('user_id', $userId)
+            ->where('payment_method_id', '>', 999)
+            ->orderBy('id', 'desc')
+            ->latest()->paginate($basic->paginate);
+        return view($this->theme . 'user.topup.index', compact('funds'));
+
+    }
+
+
 
     public function transaction(Request $request)
     {
@@ -468,15 +496,6 @@ class HomeController extends Controller
         $referrals = User::where('referral_by', $userId)->orderBy('id', 'desc')->paginate(basicControl()->paginate);
         
         return view($this->theme . 'user.referral.index', compact('commission, referrals'));
-    }
-
-    public function referralBonus()
-    {
-        $userId = Auth::id();
-        $transactions = Transaction::where('user_id', $userId)->where('remarks', 'Referral Bonus')
-            ->orderBy('id', 'desc')
-            ->paginate(basicControl()->paginate);
-        return view($this->theme . 'user.referral.bonus', compact('transactions'));
     }
 
 }
