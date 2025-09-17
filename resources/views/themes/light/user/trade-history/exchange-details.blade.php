@@ -161,6 +161,58 @@
                                     </ul>
                                 </div>
 
+                                @if ($exchange->status == 8)
+
+                                <div class="col-md-6">
+                                    <ul class="list-style-none ms-4">
+                                        <li class="my-2 border-bottom pb-3">
+                                            <span class="font-weight-medium "><i
+                                                    class="far fa-coins me-2 text-base"></i> @lang("Elapsed Time") <small
+                                                    class="float-end">{{dateTime($exchange->created_at,basicControl()->date_time_format)}}</small></span>
+                                        </li>
+
+                                        <li class="my-3">
+                                            <span>
+												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Next Return') : <span
+                                                    class="font-weight-bold">{{optional($exchange->sendCurrency)->currency_name}}
+                                                </span>
+                                            </span>
+                                        </li>
+                                        <li class="my-3">
+                                            <span>
+												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Locked Stake') : <span
+                                                    class="font-weight-bold">{{optional($exchange->getCurrency)->currency_name}}
+                                                </span>
+                                            </span>
+                                        </li>
+                                        <li class="my-3">
+                                            <span>
+												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Stake') : <span
+                                                    class="font-weight-bold">{{rtrim(rtrim($exchange->send_amount,0),'.')}} {{optional($exchange->sendCurrency)->code}}
+                                                </span>
+                                            </span>
+                                        </li>
+                                        <li class="my-3">
+                                            <span>
+												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Return') : <span
+                                                    class="font-weight-bold"
+                                                    id="receiveAmount">{{getAmount($exchange->get_amount,8)}} {{optional($exchange->getCurrency)->code}}
+                                                </span>
+                                            </span>
+                                        </li>
+                                        <li class="my-3">
+                                            <span>
+												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Receivable Amount') : <span
+                                                    class="font-weight-bold text-danger"
+                                                    id="payableAmount">{{rtrim(rtrim(getAmount($exchange->final_amount,8),0),'.')}} {{optional($exchange->getCurrency)->code}}
+                                                </span>
+                                            </span>
+                                        </li>
+
+                                </div>
+
+                                @endif
+
                                 @if ($exchange->status == 2)
                     <div class="mt-8">
 
@@ -207,6 +259,32 @@
                 <div class="itemx">
                     <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are checking your stake. You will receive a notification once your exchange has been approved.
 
+
+
+
+                </div>
+
+            </div>
+
+            @endif
+
+            @endif
+
+                @if ($exchange->status == 8)
+
+            <div class="table-row">
+                <div class="itemx">
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(63, 193, 87)"></i>Exchange running. Go to Exchange List from your dashboard to view exchange.
+                </div>
+
+            </div>
+
+            @endif
+            @if ($exchange->status == 9)
+
+            <div class="table-row">
+                <div class="itemx">
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(203, 40, 43)"></i>Expired.
 
 
 

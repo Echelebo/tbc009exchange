@@ -62,6 +62,45 @@
                     </div>
                     @endif
                 </div> 
+
+                 @if ($object->status == 7)
+
+            <div class="table-row">
+                <div class="itemx">
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color: #c1923f"></i>Hello, we are checking your stake. You will receive a notification once your exchange has been approved.
+
+
+
+
+                </div>
+
+            </div>
+
+            @endif
+
+                @if ($object->status == 8)
+
+            <div class="table-row">
+                <div class="itemx">
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(63, 193, 87)"></i>Exchange running. Go to Exchange List from your dashboard to view exchange.
+                </div>
+
+            </div>
+
+            @endif
+            @if ($object->status == 9)
+
+            <div class="table-row">
+                <div class="itemx">
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(203, 40, 43)"></i>Expired.
+
+
+
+                </div>
+
+            </div>
+
+            @endif
         </div>
     </div>
 </div>

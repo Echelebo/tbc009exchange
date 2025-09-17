@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BuyRequest;
 use App\Models\CryptoCurrency;
 use App\Models\ExchangeRequest;
+use App\Models\ExchangeActivation;
 use App\Models\FiatCurrency;
 use App\Models\SellRequest;
 use App\Traits\CalculateFees;
@@ -64,6 +65,8 @@ class TradeHistrotyController extends Controller
         $data['user'] = $this->user;
         $data['exchange'] = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3',  '4', '5', '6', '7', '8', '9'])
             ->where('utr', $utr)->firstOrFail();
+        $data['exchangex'] = ExchangeActivation::where('user_id', $this->user->id)->where('status', 'active')
+            ->where('txn_id', $utr)->firstOrFail();
         return view($this->theme . 'user.trade-history.exchange-details', $data);
     }
 
