@@ -18,17 +18,17 @@
                                     </div>
                                     
                                 </div>
-                                <div class="qna">
+                                <div class="qna mt-4">
                                     <h5>Referral bonus is 5% of your downlines staked amount.</h5>
                                     <p>Refer TBCians and earn more commission</p>
                                 </div>
-                                <div class=" share_link d-flex align-items-center">
-                                    <i class="fa-sharp fa-regular fa-share-nodes"></i> &nbsp; &nbsp; &nbsp; Referral ID: 
+                                <div class=" share_link d-flex align-items-center mt-4">
+                                    <i class="fa-sharp fa-regular fa-share-nodes"></i> &nbsp; &nbsp; Referral ID: 
                                     <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 50px;" id="referralURL" value=" {{ $userId }} " readonly="">
-                                    <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
+                                    <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #020000ff;"></i>
                                     </button>
                                 </div>
-                                <p class="refurlText mt-4">Copy your referral ID and share with your friends</p>
+                                <p class="refurlText">Copy your referral ID and share with your friends</p>
 
                                 
                             </div>
