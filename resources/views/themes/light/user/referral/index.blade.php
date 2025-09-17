@@ -13,7 +13,7 @@
                                         <div class="commission d-flex align-items-center justify-content-start">
                                             <div><i class="fa-duotone fa-sack-dollar"></i></div>
                                             <div class="ms-4"><h5>Total Commission</h5>
-                                                <p>${{ number_format($commission, 2) }}</p></div>
+                                                <p></p></div>
                                         </div>
                                     </div>
                                     
@@ -24,7 +24,7 @@
                                 </div>
                                 <div class=" share_link d-flex align-items-center">
                                     <i class="fa-sharp fa-regular fa-share-nodes"></i>
-                                    <input type="text" class="input border-0" id="referralURL" value="{{$userId}}" readonly="">
+                                    <input type="text" class="input border-0" id="referralURL" value="" readonly="">
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy"></i>
                                     </button>
                                 </div>
@@ -85,6 +85,7 @@
         </div>
     </div>
     @endsection
+
     @push('extra_scripts')
     
     <script>
