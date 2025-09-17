@@ -13,7 +13,7 @@
                                         <div class="commission d-flex align-items-center justify-content-start">
                                             <div><i class="fa-duotone fa-sack-dollar"></i></div>
                                             <div class="ms-4"><h5>Total Commission</h5>
-                                                <p></p></div>
+                                                <p>${{ number_format($commission, 2) }}</p></div>
                                         </div>
                                     </div>
                                     
@@ -24,7 +24,7 @@
                                 </div>
                                 <div class=" share_link d-flex align-items-center">
                                     <i class="fa-sharp fa-regular fa-share-nodes"></i>
-                                    <input type="text" class="input border-0" id="referralURL" value="" readonly="">
+                                    <input type="text" class="input border-0" id="referralURL" value="{{$userId}}" readonly="">
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy"></i>
                                     </button>
                                 </div>
@@ -53,20 +53,7 @@
                                                 
                                                     <tbody class="block-statistics">
                                                         @if(count($transactions) > 0)
-                                                        @foreach ( $referrals as $referral)
-                                                        <tr id="user-{{ $referral->id}}" data-level="0" data-loaded="false">
-                                                        <td data-label="Username">
-                                                            <a href="javascript:void(0)" class="" data-id="{{ $referral->id }}">
-                                                              {{ $referral->username }} 
-                                                            </a>
-                                                        </td>
-                                                        
-                                                        <td data-label="Joined At">
-                                                            {{ dateTime($referral->created_at,basicControl()->date_time_format) }}
-                                                        </td>
-
-                                                    </tr>
-                                                    @endforeach
+                                                        jhhjhjhjhj
                                                     @else
                                                     @include('empty')
                                                     @endif
@@ -85,7 +72,7 @@
         </div>
     </div>
     @endsection
-
+    
     @push('extra_scripts')
     
     <script>
