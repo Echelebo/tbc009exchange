@@ -24,7 +24,7 @@
                                 </div>
                                 <div class=" share_link d-flex align-items-center">
                                     <i class="fa-sharp fa-regular fa-share-nodes"></i>
-                                    <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 100px;" id="referralURL" value="User ID: {{ $userId }} " readonly="">
+                                    <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 100px;" id="referralURL" value="Referral ID: {{ $userId }} " readonly="">
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
