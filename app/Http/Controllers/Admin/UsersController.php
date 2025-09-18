@@ -868,4 +868,23 @@ class UsersController extends Controller
     }
 
 
+    public function referral()
+    {
+        $data['allCountry'] = config('country');
+        return view('admin.referral.index', $data);
+    }
+
+    public function topup()
+    {
+        $data['allCountry'] = config('country');
+        return view('admin.topup.index', $data);
+    }
+
+    public function payout()
+    {
+        $data['allCountry'] = config('country');
+        return view('admin.payout.index', $data);
+    }
+
+
 }

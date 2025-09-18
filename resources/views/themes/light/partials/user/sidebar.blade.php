@@ -28,6 +28,14 @@
                 <span>Referrals</span>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{menuActive('user.referral.bonus')}}" href="{{route('user.referral.bonus')}}">
+                <i class="fa-light fal fa-wallet"></i>
+                <span>Ref. Bonus</span>
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link {{menuActive('user.topup.index')}}" href="{{route('user.topup.index')}}">
                 <i class="fa-light fal fa-tags"></i>

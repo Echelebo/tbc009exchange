@@ -165,39 +165,6 @@ class User extends Authenticatable
         return $tree;
     }
 
-    // give referral bonus
-    public function giveReferralBonus($depositAmount, $depth = 1)
-    {
-        if ($depth > 10 || !$this->referrer) {
-            return;
-        }
-
-        // Calculate and award the bonus to the current upline member
-        $percentage_bonus = 5;
-        $percentage_bonus = $percentage_bonus[$depth - 1];
-
-        if ($percentage_bonus > 0) {
-            $amount = $percentage_bonus / 100 * $depositAmount;
-            $this->referrer->balance += $amount;
-            $this->referrer->save();
-
-            BasicService::makeTransaction(
-                $amount,
-                '0',
-                'Credit',
-                'Referral Bonus',
-                uniqid('R'),
-                'Stake Trans',
-                $this->referrer->id,
-                $depositAmount,
-                'USD'
-            );
-
-            //Notifications goes in here...
-
-            // Recursively call the function for the next upline member
-            $this->referrer->giveReferralBonus($depositAmount, $depth + 1);
-        }
-    }
+    
 
 }

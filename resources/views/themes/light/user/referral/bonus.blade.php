@@ -1,59 +1,24 @@
 @extends($theme.'layouts.user')
-@section('page_title',__('Referral'))
+@section('page_title',__('Ref. Bonus List'))
 @section('content')
 <div class="section dashboard">
         <div class="row">
             <div class="col-12">
-                <div class="row mb-3">
-                    <div class="col-xl-6 col-lg-12 mb-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div class="commission d-flex align-items-center justify-content-start">
-                                            <div><i class="fa-duotone fa-sack-dollar"></i></div>
-                                            <div class="ms-4"><h5>Total Commission</h5>
-                                                <p>${{ number_format($commission, 2) }}</p></div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="qna mt-4">
-                                    <h5>Referral bonus is 5% of your downlines staked amount.</h5>
-                                    <p>Refer TBCians and earn more commission</p>
-                                </div>
-                                <div class=" share_link d-flex align-items-center mt-4">
-                                    <i class="fa-sharp fa-regular fa-share-nodes"></i> &nbsp; &nbsp; Referral ID: 
-                                    <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 50px;" id="referralURL" value=" {{ $userId }} " readonly="">
-                                    <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
-                                    </button>
-                                </div>
-                                <p class="refurlText">Copy your referral ID and share with your friends</p>
-
-                                
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+                
                                     <div class="user-wrapper">
                         <div class="user-table">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="cmn-table skltbs-panel">
                                         <div class="table-responsive">
-                                            <h6>Upline</h6>
-                                            <p> 
-                                            @if($upline->referral_by != NULL)
-                                                {{ $upline->referral_by }}
-                                            @else
-                                                No Referrer
-                                            @endif</p>
+                                            
                                             <table class="table align-middle">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">Joined At</th>
+                                                    <th scope="col">Transaction ID</th>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Amount($)</th>
+                                                    <th scope="col">Time</th>
                                                 </tr>
                                                 </thead>
                                                
@@ -62,13 +27,24 @@
                                                         @if(count($referrals) > 0)
                                                         @foreach ( $referrals as $referral)
                                                         <tr id="user-{{ $referral->id}}" data-level="0" data-loaded="false">
-                                                        <td data-label="Username">
+                                                        <td data-label="Transaction ID">
                                                             <a href="javascript:void(0)" class="" data-id="{{ $referral->id }}">
-                                                              {{ $referral->username }}
+                                                              {{ $referral->trx_id }}
                                                             </a>
                                                         </td>
+
+                                                        <td data-label="Remarks">
+                                                            {{ $referral->remarks }}
+                                                        </td>
+
+                                                        <td data-label="Amount">
+                                                            <h6 class="text-success">{{ $referral->amount }}$
+                                                                | <sup
+                                                    class="baseColor">{{number_format($referral->transaction_amount, 2)}} USD</sup>
+                                                            </h6>
+                                                        </td>
                                                         
-                                                        <td data-label="Joined At">
+                                                        <td data-label="Time">
                                                             {{ dateTime($referral->created_at,basicControl()->date_time_format) }}
                                                         </td>
 

@@ -125,75 +125,32 @@
                             </a>
                         </div>
                     </div>
-                    <div class="nav-item" {{ menuActive(['admin.buyList','admin.buyView'], 3) }}>
-                        <a class="nav-link dropdown-toggle collapsed" href="#navbarBuyRequestMenu"
-                           role="button"
-                           data-bs-toggle="collapse" data-bs-target="#navbarBuyRequestMenu"
-                           aria-expanded="false"
-                           aria-controls="navbarBuyRequestMenu">
-                            <i class="fas fa-wallet nav-icon"></i>
-                            <span class="nav-link-title">@lang("Buy")</span>
+                    
+                    <div class="nav-item">
+                        <a class="nav-link {{ menuActive(['admin.referral']) }}"
+                           href="{{ route('admin.referral') }}" data-placement="left">
+                            <i class="bi bi-send nav-icon"></i>
+                            <span class="nav-link-title">@lang("Referrers")</span>
                         </a>
-                        <div id="navbarBuyRequestMenu"
-                             class="nav-collapse collapse {{ menuActive(['admin.buyList','admin.buyView'], 2) }}"
-                             data-bs-parent="#navbarBuyRequestMenu">
-                            <a class="nav-link {{ request()->query('type') == 'all'? 'active' : '' }}"
-                               href="{{ route('admin.buyList').'?type=all' }}">
-                                @lang('All Buy')
-                            </a>
-                            <a class="nav-link {{ request()->query('type') == 'pending'? 'active' : '' }}"
-                               href="{{ route('admin.buyList').'?type=pending' }}">
-                                @lang('Pending Buy')
-                            </a>
-                            <a class="nav-link {{ request()->query('type') == 'complete'? 'active' : '' }}"
-                               href="{{ route('admin.buyList').'?type=complete' }}">
-                                @lang('Complete Buy')
-                            </a>
-                            <a class="nav-link {{ request()->query('type') == 'cancel'? 'active' : '' }}"
-                               href="{{ route('admin.buyList').'?type=cancel' }}">
-                                @lang('Cancel Buy')
-                            </a>
-                            <a class="nav-link {{ request()->query('type') == 'refund'? 'active' : '' }}"
-                               href="{{ route('admin.buyList').'?type=refund' }}">
-                                @lang('Refund Buy')
-                            </a>
-                        </div>
                     </div>
 
-                    <div class="nav-item" {{ menuActive(['admin.sellList','admin.sellView'], 3) }}>
-                        <a class="nav-link dropdown-toggle collapsed" href="#navbarSellRequestMenu"
-                           role="button"
-                           data-bs-toggle="collapse" data-bs-target="#navbarSellRequestMenu"
-                           aria-expanded="false"
-                           aria-controls="navbarSellRequestMenu">
-                            <i class="fas fa-tags nav-icon"></i>
-                            <span class="nav-link-title">@lang("Sell")</span>
+                    <div class="nav-item">
+                        <a class="nav-link {{ menuActive(['admin.topup']) }}"
+                           href="{{ route('admin.topup') }}" data-placement="left">
+                            <i class="bi bi-send nav-icon"></i>
+                            <span class="nav-link-title">@lang("Top Up")</span>
                         </a>
-                        <div id="navbarSellRequestMenu"
-                             class="nav-collapse collapse {{ menuActive(['admin.sellList','admin.sellView'], 2) }}"
-                             data-bs-parent="#navbarSellRequestMenu">
-                            <a class="nav-link {{ request()->query('type') == 'all'? 'active' : '' }}"
-                               href="{{ route('admin.sellList').'?type=all' }}">
-                                @lang('All Sell')
-                            </a>
-                            <a class="nav-link {{ request()->query('type') == 'pending'? 'active' : '' }}"
-                               href="{{ route('admin.sellList').'?type=pending' }}">
-                                @lang('Pending Sell')
-                            </a>
-                            <a class="nav-link {{ request()->query('type') == 'complete'? 'active' : '' }}"
-                               href="{{ route('admin.sellList').'?type=complete' }}">
-                                @lang('Complete Sell')
-                            </a>
-                            <a class="nav-link {{ request()->query('type') == 'cancel'? 'active' : '' }}"
-                               href="{{ route('admin.sellList').'?type=cancel' }}">
-                                @lang('Cancel Sell')
-                            </a>
-                            <a class="nav-link {{ request()->query('type') == 'refund'? 'active' : '' }}"
-                               href="{{ route('admin.sellList').'?type=refund' }}">
-                                @lang('Refund Sell')
-                            </a>
-                        </div>
                     </div>
+
+                    <div class="nav-item">
+                        <a class="nav-link {{ menuActive(['admin.payout']) }}"
+                           href="{{ route('admin.payout') }}" data-placement="left">
+                            <i class="bi bi-send nav-icon"></i>
+                            <span class="nav-link-title">@lang("Payout")</span>
+                        </a>
+                    </div>
+
+                    
 
                     <div class="nav-item">
                         <a class="nav-link {{ menuActive(['admin.transaction']) }}"

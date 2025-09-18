@@ -64,6 +64,7 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
             Route::get('payout', 'payout')->name('payout.index');
             Route::get('transaction', 'transaction')->name('transaction.index');
             Route::get('referral', 'referral')->name('referral.index');
+            Route::get('referral/bonus', 'referralBonus')->name('referral.bonus');
             Route::get('topup', 'topup')->name('topup.index');
 
         });

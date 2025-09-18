@@ -42,6 +42,13 @@
                                 <div class="card-body">
                                     <div class="cmn-table skltbs-panel">
                                         <div class="table-responsive">
+                                            <h6>Upline</h6>
+                                            <p> 
+                                            @if($upline->referral_by != NULL)
+                                                {{ $upline->referral_by }}
+                                            @else
+                                                No Referrer
+                                            @endif</p>
                                             <table class="table align-middle">
                                                 <thead>
                                                 <tr>
@@ -57,7 +64,7 @@
                                                         <tr id="user-{{ $referral->id}}" data-level="0" data-loaded="false">
                                                         <td data-label="Username">
                                                             <a href="javascript:void(0)" class="" data-id="{{ $referral->id }}">
-                                                              {{ $referral->username }} 
+                                                              {{ $referral->username }}
                                                             </a>
                                                         </td>
                                                         

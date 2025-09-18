@@ -346,6 +346,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('transaction', [TransactionLogController::class, 'transaction'])->name('transaction');
         Route::get('transaction/search', [TransactionLogController::class, 'transactionSearch'])->name('transaction.search');
 
+        /* ====== Referrer =====*/
+        Route::get('referral', [UsersController::class, 'referral'])->name('referral');
+
+        /* ====== Topup =====*/
+        Route::get('topup', [UsersController::class, 'topup'])->name('topup');
+
+        /* ====== Payout =====*/
+        Route::get('payout', [UsersController::class, 'payout'])->name('payout');
+
         /* ====== Payment Log =====*/
         Route::get('payment/log', [PaymentLogController::class, 'index'])->name('payment.log');
         Route::get('payment/search', [PaymentLogController::class, 'search'])->name('payment.search');
