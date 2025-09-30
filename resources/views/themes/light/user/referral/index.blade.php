@@ -45,7 +45,7 @@
                                             <h6>Parent</h6>
                                             <p class="mt-4"> 
                                             @if($upline)
-                                                {{ $upline->referral_by->username }}
+                                                {{ $upline->referral_by }}
                                             @else
                                                 No Referrer
                                             @endif</p>
