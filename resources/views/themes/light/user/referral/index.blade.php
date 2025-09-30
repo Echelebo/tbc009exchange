@@ -45,7 +45,7 @@
                                             <h5>Parent</h5>
                                             <p class=""> 
                                             @if($uplineId)
-                                                {{ $upline->username }}
+                                            <i class="fa-sharp fa-regular fa-share-nodes"></i> &nbsp; &nbsp;    {{ $upline->username }}
                                             @else
                                                 No Referrer
                                             @endif</p>
