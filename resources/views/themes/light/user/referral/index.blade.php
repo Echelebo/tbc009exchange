@@ -44,8 +44,8 @@
                                         <div class="table-responsive">
                                             <h5>Parent</h5>
                                             <p class=""> 
-                                            @if($upline)
-                                                {{ $upline->referral_by }}
+                                            @if($uplineId)
+                                                {{ $upline->username }}
                                             @else
                                                 No Referrer
                                             @endif</p>
