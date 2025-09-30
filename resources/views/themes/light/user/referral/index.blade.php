@@ -28,7 +28,7 @@
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
-                                <p class="refurlText">Copy your referral ID and share with your friends</p>
+                                <p class="refurlText mt-4">Copy your referral ID and share with your friends</p>
 
                                 
                             </div>
@@ -42,10 +42,10 @@
                                 <div class="card-body">
                                     <div class="cmn-table skltbs-panel">
                                         <div class="table-responsive">
-                                            <h6>Upline</h6>
-                                            <p> 
-                                            @if($upline->referral_by != NULL)
-                                                {{ $upline->referral_by }}
+                                            <h6>Parent</h6>
+                                            <p class="mt-4"> 
+                                            @if($upline)
+                                                {{ $upline->referral_by->username }}
                                             @else
                                                 No Referrer
                                             @endif</p>
