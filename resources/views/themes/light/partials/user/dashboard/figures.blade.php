@@ -66,7 +66,7 @@
                 }
             },
             xaxis: {
-                categories: ['Total', 'Pending', 'Complete', 'Cancel', 'Refund'
+                categories: ['Total', 'Pending', 'Active', 'Expired', 'Refund'
                 ],
                 labels: {
                     style: {

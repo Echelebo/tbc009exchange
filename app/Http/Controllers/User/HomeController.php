@@ -63,23 +63,23 @@ class HomeController extends Controller
 
 
         $exchangeRecord = collect((clone $exchangeRequestQuery)
-                ->whereIn('status', ['2', '3', '5', '6'])
+                ->whereIn('status', ['2', '6', '8', '9'])
                 ->selectRaw('COUNT(id) AS totalExchange')
                 ->selectRaw('(COUNT(CASE WHEN status = 2 THEN id END)) AS pendingExchange')
                 ->selectRaw('(COUNT(CASE WHEN status = 2 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysPendingPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
-                ->selectRaw('(COUNT(CASE WHEN status = 3 THEN id END)) AS completeExchange')
-                ->selectRaw('(COUNT(CASE WHEN status = 3 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCompletePercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
-                ->selectRaw('(COUNT(CASE WHEN status = 5 THEN id END)) AS cancelExchange')
-                ->selectRaw('(COUNT(CASE WHEN status = 5 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCancelPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
                 ->selectRaw('(COUNT(CASE WHEN status = 6 THEN id END)) AS refundExchange')
                 ->selectRaw('(COUNT(CASE WHEN status = 6 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysRefundPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
+                ->selectRaw('(COUNT(CASE WHEN status = 8 THEN id END)) AS completeExchange')
+                ->selectRaw('(COUNT(CASE WHEN status = 8 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCompletePercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
+                ->selectRaw('(COUNT(CASE WHEN status = 9 THEN id END)) AS cancelExchange')
+                ->selectRaw('(COUNT(CASE WHEN status = 9 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCancelPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
                 ->get()
                 ->makeHidden(['tracking_status', 'admin_status', 'user_status'])
                 ->toArray())->collapse();
 
         $buyRequestQuery = $this->buyRequestQuery();
 
-        $buyRecord = collect((clone $buyRequestQuery)->where('user_id', auth()->id())->whereIn('status', [2,3,5,6])->selectRaw('COUNT(id) AS totalBuy')
+        $buyRecord = collect((clone $buyRequestQuery)->where('user_id', auth()->id())->whereIn('status', [2, 3, 5, 6])->selectRaw('COUNT(id) AS totalBuy')
             ->selectRaw('(COUNT(CASE WHEN status = 2 THEN id END)) AS pendingBuy')
             ->selectRaw('(COUNT(CASE WHEN status = 2 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysPendingPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
             ->selectRaw('(COUNT(CASE WHEN status = 3 THEN id END)) AS completeBuy')

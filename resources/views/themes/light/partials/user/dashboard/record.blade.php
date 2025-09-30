@@ -28,7 +28,7 @@
             <div class="box-card grayish-blue-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-check"></i>@lang('Complete Exchange')
+                            class="fa-light fas fa-check"></i>@lang('Active Exchange')
                     </h5>
                 </div>
                 <div class="box-card-body">
@@ -50,7 +50,7 @@
             <div class="box-card grayish-green-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fa-exclamation-triangle"></i>@lang('Cancel Exchange')
+                            class="fa-light fa-exclamation-triangle"></i>@lang('Expired Exchange')
                     </h5>
                 </div>
                 <div class="box-card-body">
@@ -165,7 +165,7 @@
             <div class="box-card grayish-custom-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-undo-alt"></i>@lang('Refund Top Up')</h5>
+                            class="fa-light fas fa-undo-alt"></i>@lang('Total Top Up')</h5>
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"> <span class="refundBuy"></span>
@@ -256,7 +256,7 @@
             <div class="box-card grayish-green-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-undo-alt"></i>@lang('Refund Payout')</h5>
+                            class="fa-light fas fa-undo-alt"></i>@lang('Total Payout')</h5>
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"> <span class="refundSell"></span>
