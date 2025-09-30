@@ -42,7 +42,7 @@
                                 <div class="card-body">
                                     <div class="cmn-table skltbs-panel">
                                         <div class="table-responsive">
-                                            <h6>Parent</h6>
+                                            <h5>Parent</h5>
                                             <p class=""> 
                                             @if($upline)
                                                 {{ $upline->referral_by }}
