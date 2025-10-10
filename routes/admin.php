@@ -348,6 +348,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         /* ====== Referrer =====*/
         Route::get('referral', [UsersController::class, 'referral'])->name('referral');
+        Route::get('referral/referrer-list/{id}', [UsersController::class, 'referralList'])->name('referral.referrerList');
 
         /* ====== Topup =====*/
         Route::get('topup', [UsersController::class, 'topup'])->name('topup');

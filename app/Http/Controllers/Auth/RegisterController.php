@@ -124,6 +124,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $referredBy = null;
+        $referralCode = request()->input('ref'); // Or from $data if in form
+
+        if ($referralCode) {
+            $referrer = User::where('referral_code', $referralCode)->first();
+            if ($referrer) {
+                $referredBy = $referrer->id;
+            }
+        }
         $basic = basicControl();
         return User::create([
             'firstname' => $data['first_name'],
@@ -138,6 +148,11 @@ class RegisterController extends Controller
             'email_verification' => ($basic->email_verification) ? 0 : 1,
             'sms_verification' => ($basic->sms_verification) ? 0 : 1,
         ]);
+
+        // Notify upline if exists
+        if ($referredBy) {
+            $referrer->notify(new DownlineSignup($user));
+        }
     }
 
     public function register(Request $request)

@@ -7,14 +7,14 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card mt-50" id="buyRecord">
+        <div class="card mt-50" id="topupRecord">
             <div class="card-body">
                 <div id="chart5"></div>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card mt-50" id="sellRecord">
+        <div class="card mt-50" id="payoutRecord">
             <div class="card-body">
                 <div id="chart6"></div>
             </div>
@@ -90,7 +90,7 @@
     </script>
 
     <script>
-        Notiflix.Block.standard('#buyRecord', {
+        Notiflix.Block.standard('#topupRecord', {
             backgroundColor: loaderColor,
         });
 
@@ -138,17 +138,17 @@
             }
         };
 
-        updateBuyMovementGraph();
+        updateTopUpMovementGraph();
 
-        async function updateBuyMovementGraph() {
-            let $url = "{{ route('user.chartBuyRecords') }}"
+        async function updateTopUpMovementGraph() {
+            let $url = "{{ route('user.chartTopUpRecords') }}"
             await axios.get($url)
                 .then(function (res) {
-                    options5.series[0].data = Object.values(res.data.buyMovements);
-                    options5.xaxis.categories = Object.keys(res.data.buyMovements);
+                    options5.series[0].data = Object.values(res.data.topupMovements);
+                    options5.xaxis.categories = Object.keys(res.data.topupMovements);
                     var chart5 = new ApexCharts(document.querySelector("#chart5"), options5);
                     chart5.render();
-                    Notiflix.Block.remove('#buyRecord');
+                    Notiflix.Block.remove('#topupRecord');
                 })
                 .catch(function (error) {
                 });
@@ -156,7 +156,7 @@
     </script>
 
     <script>
-        Notiflix.Block.standard('#sellRecord', {
+        Notiflix.Block.standard('#payoutRecord', {
             backgroundColor: loaderColor,
         });
 
@@ -206,17 +206,17 @@
             }
         };
 
-        updateSellMovementGraph();
+        updatePayoutMovementGraph();
 
-        async function updateSellMovementGraph() {
-            let $url = "{{ route('user.chartSellRecords') }}"
+        async function updatePayoutMovementGraph() {
+            let $url = "{{ route('user.chartPayoutRecords') }}"
             await axios.get($url)
                 .then(function (res) {
-                    options6.series[0].data = Object.values(res.data.sellMovements);
-                    options6.xaxis.categories = Object.keys(res.data.sellMovements);
+                    options6.series[0].data = Object.values(res.data.payoutMovements);
+                    options6.xaxis.categories = Object.keys(res.data.payoutMovements);
                     var chart6 = new ApexCharts(document.querySelector("#chart6"), options6);
                     chart6.render();
-                    Notiflix.Block.remove('#sellRecord');
+                    Notiflix.Block.remove('#payoutRecord');
                 })
                 .catch(function (error) {
                 });

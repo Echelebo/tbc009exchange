@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('page_title',__('Referrers'))
+@section('page_title',__('Referrer List'))
 @section('content')
     <div class="content container-fluid">
         <div class="page-header">
@@ -10,8 +10,8 @@
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0);">@lang('Dashboard')</a></li>
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
-                                                           href="javascript:void(0);">@lang('Referrers')</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">@lang('Referrers')</li>
+                                                           href="javascript:void(0);">@lang('Referrer List')</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang('Referrer List')</li>
                         </ol>
                     </nav>
                     <h1 class="page-header-title">@lang('Referrers List')</h1>
@@ -75,7 +75,6 @@
                             </div>
                         </th>
                         <th class="table-column-ps-0">@lang('Full Name')</th>
-                        <th>@lang('No. Of Downlines')</th>
                     </tr>
                     </thead>
 
@@ -155,7 +154,6 @@
                 columns: [
                     {data: 'checkbox', name: 'checkbox'},
                     {data: 'name', name: 'name'},
-                    {data: 'downline', name: 'downline'},
                 ],
                 select: {
                     style: 'multi',

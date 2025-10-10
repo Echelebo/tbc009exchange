@@ -7,14 +7,14 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card mt-50" id="buyFigures">
+        <div class="card mt-50" id="topupFigures">
             <div class="card-body">
                 <div id="chart1"></div>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card mt-50" id="sellFigures">
+        <div class="card mt-50" id="payoutFigures">
             <div class="card-body">
                 <div id="chart2"></div>
             </div>
@@ -66,7 +66,7 @@
                 }
             },
             xaxis: {
-                categories: ['Total', 'Pending', 'Active', 'Expired', 'Refund'
+                categories: ['Total', 'Pending', 'Active', 'Complete', 'Refund'
                 ],
                 labels: {
                     style: {
@@ -100,7 +100,7 @@
     </script>
 
     <script>
-        Notiflix.Block.standard('#buyFigures', {
+        Notiflix.Block.standard('#topupFigures', {
             backgroundColor: loaderColor,
         });
         var options1 = {
@@ -129,7 +129,7 @@
                 }
             },
             xaxis: {
-                categories: ['Total', 'Pending', 'Complete', 'Cancel', 'Refund'
+                categories: ['Total', 'Pending', 'Complete', 'Cancel'
                 ],
                 labels: {
                     style: {
@@ -147,17 +147,17 @@
             colors: ['{{$baseColor}}'],
         };
 
-        updateBuyFiguresGraph();
+        updateTopUpFiguresGraph();
 
-        async function updateBuyFiguresGraph() {
-            let $url = "{{ route('user.chartBuyFigures') }}"
+        async function updateTopUpFiguresGraph() {
+            let $url = "{{ route('user.chartTopUpFigures') }}"
             await axios.get($url)
                 .then(function (res) {
 
-                    options1.series[0].data = res.data.buyFigures.horizontalBarChatBuy;
+                    options1.series[0].data = res.data.topupFigures.horizontalBarChatTopUp;
                     var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
                     chart1.render();
-                    Notiflix.Block.remove('#buyFigures');
+                    Notiflix.Block.remove('#topupFigures');
                 })
                 .catch(function (error) {
                 });
@@ -166,7 +166,7 @@
     </script>
 
     <script>
-        Notiflix.Block.standard('#sellFigures', {
+        Notiflix.Block.standard('#payoutFigures', {
             backgroundColor: loaderColor,
         });
         var options2 = {
@@ -196,7 +196,7 @@
                 }
             },
             xaxis: {
-                categories: ['Total', 'Pending', 'Complete', 'Cancel', 'Refund'
+                categories: ['Total', 'Pending', 'Complete', 'Cancel'
                 ],
                 labels: {
                     style: {
@@ -215,17 +215,17 @@
             colors: ['{{$baseColor}}'],
         };
 
-        updateSellFiguresGraph();
+        updatePayoutFiguresGraph();
 
-        async function updateSellFiguresGraph() {
-            let $url = "{{ route('user.chartSellFigures') }}"
+        async function updatePayoutFiguresGraph() {
+            let $url = "{{ route('user.chartPayoutFigures') }}"
             await axios.get($url)
                 .then(function (res) {
 
-                    options2.series[0].data = res.data.sellFigures.horizontalBarChatSell;
+                    options2.series[0].data = res.data.payoutFigures.horizontalBarChatPayout;
                     var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
                     chart2.render();
-                    Notiflix.Block.remove('#sellFigures');
+                    Notiflix.Block.remove('#payoutFigures');
                 })
                 .catch(function (error) {
                 });

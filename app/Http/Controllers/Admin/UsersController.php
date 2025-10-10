@@ -870,7 +870,26 @@ class UsersController extends Controller
 
     public function referral()
     {
-        $data['allCountry'] = config('country');
+
+    $data['referrers'] = User::has('referredUsers')
+    ->with('referredUsers', 'referrer')
+    ->orderBy('id', 'DESC')
+    ->get();
+
+        return view('admin.referral.index', $data);
+    }
+
+
+    public function referrerList($id)
+    {
+        $data['downlines'] = User::where('referral_by', $id)
+            ->where('status', 1)
+            ->where('email_verification', 1)
+            ->orderBy('id', 'DESC')->get();
+
+        $data['parent'] = User::where('id', $id)
+            ->whereNotNull('referral_by')->first();
+
         return view('admin.referral.index', $data);
     }
 
