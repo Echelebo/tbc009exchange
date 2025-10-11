@@ -74,12 +74,12 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
             Route::get('getRecords', 'getRecords')->name('getRecords');
 
             Route::get('chartExchangeFigures', 'chartExchangeFigures')->name('chartExchangeFigures');
-            Route::get('chartBuyFigures', 'chartBuyFigures')->name('chartBuyFigures');
-            Route::get('chartSellFigures', 'chartSellFigures')->name('chartSellFigures');
+            Route::get('chartTopUpFigures', 'chartTopUpFigures')->name('chartTopUpFigures');
+            Route::get('chartPayoutFigures', 'chartPayoutFigures')->name('chartPayoutFigures');
 
             Route::get('chartExchangeMovements', 'chartExchangeMovements')->name('chartExchangeRecords');
-            Route::get('chartBuyMovements', 'chartBuyMovements')->name('chartBuyRecords');
-            Route::get('chartSellMovements', 'chartSellMovements')->name('chartSellRecords');
+            Route::get('chartTopUpMovements', 'chartTopUpMovements')->name('chartTopUpRecords');
+            Route::get('chartPayoutMovements', 'chartPayoutMovements')->name('chartPayoutRecords');
         });
     });
 });
