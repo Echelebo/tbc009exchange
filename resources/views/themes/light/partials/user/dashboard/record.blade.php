@@ -371,6 +371,10 @@
 </div>
 @push('extra_scripts')
     <script>
+        'use strict';
+        Notiflix.Block.standard('.exchangeRecord', {
+            backgroundColor: loaderColor,
+        });
 
         axios.get("{{route('user.getRecords')}}")
             .then(function (res) {
@@ -407,7 +411,7 @@
                 $('.totalSumReturn').text(res.data.totalSumReturn);
                 $('.totalSumExchange').text(res.data.totalSumExchange);
 
-                
+                Notiflix.Block.remove('.exchangeRecord');
             })
             .catch(function (error) {
 
