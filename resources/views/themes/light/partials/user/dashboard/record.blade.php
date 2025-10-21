@@ -371,10 +371,6 @@
 </div>
 @push('extra_scripts')
     <script>
-        'use strict';
-        Notiflix.Block.standard('.exchangeRecord', {
-            backgroundColor: loaderColor,
-        });
 
         axios.get("{{route('user.getRecords')}}")
             .then(function (res) {
@@ -390,11 +386,10 @@
                 $('.totalTopUp').text(res.data.totalTopUp);
                 $('.pendingTopUp').text(res.data.pendingTopUp);
                 $('.last30DaysPendingPercentageTopUp').text(res.data.last30DaysPendingPercentageTopUp);
-                $('.completeTopUp').text(res.d---ata.completeTopUp);
+                $('.completeTopUp').text(res.data.completeTopUp);
                 $('.last30DaysCompletePercentageTopUp').text(res.data.last30DaysCompletePercentageTopUp);
                 $('.cancelTopUp').text(res.data.cancelTopUp);
                 $('.last30DaysCancelPercentageTopUp').text(res.data.last30DaysCancelPercentageTopUp);
-              //  $('.refundTopUp').text(res.data.refundTopUp);
                 $('.last30DaysTotalPercentageTopUp').text(res.data.last30DaysTotalPercentageTopUp);
                 $('.totalPayout').text(res.data.totalPayout);
                 $('.pendingPayout').text(res.data.pendingPayout);
@@ -403,7 +398,6 @@
                 $('.last30DaysCompletePercentagePayout').text(res.data.last30DaysCompletePercentagePayout);
                 $('.cancelPayout').text(res.data.cancelPayout);
                 $('.last30DaysCancelPercentagePayout').text(res.data.last30DaysCancelPercentagePayout);
-              //  $('.refundPayout').text(res.data.refundPayout);
                 $('.last30DaysTotalPercentagePayout').text(res.data.last30DaysTotalPercentagePayout);
                 $('.last30DaysTotalPercentageBalance').text(res.data.last30DaysTotalPercentageBalance);
                 $('.totalBalance').text(res.data.totalBalance);
@@ -413,10 +407,7 @@
                 $('.totalSumReturn').text(res.data.totalSumReturn);
                 $('.totalSumExchange').text(res.data.totalSumExchange);
 
-
                 
-
-                Notiflix.Block.remove('.exchangeRecord');
             })
             .catch(function (error) {
 
