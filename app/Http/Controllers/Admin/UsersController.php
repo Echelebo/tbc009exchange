@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\UserAllRecordDeleteJob;
-use App\Models\BuyRequest;
+use App\Models\BuyRequest;;
+use App\Models\PayoutRequest;
+use App\Models\TopUpRequest;
 use App\Models\Deposit;
 use App\Mail\SendMail;
 use App\Models\Gateway;
@@ -891,6 +893,76 @@ class UsersController extends Controller
             ->whereNotNull('referral_by')->first();
 
         return view('admin.referral.index', $data);
+    }
+
+    public function referralSearch(Request $request)
+    {
+        $search = $request->search['value'] ?? null;
+        $filterTransactionId = $request->filterTransactionID;
+        $filterDate = explode('-', $request->filterDate);
+        $startDate = $filterDate[0];
+        $endDate = isset($filterDate[1]) ? trim($filterDate[1]) : null;
+
+        $referrer = User::has('referredUsers')->with('referredUsers', 'referrer')->orderBy('id', 'DESC')
+            ->when(!empty($search), function ($query) use ($search) {
+                return $query->where(function ($subquery) use ($search) {
+                    $subquery->where('username', 'LIKE', "%$search%")
+                        ->orWhere('referral_by', 'LIKE', "%{$search}%")
+                        ->orWhere('firstname', 'LIKE', "%{$search}%")
+                        ->orWhere('lastname', 'LIKE', "%{$search}%")
+                        ->orWhere('username', 'LIKE', "%{$search}%");
+                });
+            })
+            ->when(!empty($request->filterDate) && $endDate == null, function ($query) use ($startDate) {
+                $startDate = Carbon::createFromFormat('d/m/Y', trim($startDate));
+                $query->whereDate('created_at', $startDate);
+            })
+            ->when(!empty($request->filterDate) && $endDate != null, function ($query) use ($startDate, $endDate) {
+                $startDate = Carbon::createFromFormat('d/m/Y', trim($startDate));
+                $endDate = Carbon::createFromFormat('d/m/Y', trim($endDate));
+                $query->whereBetween('created_at', [$startDate, $endDate]);
+            })
+            ->when(!empty($filterTransactionId), function ($query) use ($filterTransactionId) {
+                return $query->where('trx_id', $filterTransactionId);
+            })
+            ->orderBy('id', 'DESC');
+
+        return DataTables::of($referrer)
+            ->addColumn('no', function ($item) {
+                static $counter = 0;
+                $counter++;
+                return $counter;
+            })
+            ->addColumn('referrer', function ($item) {
+                if ($item->id) {
+                    $url = route("admin.user.view.profile", $item->id);
+                    return '<a class="d-flex align-items-center me-2" href="' . $url . '">
+                                <div class="flex-shrink-0">
+                                    ' . optional($item)->profilePicture() . '
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                  <h5 class="text-hover-primary mb-0">' . optional($item)->firstname . ' ' . optional($item)->lastname . '</h5>
+                                  <span class="fs-6 text-body">' . optional($item)->username ?? 'Unknown' . '</span>
+                                </div>
+                              </a>';
+                } else {
+                    return '<a class="d-flex align-items-center me-2" href="javascript:void(0)">
+                                <div class="flex-shrink-0">
+                                   <div class="avatar avatar-sm avatar-soft-primary avatar-circle">
+                                       <span class="avatar-initials">A</span>
+                                   </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                  <h5 class="text-hover-primary mb-0">Anonymous</h5>
+                                </div>
+                              </a>';
+                }
+            })
+            ->addColumn('downlines', function ($item) {
+               return $item->count();
+            })
+            ->rawColumns(['referrer', 'downlines',])
+            ->make(true);
     }
 
     public function topup()
