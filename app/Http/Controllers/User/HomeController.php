@@ -499,12 +499,17 @@ class HomeController extends Controller
     {
         $basic = basicControl();
         $userId = Auth::id();
-        $funds = Deposit::with(['depositable', 'gateway'])
-            ->where('user_id', $userId)
-            ->where('payment_method_id', '>', 999)
+        $commission = Transaction::where('user_id', $userId)
+        ->where('remarks', 'LIKE', '%Payout%')
+        ->sum('amount');
+        $commissions = Transaction::where('user_id', $userId)
+        ->where('remarks', 'LIKE', '%Payout%')->get();
+        $data['commission'] = $commission;
+        $data['commissions'] = $commissions;
+        $data['payouts'] = PayoutRequest::where('user_id', $userId)
             ->orderBy('id', 'desc')
             ->latest()->paginate($basic->paginate);
-        return view($this->theme . 'user.payout.index', compact('funds'));
+        return view($this->theme . 'user.payout.index', $data);
 
     }
 
@@ -513,12 +518,17 @@ class HomeController extends Controller
     {
         $basic = basicControl();
         $userId = Auth::id();
-        $funds = Deposit::with(['depositable', 'gateway'])
-            ->where('user_id', $userId)
-            ->where('payment_method_id', '>', 999)
+        $commission = Transaction::where('user_id', $userId)
+        ->where('remarks', 'LIKE', '%Top Up%')
+        ->sum('amount');
+        $commissions = Transaction::where('user_id', $userId)
+        ->where('remarks', 'LIKE', '%Top Up%')->get();
+        $data['commission'] = $commission;
+        $data['commissions'] = $commissions;
+        $data['topups'] = TopUpRequest::where('user_id', $userId)
             ->orderBy('id', 'desc')
             ->latest()->paginate($basic->paginate);
-        return view($this->theme . 'user.topup.index', compact('funds'));
+        return view($this->theme . 'user.topup.index', $data);
 
     }
 

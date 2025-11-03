@@ -1,5 +1,5 @@
 @extends($theme.'layouts.user')
-@section('page_title',__('Referral'))
+@section('page_title',__('Payout'))
 @section('content')
 <div class="section dashboard">
         <div class="row">
@@ -20,7 +20,7 @@
                                         <div class="commission d-flex align-items-center justify-content-start">
                                             <div><i class="fa-duotone fa-sack-dollar"></i></div>
                                             <div class="ms-4"><h5>Total count of Payouts.</h5>
-                                                <p>${{ number_format($commission, 2) }}</p></div>
+                                                <p>${{ $commissions->count() }}</p></div>
                                         </div>
                                     </div>
                                     
@@ -42,7 +42,7 @@
 
                                 <p class="refurlText">Copy your preferred wallet to Top Up your balance.</p>
 
-                            <form method="POST" action="{{route('...')}}"  class="mt-4">
+                            <form method="POST" action=""  class="mt-4">
 
                                 <select name="topUpMethod" class="form-control" required>
                                     <option value="">Select Top Up method</option>
@@ -90,21 +90,21 @@
                                                
                                                 
                                                     <tbody class="block-statistics">
-                                                        @if(count($topups) > 0)
-                                                        @foreach ( $topups as $topup)
+                                                        @if(count($payouts) > 0)
+                                                        @foreach ( $payouts as $payout)
                                                         <tr >
                                                         <td data-label="Amount">  
-                                                              {{ $topup->amount }}
+                                                              {{ $payout->amount }}
                                                         </td>
                                                         
                                                         <td data-label="Method">
-                                                            {{ $topup->method }}
+                                                            {{ $payout->method }}
                                                         </td>
                                                         <td data-label="Status">
-                                                            {{ $topup->status }}
+                                                            {{ $payout->status }}
                                                         </td>
                                                         <td data-label="Time">
-                                                            {{ dateTime($topup->created_at,basicControl()->date_time_format) }}
+                                                            {{ dateTime($payout->created_at,basicControl()->date_time_format) }}
                                                         </td>
 
                                                     </tr>

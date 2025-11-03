@@ -1,5 +1,5 @@
 @extends($theme.'layouts.user')
-@section('page_title',__('Referral'))
+@section('page_title',__('Top Up'))
 @section('content')
 <div class="section dashboard">
         <div class="row">
@@ -19,8 +19,8 @@
                                     <div class="col-md-6">
                                         <div class="commission d-flex align-items-center justify-content-start">
                                             <div><i class="fa-duotone fa-sack-dollar"></i></div>
-                                            <div class="ms-4"><h5>Total count of Top Ups.</h5>
-                                                <p>${{ number_format($commission, 2) }}</p></div>
+                                            <div class="ms-4"><h5>Total count of Top Up.</h5>
+                                                <p>${{ $commissions->count() }}</p></div>
                                         </div>
                                     </div>
                                     
@@ -53,7 +53,7 @@
 
                                 <p class="refurlText">Copy your preferred wallet to Top Up your balance.</p>
 
-                            <form method="POST" action="{{route('...')}}"  class="mt-4">
+                            <form method="POST" action=""  class="mt-4">
 
                                 <select name="topUpMethod" class="form-control" required>
                                     <option value="">Select Top Up method</option>
