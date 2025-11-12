@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="row mb-3">
-                    <div class="col-xl-6 col-lg-12 col-md-12 mb-5">
+                    <div class="col-xl-12 col-lg-12 mb-5">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row g-4">
-                                    <div class="col-md-">
+                                    <div class="col-md-6">
                                         <div class="commission d-flex align-items-center justify-content-start">
                                             <div><i class="fa-duotone fa-sack-dollar"></i></div>
                                             <div class="ms-4"><h5>Total Top Up amount ($)</h5>
