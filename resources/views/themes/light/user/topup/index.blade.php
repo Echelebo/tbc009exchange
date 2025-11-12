@@ -20,7 +20,7 @@
                                         <div class="commission d-flex align-items-center justify-content-start">
                                             <div><i class="fa-duotone fa-sack-dollar"></i></div>
                                             <div class="ms-4"><h5>Total count of Top Up.</h5>
-                                                <p>${{ $commissions->count() }}</p></div>
+                                                <p>{{ $commissions->count() }}</p></div>
                                         </div>
                                     </div>
                                     
@@ -29,6 +29,8 @@
                                     <h5>Referral bonus is 5% of your downlines staked amount.</h5>
                                     <p>Refer TBCians and earn more commission</p>
                                 </div> -->
+
+                                <p class="refurlText mt-4">Copy your preferred wallet to Top Up your balance.</p>
                                
                                <div class=" share_link d-flex align-items-center mt-4">
                                 <label id="usdttrc20">USDT TRC-20</label>
@@ -51,9 +53,9 @@
                                     </button>
                                 </div>
 
-                                <p class="refurlText">Copy your preferred wallet to Top Up your balance.</p>
+                                
 
-                            <form method="POST" action=""  class="mt-4">
+                            <form method="POST" action=""  class="col-md-6 mt-4">
 
                                 <select name="topUpMethod" class="form-control" required>
                                     <option value="">Select Top Up method</option>
@@ -62,18 +64,20 @@
                                     <option value="usdtbep20">USDT BEP-20</option>
                                 </select>
                                 
+                                <div class="form-control" style="width: 80%; margin-top: 15px;">
                                 <label id="amount">Amount ($)</label>
                                 <input type="text" class="input" style="background-color: #2e403e; color: #ffffff; width: 50px;" name="amount" id="amount" value="" required>
-
+                                </div>
+                                <div class="form-control" style="width: 80%; margin-top: 15px;">
                                 <label id="hash_id">Hash Id (paste the hash Id of the usdt payment, for fast confirmation.)</label>
                                 <input type="text" class="input" style="background-color: #2e403e; color: #ffffff; width: 50px;" name="hash_id" id="hash_id" value="" required>
+                                </div>
+
+                                <p class="mt-4">Make sure you have sent USDT payment before clicking submit.</p>
 
 
-                                <p class="mt-4">Make sure you have sent USDT payment before pressing submit.</p>
 
-
-
-                                <button type="submit" class="search-btn2 mt-4 px-8" style="background-color:#c1923f; border-radius: 15px; padding: 10px; font-size: 15px; color: #ffffff; ">Submit Top Up
+                                <button type="submit" class="search-btn2 mt-4 px-8" style="background-color:#c1923f; border-radius: 15px; padding: 10px; font-size: 15px; color: #ffffff; ">Submit
                                     </button>
 
                             </form>
