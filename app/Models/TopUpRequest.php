@@ -14,7 +14,7 @@ class TopUpRequest extends Model
 {
     use HasFactory, SoftDeletes, Status, Prunable;
 
-    protected $fillable = ['user_id', 'amount', 'crypto', 'hash', 'status'];
+    protected $fillable = ['user_id', 'amount', 'method', 'hash', 'status'];
 
     protected $appends = ['tracking_status', 'admin_status', 'user_status'];
 
