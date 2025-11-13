@@ -57,21 +57,21 @@
 
                             <form method="POST" action=""  class="col-md-6 mt-4">
 
-                                <select name="topUpMethod" class="form-control" required>
+                                <select name="topUpMethod" class="form-control" style="width: 50%" required>
                                     <option value="">Select Top Up method</option>
                                     <option value="usdttrc20">USDT TRC-20</option>
                                     <option value="usdterc20">USDT ERC-20</option>
                                     <option value="usdtbep20">USDT BEP-20</option>
                                 </select>
                                 
-                                <div class="form-control" style="width: 80%; margin-top: 15px;">
+                                
                                 <label id="amount">Amount ($)</label>
-                                <input type="text" class="input" style="background-color: #2e403e; color: #ffffff; width: 50px;" name="amount" id="amount" value="" required>
-                                </div>
-                                <div class="form-control" style="width: 80%; margin-top: 15px;">
+                                <input type="text" class="input form-control" style="color: #ffffff; width: 50px;" name="amount" id="amount" value="" required>
+                                
+                                
                                 <label id="hash_id">Hash Id (paste the hash Id of the usdt payment, for fast confirmation.)</label>
-                                <input type="text" class="input" style="background-color: #2e403e; color: #ffffff; width: 50px;" name="hash_id" id="hash_id" value="" required>
-                                </div>
+                                <input type="text" class="input form-control" style="color: #ffffff; width: 80%;" name="hash_id" id="hash_id" value="" required>
+                                
 
                                 <p class="mt-4">Make sure you have sent USDT payment before clicking submit.</p>
 
