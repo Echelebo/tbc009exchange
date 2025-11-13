@@ -36,6 +36,7 @@
                                 <label id="usdttrc20">USDT TRC-20</label>
                                     <input type="text" class="input border-0 form-control" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="" readonly="">
                                     </div>
+                                    
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 

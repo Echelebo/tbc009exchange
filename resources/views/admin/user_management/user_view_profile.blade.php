@@ -24,6 +24,9 @@
                                     </li>
                                     <li><i class="bi-briefcase dropdown-item-icon"></i> @lang($user->username)
                                     </li>
+
+                                    <li><i class="bi-arrow-repeat dropdown-item-icon"></i> @lang($user->referrer->username)
+                                    </li>
                                     @if(isset($user->country))
                                         <li><i class="bi-geo-alt dropdown-item-icon"></i> @lang($user->country)</li>
                                     @endif

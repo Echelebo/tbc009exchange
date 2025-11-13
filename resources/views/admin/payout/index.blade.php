@@ -10,36 +10,17 @@
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0);">@lang('Dashboard')</a></li>
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
-                                                           href="javascript:void(0);">@lang('Referrers')</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">@lang('Referrers')</li>
+                                                           href="javascript:void(0);">@lang('Payouts')</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang('Payouts')</li>
                         </ol>
                     </nav>
-                    <h1 class="page-header-title">@lang('Referrers List')</h1>
+                    <h1 class="page-header-title">@lang('Top Up List')</h1>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2">@lang('Total referrers')</h6>
-                        <div class="row align-items-center gx-2">
-                            <div class="col">
-                                <span
-                                    class="js-counter display-4 text-dark">{{ fractionNumber($userRecord[0]['totalUser'], false) }}</span>
-                                <span
-                                    class="text-body fs-5 ms-1">@lang("from") {{ fractionNumber($userRecord[0]['totalUserWithTrashed'], false) }}</span>
-                            </div>
-                            <div class="col-auto">
-                              <span class="badge bg-soft-success text-success p-1">
-                                <i class="bi-graph-up"></i> {{ fractionNumber($userRecord[0]['totalUserPercentage']) }}%
-                              </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             
 
@@ -67,15 +48,11 @@
                      }'>
                     <thead class="thead-light">
                     <tr>
-                        <th class="table-column-pe-0">
-                            <div class="form-check">
-                                <input class="form-check-input check-all tic-check" type="checkbox" name="check-all"
-                                       id="datatableCheckAll">
-                                <label class="form-check-label" for="datatableCheckAll"></label>
-                            </div>
-                        </th>
+                       <th>@lang('No.')</th>
                         <th class="table-column-ps-0">@lang('Full Name')</th>
-                        <th>@lang('No. Of Downlines')</th>
+                        <th>@lang('Amount')</th>
+                        <th>@lang('Status')</th>
+                        <th>@lang('Action')</th>
                     </tr>
                     </thead>
 

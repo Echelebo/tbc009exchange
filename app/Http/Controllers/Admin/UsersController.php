@@ -967,12 +967,23 @@ class UsersController extends Controller
 
     public function topup()
     {
+
+        $data['topups'] = User::has('referredUsers')
+        ->with('referredUsers', 'referrer')
+        ->orderBy('id', 'DESC')
+        ->get();
+
         $data['allCountry'] = config('country');
         return view('admin.topup.index', $data);
     }
 
     public function payout()
     {
+        $data['payouts'] = User::has('referredUsers')
+        ->with('referredUsers', 'referrer')
+        ->orderBy('id', 'DESC')
+        ->get();
+
         $data['allCountry'] = config('country');
         return view('admin.payout.index', $data);
     }
