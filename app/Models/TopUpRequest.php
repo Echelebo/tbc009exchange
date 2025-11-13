@@ -18,11 +18,9 @@ class TopUpRequest extends Model
 
     protected $appends = ['tracking_status', 'admin_status', 'user_status'];
 
-    
-
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id')->withTrashed();
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 }

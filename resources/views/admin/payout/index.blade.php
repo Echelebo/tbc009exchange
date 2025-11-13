@@ -126,12 +126,15 @@
                 serverSide: true,
 
                 ajax: {
-                    url: "{{ route("admin.referrers.search") }}",
+                    url: "{{ route("admin.payouts.search") }}",
 
                 },
                 columns: [
-                    {data: 'checkbox', name: 'checkbox'},
+                    {data: 'no', name: 'no'},
                     {data: 'name', name: 'name'},
+                    {data: 'amount', name: 'amount'},
+                    {data: 'status', name: 'status'},
+                    {data: 'action', name: 'action'},
                 ],
                 select: {
                     style: 'multi',

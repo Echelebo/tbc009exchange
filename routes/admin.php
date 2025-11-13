@@ -353,9 +353,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         /* ====== Topup =====*/
         Route::get('topup', [UsersController::class, 'topup'])->name('topup');
+        Route::get('topup/search', [UsersController::class, 'topupSearch'])->name('topup.search');
+        Route::get('topup-view/{id}', [UsersController::class, 'topupView'])->name('topup.view');
+        Route::put('topup/action/{id}', [UsersController::class, 'topupAction'])->name('topup.action');
 
         /* ====== Payout =====*/
         Route::get('payout', [UsersController::class, 'payout'])->name('payout');
+        Route::get('payout/search', [UsersController::class, 'payoutSearch'])->name('payout.search');
+        Route::get('payout-view/{id}', [UsersController::class, 'payoutView'])->name('payout.view');
+        Route::put('payout/action/{id}', [UsersController::class, 'payoutAction'])->name('payout.action');
 
         /* ====== Payment Log =====*/
         Route::get('payment/log', [PaymentLogController::class, 'index'])->name('payment.log');
