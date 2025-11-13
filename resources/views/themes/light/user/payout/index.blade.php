@@ -30,13 +30,13 @@
                                     <p>Refer TBCians and earn more commission</p>
                                 </div> -->
                                
-                               <div class=" share_link d-flex align-items-center mt-4">
-                                <p>Choose a payout wallet</p>
+                            
+                                <p class="mt-4">Choose a payout wallet</p>
                                 <label id="usdttrc20" class="mt-4">USDT TRC-20</label>
                                     <input type="text" class="input border-0 form-control" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="" readonly="">
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
-                                </div>
+                                
 
                                 
 
@@ -44,8 +44,8 @@
 
                             <form method="POST" action=""  class="mt-4 col-md-6">
 
-                                <select name="topUpMethod" class="form-control" required>
-                                    <option value="">Select Top Up method</option>
+                                <select name="topUpMethod" class="form-control" style="width: 50%" required>
+                                    <option value="">Select Payout method</option>
                                     <option value="usdttrc20">USDT TRC-20</option>
                                     <option value="usdterc20">USDT ERC-20</option>
                                     <option value="usdtbep20">USDT BEP-20</option>
@@ -53,14 +53,6 @@
                                 
                                 <label id="amount" class="mt-4">Amount ($)</label>
                                 <input type="text" class="input form-control" style="color: #ffffff; width: 50%;" name="amount" id="amount" value="" required>
-
-                                <label id="hash_id" class="mt-4">Hash Id (paste the hash Id of the usdt payment, for fast confirmation.)</label>
-                                <input type="text" class="input form-control" style="color: #ffffff; width: 50%;" name="hash_id" id="hash_id" value="" required>
-
-
-                                <p class="mt-4">Make sure you have sent USDT payment before clicking submit.</p>
-
-
 
                                 <button type="submit" class="search-btn2 mt-4 px-8" style="background-color:#c1923f; border-radius: 15px; padding: 10px; font-size: 15px; color: #ffffff; ">Submit
                                     </button>
