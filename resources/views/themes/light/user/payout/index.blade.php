@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="row mb-3">
-                    <div class="col-xl-6 col-lg-12 mb-5">
+                    <div class="col-xl-12 col-lg-12 mb-5">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row g-4">
@@ -32,17 +32,17 @@
                                
                                <div class=" share_link d-flex align-items-center mt-4">
                                 <p>Choose a payout wallet</p>
-                                <label id="usdttrc20">USDT TRC-20</label>
-                                    <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 50px;" id="usdttrc20" value="" readonly="">
+                                <label id="usdttrc20" class="mt-4">USDT TRC-20</label>
+                                    <input type="text" class="input border-0 form-control" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="" readonly="">
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
 
                                 
 
-                                <p class="refurlText">Copy your preferred wallet to Top Up your balance.</p>
+                                <p class="refurlText mt-4">Copy your preferred wallet to Top Up your balance.</p>
 
-                            <form method="POST" action=""  class="mt-4">
+                            <form method="POST" action=""  class="mt-4 col-md-6">
 
                                 <select name="topUpMethod" class="form-control" required>
                                     <option value="">Select Top Up method</option>
@@ -51,18 +51,18 @@
                                     <option value="usdtbep20">USDT BEP-20</option>
                                 </select>
                                 
-                                <label id="amount">Amount ($)</label>
-                                <input type="text" class="input" style="background-color: #2e403e; color: #ffffff; width: 50px;" name="amount" id="amount" value="" required>
+                                <label id="amount" class="mt-4">Amount ($)</label>
+                                <input type="text" class="input form-control" style="color: #ffffff; width: 50%;" name="amount" id="amount" value="" required>
 
-                                <label id="hash_id">Hash Id (paste the hash Id of the usdt payment, for fast confirmation.)</label>
-                                <input type="text" class="input" style="background-color: #2e403e; color: #ffffff; width: 50px;" name="hash_id" id="hash_id" value="" required>
-
-
-                                <p class="mt-4">Make sure you have sent USDT payment before pressing submit.</p>
+                                <label id="hash_id" class="mt-4">Hash Id (paste the hash Id of the usdt payment, for fast confirmation.)</label>
+                                <input type="text" class="input form-control" style="color: #ffffff; width: 50%;" name="hash_id" id="hash_id" value="" required>
 
 
+                                <p class="mt-4">Make sure you have sent USDT payment before clicking submit.</p>
 
-                                <button type="submit" class="search-btn2 mt-4 px-8" style="background-color:#c1923f; border-radius: 15px; padding: 10px; font-size: 15px; color: #ffffff; ">Submit Top Up
+
+
+                                <button type="submit" class="search-btn2 mt-4 px-8" style="background-color:#c1923f; border-radius: 15px; padding: 10px; font-size: 15px; color: #ffffff; ">Submit
                                     </button>
 
                             </form>
