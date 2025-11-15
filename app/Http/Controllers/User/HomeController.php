@@ -654,8 +654,8 @@ class HomeController extends Controller
                 'status' => 0, // Pending
             ]);
 
-        $this->sendAdminNotification($topupRequest, 'exchange');
-        $this->sendUserNotification($topupRequest, 'exchange');
+        $this->sendAdminNotification($topupRequest, 'topup');
+        $this->sendUserNotification($topupRequest, 'topup');
         
         return back()->with('success', 'Top Up request submitted successfully.');
         } catch (\Exception $e) {
