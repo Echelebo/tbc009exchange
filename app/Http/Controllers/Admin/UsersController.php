@@ -1192,6 +1192,70 @@ class UsersController extends Controller
             return back();
         }
         return back();
+
+
+
+        //grok sample
+        public function confirm(Request $request, $id)
+    {
+        $deposit = Deposit::with('user')->findOrFail($id);
+
+        // Prevent double confirmation
+        if ($deposit->status == 1) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Deposit already confirmed.'
+            ], 400);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // Update deposit status
+            $deposit->status = 1;
+            $deposit->confirmed_at = now();
+            $deposit->confirmed_by = auth()->id(); // assuming admin is logged in
+            $deposit->save();
+
+            // Credit user's wallet
+            $wallet = Wallet::firstOrCreate(
+                ['user_id' => $deposit->user_id],
+                ['balance' => 0]
+            );
+
+            $wallet->credit($deposit->amount);
+
+            // Notify User
+            $deposit->user->notify(new DepositConfirmedNotification($deposit));
+
+            // Notify Admins
+            $admins = User::where('is_admin', 1)->get();
+            Notification::send($admins, new \App\Notifications\AdminDepositConfirmedNotification($deposit));
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Deposit confirmed and wallet credited.',
+                'data' => [
+                    'deposit' => $deposit,
+                    'new_balance' => $wallet->balance
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to confirm deposit.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    //grok sample ends
+    
     }
 
     public function payout()

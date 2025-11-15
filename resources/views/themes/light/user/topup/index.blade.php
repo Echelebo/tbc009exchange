@@ -33,21 +33,21 @@
                                 <p class="refurlText mt-4">Copy your preferred wallet to Top Up your balance.</p>
                                
                                <div class=" share_link d-flex align-items-center mt-4">
-                                <label id="usdttrc20">USDT TRC-20</label>
+                                <label id="usdttrc20">USDT TRC-20: </label>
                                     <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="" readonly="">
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
 
                                 <div class=" share_link d-flex align-items-center mt-4">
-                                    <label id="usdterc20">USDT ERC-20</label>
+                                    <label id="usdterc20">USDT ERC-20: </label>
                                     <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdterc20" value="" readonly="">
                                     <button class="copy_btn" onclick="copyFunction2()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
 
                                 <div class=" share_link d-flex align-items-center mt-4">
-                                    <label id="usdtbep20">USDT BEP-20</label>
+                                    <label id="usdtbep20">USDT BEP-20: </label>
                                     <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdtbep20" value="" readonly="">
                                     <button class="copy_btn" onclick="copyFunction3()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
@@ -55,9 +55,9 @@
 
                                 
 
-                            <form method="POST" action=""  class="col-md-6 mt-4">
+                            <form method="POST" action="{{route('topup.fromSubmit')}}"  class="col-md-6 mt-4">
 
-                                <select name="topUpMethod" class="form-control" style="width: 50%" required>
+                                <select name="method" class="form-control" style="width: 50%" required>
                                     <option value="">Select Top Up method</option>
                                     <option value="usdttrc20">USDT TRC-20</option>
                                     <option value="usdterc20">USDT ERC-20</option>

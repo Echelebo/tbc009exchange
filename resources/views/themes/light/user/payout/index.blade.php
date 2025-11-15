@@ -25,29 +25,16 @@
                                     </div>
                                     
                                 </div>
-                               <!-- <div class="qna mt-4">
-                                    <h5>Referral bonus is 5% of your downlines staked amount.</h5>
-                                    <p>Refer TBCians and earn more commission</p>
-                                </div> -->
-                               
-                            
+                                <div class="row mt-5">
+                            <form method="POST" action="{{route('payout.fromSubmit')}}"  class="mt-4 col-md-6">
+
                                 <p class="mt-4">Choose a payout wallet</p>
-                                 <div class=" share_link d-flex align-items-center mt-4">
-                                <label id="usdttrc20">USDT TRC-20</label>
+                                <div class=" share_link d-flex align-items-center mt-4">
+                                <label id="usdttrc20">USDT TRC-20 </label>
                                     <input type="text" class="input border-0 form-control" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="" readonly="">
-                                    </div>
-                                    
-                                    <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
-                                    </button>
-                                
+                                </div>
 
-                                
-
-                                <p class="refurlText mt-4">Copy your preferred wallet to Top Up your balance.</p>
-
-                            <form method="POST" action=""  class="mt-4 col-md-6">
-
-                                <select name="topUpMethod" class="form-control" style="width: 50%" required>
+                                <select name="method" class="form-control" style="width: 50%" required>
                                     <option value="">Select Payout method</option>
                                     <option value="usdttrc20">USDT TRC-20</option>
                                     <option value="usdterc20">USDT ERC-20</option>
@@ -61,6 +48,7 @@
                                     </button>
 
                             </form>
+                            </div>
                             </div>
                         </div>
                     </div>
