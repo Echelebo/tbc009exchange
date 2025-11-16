@@ -646,7 +646,7 @@ class HomeController extends Controller
             $amount = $request->amount;
             $method = $request->method;
             // Create deposit with status = 0
-            TopUpRequest::create([
+    $topup = TopUpRequest::create([
                 'user_id' => $user->id,
                 'method' => $method,
                 'amount' => $amount,
@@ -654,8 +654,7 @@ class HomeController extends Controller
                 'status' => 0, // Pending
             ]);
 
-        $this->sendAdminNotification($topupRequest, 'topup');
-        $this->sendUserNotification($topupRequest, 'topup');
+        $this->sendAdminNotification($topup, 'topup');
         
         return back()->with('success', 'Top Up request submitted successfully.');
         } catch (\Exception $e) {

@@ -42,12 +42,9 @@ trait SendNotification
     {
         if ($referrer->user_id && $referrer->user) {
             $params = [
-                'user' => optional($referrer->user)->username ?? 'Anonymous',
-                'sendAmount' => rtrim(rtrim($referrer->send_amount, 0), '.'),
-                'getAmount' => rtrim(rtrim($referrer->get_amount, 0), '.'),
-                'sendCurrency' => optional($referrer->sendCurrency)->code,
-                'getCurrency' => optional($referrer->getCurrency)->code,
-                'transaction' => $referrer->utr,
+                'username' => optional($referrer->user)->username ?? 'Anonymous',
+                'amount' => rtrim(rtrim($referrer->send_amount, 0), '.'),
+                'referralsusername' => optional($referrer->user)->username ?? 'Anonymous',
             ];
 
             $action = [
@@ -64,12 +61,8 @@ trait SendNotification
     {
         if ($referrer->user_id && $referrer->user) {
             $params = [
-                'user' => optional($referrer->user)->username ?? 'Anonymous',
-                'sendAmount' => rtrim(rtrim($referrer->send_amount, 0), '.'),
-                'getAmount' => rtrim(rtrim($referrer->get_amount, 0), '.'),
-                'sendCurrency' => optional($referrer->sendCurrency)->code,
-                'getCurrency' => optional($referrer->getCurrency)->code,
-                'transaction' => $referrer->utr,
+                'username' => optional($referrer->user)->username ?? 'Anonymous',
+                'referralsusername' => optional($referrer->user)->username ?? 'Anonymous',
             ];
 
             $action = [
@@ -122,25 +115,25 @@ trait SendNotification
         }
     }
 
-    public function userStaking($staking, $templateKey): void
+    public function userStaking($exchange, $templateKey): void
     {
-        if ($staking->user_id && $staking->user) {
+        if ($exchange->user_id && $exchange->user) {
             $params = [
-                'user' => optional($staking->user)->username ?? 'Anonymous',
-                'sendAmount' => rtrim(rtrim($staking->send_amount, 0), '.'),
-                'getAmount' => rtrim(rtrim($staking->get_amount, 0), '.'),
-                'sendCurrency' => optional($staking->sendCurrency)->code,
-                'getCurrency' => optional($staking->getCurrency)->code,
-                'transaction' => $staking->utr,
+                'user' => optional($exchange->user)->username ?? 'Anonymous',
+            'sendAmount' => rtrim(rtrim($exchange->send_amount, 0), '.'),
+            'getAmount' => rtrim(rtrim($exchange->get_amount, 0), '.'),
+            'sendCurrency' => optional($exchange->sendCurrency)->code,
+            'getCurrency' => optional($exchange->getCurrency)->code,
+            'transaction' => $exchange->utr,
             ];
 
             $action = [
                 "link" => '#',
                 "icon" => "fa fa-money-bill-alt text-white"
             ];
-            $this->sendMailSms($staking->user, $templateKey, $params);
-            $this->userPushNotification($staking->user, $templateKey, $params, $action);
-            $this->userFirebasePushNotification($staking->user, $templateKey, $params);
+            $this->sendMailSms($exchange->user, $templateKey, $params);
+            $this->userPushNotification($exchange->user, $templateKey, $params, $action);
+            $this->userFirebasePushNotification($exchange->user, $templateKey, $params);
         }
     }
 
