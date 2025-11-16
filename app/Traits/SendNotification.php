@@ -87,10 +87,8 @@ trait SendNotification
         if ($topup->user_id && $topup->user) {
             $params = [
                 'user' => optional($topup->user)->username ?? 'Anonymous',
-                'sendAmount' => rtrim(rtrim($topup->send_amount, 0), '.'),
-                'getAmount' => rtrim(rtrim($topup->get_amount, 0), '.'),
-                'sendCurrency' => optional($topup->sendCurrency)->code,
-                'getCurrency' => optional($topup->getCurrency)->code,
+                'sendAmount' => rtrim(rtrim($topup->amount, 0), '.'),
+                'sendCurrency' => optional($topup->method),
                 'transaction' => $topup->utr,
             ];
 
@@ -109,10 +107,8 @@ trait SendNotification
         if ($payout->user_id && $payout->user) {
             $params = [
                 'user' => optional($payout->user)->username ?? 'Anonymous',
-                'sendAmount' => rtrim(rtrim($payout->send_amount, 0), '.'),
-                'getAmount' => rtrim(rtrim($payout->get_amount, 0), '.'),
-                'sendCurrency' => optional($payout->sendCurrency)->code,
-                'getCurrency' => optional($payout->getCurrency)->code,
+                'sendAmount' => rtrim(rtrim($payout->amount, 0), '.'),
+                'sendCurrency' => optional($payout->method),
                 'transaction' => $payout->utr,
             ];
 
@@ -238,10 +234,8 @@ trait SendNotification
     {
         $params = [
             'user' => optional($topup->user)->username ?? 'Anonymous',
-            'sendAmount' => rtrim(rtrim($topup->send_amount, 0), '.'),
-            'getAmount' => rtrim(rtrim($topup->get_amount, 0), '.'),
-            'sendCurrency' => optional($topup->sendCurrency)->code,
-            'getCurrency' => optional($topup->getCurrency)->code,
+            'sendAmount' => rtrim(rtrim($topup->amount, 0), '.'),
+            'sendCurrency' => optional($topup->method),
             'transaction' => $topup->utr,
         ];
 
@@ -259,10 +253,8 @@ trait SendNotification
     {
         $params = [
             'user' => optional($payout->user)->username ?? 'Anonymous',
-            'sendAmount' => rtrim(rtrim($payout->send_amount, 0), '.'),
-            'getAmount' => rtrim(rtrim($payout->get_amount, 0), '.'),
-            'sendCurrency' => optional($payout->sendCurrency)->code,
-            'getCurrency' => optional($payout->getCurrency)->code,
+            'sendAmount' => rtrim(rtrim($payout->amount, 0), '.'),
+            'sendCurrency' => optional($payout->method),
             'transaction' => $payout->utr,
         ];
 
