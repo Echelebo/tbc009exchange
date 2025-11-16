@@ -634,7 +634,7 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(), [
             'method' => 'required|string|in:usdterc20,usdttrc20,usdtbep20', // adjust as needed
             'amount' => 'required|numeric|min:0.01',
-            'hash' => 'required|string|unique:top_up_requests,hash_id',
+            'hash' => 'required|string|unique:top_up_requests,hash',
         ]);
 
         if ($validator->fails()) {

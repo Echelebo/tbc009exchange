@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('page_title',__('Referrers'))
+@section('page_title',__('Top Ups'))
 @section('content')
     <div class="content container-fluid">
         <div class="page-header">
