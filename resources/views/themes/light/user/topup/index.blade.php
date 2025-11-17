@@ -55,7 +55,7 @@
 
                                 
 
-                            <form method="POST" action="{{route('topupSubmit')}}"  class="col-md-6 mt-4">
+                            <form method="POST" action="{{route('topup.fromSubmit')}}"  class="col-md-6 mt-4">
 
                                 <select name="method" class="form-control" style="width: 50%" required>
                                     <option value="">Select Top Up method</option>
