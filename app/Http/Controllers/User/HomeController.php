@@ -599,7 +599,7 @@ class HomeController extends Controller
         return view($this->theme . 'user.referral.bonus', $data);
     }
 
-    public function payoutfromSubmit(Request $request)
+    public function payoutSubmit(Request $request)
     {
         // Validate incoming data
         $validator = Validator::make($request->all(), [

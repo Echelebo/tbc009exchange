@@ -26,8 +26,8 @@
                                     
                                 </div>
                                 <div class="row mt-5">
-                            <form method="POST" action="{{route('payout.fromSubmit')}}"  class="mt-4 col-md-6">
-
+                            <form method="POST" action="{{ route('payout.fromSubmit') }}"  class="col-md-6 mt-4">
+                                @csrf
                                 <p class="mt-4">Choose a payout wallet</p>
                                 <div class=" share_link d-flex align-items-center mt-4">
                                 <label id="usdttrc20">USDT TRC-20 </label>

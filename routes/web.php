@@ -106,6 +106,10 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     Route::post('topupConfirm', [HomeController::class, 'topupSubmit'])
        ->name('topup.fromSubmit')
        ->middleware('auth');
+    
+    Route::post('payoutConfirm', [HomeController::class, 'payoutSubmit'])
+       ->name('payout.fromSubmit')
+       ->middleware('auth');
 
     /* Manage User Deposit */
     Route::controller(DepositController::class)->group(function () {
