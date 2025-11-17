@@ -628,7 +628,7 @@ class HomeController extends Controller
         }
     }
 
-    public function topupfromSubmit(Request $request)
+    public function topupSubmit(Request $request)
     {
         // Validate incoming data
         $validator = Validator::make($request->all(), [
