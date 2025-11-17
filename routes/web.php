@@ -66,7 +66,6 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
             Route::get('referral', 'referral')->name('referral.index');
             Route::get('referral/bonus', 'referralBonus')->name('referral.bonus');
             Route::get('topup', 'topup')->name('topup.index');
-            Route::post('topupConfirm', 'topupSubmit')->name('topup.fromSubmit');
             Route::post('payoutConfirm', 'payoutfromSubmit')->name('payout.fromSubmit');
 
         });
@@ -103,6 +102,10 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
             Route::get('ticket-download/{ticket}', 'download')->name('ticket.download');
         });
     });
+
+    Route::post('topupConfirm', [HomeController::class, 'topupSubmit'])
+       ->name('topup.fromSubmit')
+       ->middleware('auth');
 
     /* Manage User Deposit */
     Route::controller(DepositController::class)->group(function () {
