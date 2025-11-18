@@ -625,7 +625,7 @@ class HomeController extends Controller
             $selectedAddress = $request->address;
             // Create deposit with status = 0
             $payout = PayoutRequest::create([
-                'utr' => uniqid('PAYOUT-'),
+                'utr' => uniqid('P'),
                 'user_id' => $user->id,
                 'method' => $method,
                 'amount' => $amount,
