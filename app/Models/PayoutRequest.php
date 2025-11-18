@@ -14,7 +14,7 @@ class PayoutRequest extends Model
 {
     use HasFactory, SoftDeletes, Status, Prunable;
 
-    protected $fillable = ['user_id', 'amount', 'method', 'address', 'status'];
+    protected $fillable = ['utr', 'user_id', 'amount', 'method', 'address', 'status'];
 
     protected $appends = ['tracking_status', 'admin_status', 'user_status'];
 
