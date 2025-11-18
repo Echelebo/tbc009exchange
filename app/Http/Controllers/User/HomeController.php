@@ -623,6 +623,14 @@ class HomeController extends Controller
             $amount = $request->amount;
             $method = $request->method;
             $selectedAddress = $request->address;
+
+            if ($user->balance < $amount) {
+                return back()->withInput()->with('error', 'Insufficient balance');
+            }
+            
+            $user->balance -= $amount;
+            $user->save();
+
             // Create deposit with status = 0
             $payout = PayoutRequest::create([
                 'utr' => uniqid('P'),
