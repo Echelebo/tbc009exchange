@@ -98,14 +98,18 @@
                                                         @foreach ( $payouts as $payout)
                                                         <tr >
                                                         <td data-label="Amount">  
-                                                              {{ $payout->amount }}
+                                                              ${{ $payout->amount }}
                                                         </td>
                                                         
                                                         <td data-label="Method">
                                                             {{ $payout->method }}
                                                         </td>
                                                         <td data-label="Status">
-                                                            {{ $payout->status }}
+                                                            @if ($payout->status == 0)
+                                                                <span class="badge bg-warning">Pending</span>
+                                                            @elseif ($payout->status == 1)
+                                                                <span class="badge bg-success">Approved</span>
+                                                            @endif
                                                         </td>
                                                         <td data-label="Time">
                                                             {{ dateTime($payout->created_at,basicControl()->date_time_format) }}

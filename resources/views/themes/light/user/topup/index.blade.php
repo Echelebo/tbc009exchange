@@ -109,14 +109,18 @@
                                                         @foreach ( $topups as $topup)
                                                         <tr >
                                                         <td data-label="Amount">  
-                                                              {{ $topup->amount }}
+                                                            ${{ $topup->amount }}
                                                         </td>
                                                         
                                                         <td data-label="Method">
                                                             {{ $topup->method }}
                                                         </td>
                                                         <td data-label="Status">
-                                                            {{ $topup->status }}
+                                                            @if ($topup->status == 0)
+                                                                <span class="badge bg-warning">Pending</span>
+                                                            @elseif ($topup->status == 1)
+                                                                <span class="badge bg-success">Approved</span>
+                                                            @endif
                                                         </td>
                                                         <td data-label="Time">
                                                             {{ dateTime($topup->created_at,basicControl()->date_time_format) }}
