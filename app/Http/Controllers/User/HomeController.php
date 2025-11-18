@@ -633,7 +633,7 @@ class HomeController extends Controller
                 'status' => 0, // Pending
             ]);
 
-        $this->sendAdminNotification($payout, 'adminpayout');
+       // $this->sendAdminNotification($payout, 'adminpayout');
         
         return back()->with('success', 'Payout request submitted successfully.');
         } catch (\Exception $e) {
@@ -647,7 +647,7 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(), [
             'method' => 'required|string|in:usdterc20,usdttrc20,usdtbep20', // adjust as needed
             'amount' => 'required|numeric|min:0.01',
-            'hash' => 'required|string|unique:top_up_requests,hash',
+            'hash' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -668,7 +668,7 @@ class HomeController extends Controller
                 'status' => 0, // Pending
             ]);
 
-        $this->sendAdminNotification($topup, 'admintopup');
+        
         
         return back()->with('success', 'Top Up request submitted successfully.');
         } catch (\Exception $e) {
