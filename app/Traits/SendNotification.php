@@ -223,7 +223,7 @@ trait SendNotification
         $this->adminFirebasePushNotification('EXCHANGE_STAKING', $params, $action);
     }
 
-    public function topup($topup): void
+    public function admintopup($topup): void
     {
         $params = [
             'user' => optional($topup->user)->username ?? 'Anonymous',
@@ -233,7 +233,7 @@ trait SendNotification
         ];
 
         $action = [
-            "link" => route('admin.topupView') . '?id=' . $topup->id,
+            "link" => route('admin.topup') . '?id=' . $topup->id,
             "icon" => "fa fa-money-bill-alt text-white"
         ];
 
@@ -242,7 +242,7 @@ trait SendNotification
         $this->adminFirebasePushNotification('TOPUP', $params, $action);
     }
 
-    public function payout($payout): void
+    public function adminpayout($payout): void
     {
         $params = [
             'user' => optional($payout->user)->username ?? 'Anonymous',
@@ -252,7 +252,7 @@ trait SendNotification
         ];
 
         $action = [
-            "link" => route('admin.payoutView') . '?id=' . $payout->id,
+            "link" => route('admin.payout') . '?id=' . $payout->id,
             "icon" => "fa fa-money-bill-alt text-white"
         ];
 

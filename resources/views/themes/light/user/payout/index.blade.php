@@ -29,11 +29,32 @@
                             <form method="POST" action="{{ route('payout.fromSubmit') }}"  class="col-md-6 mt-4">
                                 @csrf
                                 <p class="mt-4">Choose a payout wallet</p>
-                                <div class=" share_link d-flex align-items-center mt-4">
-                                <label id="usdttrc20">USDT TRC-20 </label>
-                                    <input type="text" class="input border-0 form-control" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="" readonly="">
-                                </div>
+                                @if($uniqueAddresses->count() > 0)
+                                @foreach($uniqueAddresses as $address)
+                                        <label class="flex items-center p-4 bg-white border rounded-lg hover:bg-gray-50 cursor-pointer transition
+                                            {{ old('address') === $address ? 'ring-2 ring-blue-600 bg-blue-50 border-blue-600' : '' }}">
 
+                                            <input type="radio" name="address" value="{{ $address }}" class="w-5 h-5 text-blue-600 focus:ring-blue-500" {{ old('address') === $address ? 'checked' : '' }} required>
+
+                                            <span class="ml-4 font-mono text-lg break-all">
+                                                {{ $address }}
+                                            </span>
+
+                                            <!-- Optional: Show shortened version -->
+                                            <span class="ml-4 text-sm text-gray-500">
+                                                ({{ Str::substr($address, 0, 8) }}...{{ Str::substr($address, -6) }})
+                                            </span>
+                                        </label>
+                                    @endforeach
+                                @else
+                                    <p class="text-gray-500 text-center py-8">No wallet addresses found.</p>
+                                @endif
+
+                                @error('address')
+                                    <div class="text-red-600 text-sm mt-2">{{ $message }}</div>
+                                @enderror
+
+                                <label id="method" class="mt-4">Payout Method</label>
                                 <select name="method" class="form-control" style="width: 50%" required>
                                     <option value="">Select Payout method</option>
                                     <option value="usdttrc20">USDT TRC-20</option>

@@ -506,16 +506,23 @@ class HomeController extends Controller
     {
         $basic = basicControl();
         $userId = Auth::id();
-        $commission = Transaction::where('user_id', $userId)
-        ->where('remarks', 'LIKE', '%Payout%')
+        $commission = PayoutRequest::where('user_id', $userId)
         ->sum('amount');
-        $commissions = Transaction::where('user_id', $userId)
-        ->where('remarks', 'LIKE', '%Payout%')->get();
+        $commissions = PayoutRequest::where('user_id', $userId)
+        ->get();
         $data['commission'] = $commission;
         $data['commissions'] = $commissions;
         $data['payouts'] = PayoutRequest::where('user_id', $userId)
             ->orderBy('id', 'desc')
             ->latest()->paginate($basic->paginate);
+    
+        $data['uniqueAddresses'] = ExchangeRequest::query()
+        ->where('user_id', $userId)
+        ->select('destination_wallet')
+        ->distinct()
+        ->get()
+        ->pluck('destination_wallet');
+
         return view($this->theme . 'user.payout.index', $data);
 
     }
@@ -525,11 +532,10 @@ class HomeController extends Controller
     {
         $basic = basicControl();
         $userId = Auth::id();
-        $commission = Transaction::where('user_id', $userId)
-        ->where('remarks', 'LIKE', '%Top Up%')
+        $commission = TopUpRequest::where('user_id', $userId)
         ->sum('amount');
-        $commissions = Transaction::where('user_id', $userId)
-        ->where('remarks', 'LIKE', '%Top Up%')->get();
+        $commissions = TopUpRequest::where('user_id', $userId)
+        ->get();
         $data['commission'] = $commission;
         $data['commissions'] = $commissions;
         $data['topups'] = TopUpRequest::where('user_id', $userId)
@@ -616,17 +622,18 @@ class HomeController extends Controller
             $user = Auth::user();
             $amount = $request->amount;
             $method = $request->method;
+            $selectedAddress = $request->address;
             // Create deposit with status = 0
-            PayoutRequest::create([
+            $payout = PayoutRequest::create([
+                'utr' => uniqid('PAYOUT-'),
                 'user_id' => $user->id,
                 'method' => $method,
                 'amount' => $amount,
-                'address' => $request->address,
+                'address' => $selectedAddress,
                 'status' => 0, // Pending
             ]);
 
-        $this->sendAdminNotification($payoutRequest, 'payout');
-        $this->sendUserNotification($payoutRequest, 'payout');
+        $this->sendAdminNotification($payout, 'adminpayout');
         
         return back()->with('success', 'Payout request submitted successfully.');
         } catch (\Exception $e) {
@@ -653,6 +660,7 @@ class HomeController extends Controller
             $method = $request->method;
             // Create deposit with status = 0
     $topup = TopUpRequest::create([
+                'utr' => uniqid('TOPUP-'),
                 'user_id' => $user->id,
                 'method' => $method,
                 'amount' => $amount,
@@ -660,7 +668,7 @@ class HomeController extends Controller
                 'status' => 0, // Pending
             ]);
 
-        $this->sendAdminNotification($topup, 'topup');
+        $this->sendAdminNotification($topup, 'admintopup');
         
         return back()->with('success', 'Top Up request submitted successfully.');
         } catch (\Exception $e) {
