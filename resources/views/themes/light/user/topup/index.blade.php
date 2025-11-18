@@ -66,11 +66,11 @@
                                 
                                 
                                 <label id="amount" class="mt-4">Amount ($)</label>
-                                <input type="text" class="input form-control" style="color: #ffffff; width: 50%;" name="amount" id="amount" value="" required>
+                                <input type="text" class="input form-control" style="color: #ffffff; width: 50%" name="amount" id="amount" value="" required>
                                 
                                 
-                                <label id="hash_id" class="mt-4">Hash Id (paste the hash Id of the usdt payment, for fast confirmation.)</label>
-                                <input type="text" class="input form-control" style="color: #ffffff; width: 80%;" name="hash_id" id="hash_id" value="" required>
+                                <label id="hash" class="mt-4">Hash Id (paste the hash Id of the usdt payment, for fast confirmation.)</label>
+                                <input type="text" class="input form-control" style="color: #ffffff; width: 80%" name="hash" id="hash_id" value="" required>
                                 
 
                                 <p class="mt-4">Make sure you have sent USDT payment before clicking submit.</p>
