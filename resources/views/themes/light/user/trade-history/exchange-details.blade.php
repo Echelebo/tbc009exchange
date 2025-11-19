@@ -268,8 +268,6 @@
 
             @endif
 
-            @endif
-
                 @if ($exchange->status == 8)
 
             <div class="table-row">
