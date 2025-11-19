@@ -35,9 +35,9 @@
                                <div class=" share_link d-flex align-items-center mt-4">
                                 <label id="usdttrc20">USDT TRC-20: </label>
                                     <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="TBFLFQGifn29ZrJS2Mk6UXQYHRjs8yVmG9" readonly="">
-                                    <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
-                                    </button>
                                 </div>
+                                <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
+                                    </button>
 
                                 <div class=" share_link d-flex align-items-center mt-4">
                                     <label id="usdterc20">USDT ERC-20: </label>
