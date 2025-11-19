@@ -34,21 +34,21 @@
                                
                                <div class=" share_link d-flex align-items-center mt-4">
                                 <label id="usdttrc20">USDT TRC-20: </label>
-                                    <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="" readonly="">
+                                    <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="TBFLFQGifn29ZrJS2Mk6UXQYHRjs8yVmG9" readonly="">
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
 
                                 <div class=" share_link d-flex align-items-center mt-4">
                                     <label id="usdterc20">USDT ERC-20: </label>
-                                    <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdterc20" value="" readonly="">
+                                    <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdterc20" value="0x4ec85660f919367f4a5f11860e828405c7b06cbf" readonly="">
                                     <button class="copy_btn" onclick="copyFunction2()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
 
                                 <div class=" share_link d-flex align-items-center mt-4">
                                     <label id="usdtbep20">USDT BEP-20: </label>
-                                    <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdtbep20" value="" readonly="">
+                                    <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdtbep20" value="0x4ec85660f919367f4a5f11860e828405c7b06cbf" readonly="">
                                     <button class="copy_btn" onclick="copyFunction3()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
