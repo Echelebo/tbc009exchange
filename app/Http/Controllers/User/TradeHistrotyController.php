@@ -16,20 +16,14 @@ class TradeHistrotyController extends Controller
 {
     use CalculateFees;
 
-    // Declare the properties first — this removes the deprecation completely
-    public $user;
-    public $theme;
-
     public function __construct()
     {
-        // Better way: use proper middleware syntax instead of doing it manually
-        $this->middleware('auth');
-        
+        $this->middleware(['auth']);
         $this->middleware(function ($request, $next) {
             $this->user = auth()->user();
-            $this->theme = template();    // now allowed because $theme is declared above
             return $next($request);
         });
+        $this->theme = template();
     }
 
     public function exchangeList(Request $request)
