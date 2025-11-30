@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
                 SellRequest::class,
             ],
         ])->daily();
-        $schedule->command('app:last-run')->everyFiveMinutes();
+       // $schedule->command('app:last-run')->everyFiveMinutes();
     }
 
     /**

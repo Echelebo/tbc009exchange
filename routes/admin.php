@@ -50,8 +50,8 @@ Route::get('clear', function () {
     return view('artisan_output', ['output' => $output]);
 })->name('clear');
 
-Route::get('bot-cron-1', [BaseCronController::class, 'botCronOne'])->name('bot-cron-one');
-Route::get('delete-logs', [BaseCronController::class, 'deleteLogs'])->name('delete-logs');
+// Route::get('bot-cron-1', [BaseCronController::class, 'botCronOne'])->name('bot-cron-one');
+// Route::get('delete-logs', [BaseCronController::class, 'deleteLogs'])->name('delete-logs');
 
 
 Route::get('queue-work', function () {
