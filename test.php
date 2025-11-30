@@ -1,0 +1,1 @@
+<?php echo extension_loaded('pdo_mysql') ? 'pdo_mysql is ENABLED' : 'pdo_mysql is MISSING'; ?>
