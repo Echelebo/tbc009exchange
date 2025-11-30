@@ -61,15 +61,15 @@ Route::get('schedule-run', function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
-    Route::get('bot-cron-1', [BaseCronController::class, 'botCronOne'])->name('bot-cron-one');
-    Route::get('delete-logs', [BaseCronController::class, 'deleteLogs'])->name('delete-logs');      
-
     Route::any('two-fa/check', [BasicControlController::class, 'twoFaCheck'])->name('twoFaCheck');
 
     Route::get('/themeMode/{themeType?}', function ($themeType = 'true') {
         session()->put('themeMode', $themeType);
         return $themeType;
     })->name('themeMode');
+
+    Route::get('bot-cron-1', [BaseCronController::class, 'botCronOne'])->name('bot-cron-one');
+    Route::get('delete-logs', [BaseCronController::class, 'deleteLogs'])->name('delete-logs'); 
 
     /*== Authentication Routes ==*/
     Route::get('/', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest:admin');
