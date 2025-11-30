@@ -50,7 +50,7 @@ class TradeHistrotyController extends Controller
                 if (@$search['status']) {
                     return $query->where('status', $search['status']);
                 } else {
-                    return $query->whereIn('status', ['2', '3',  '4', '5', '6', '7', '8', '9']);
+                    return $query->whereIn('status', ['2', '3', '4', '5', '6', '7', '8', '9']);
                 }
             })
             ->orderBy('id', 'desc')
@@ -63,10 +63,10 @@ class TradeHistrotyController extends Controller
     public function exchangeDetails($utr)
     {
         $data['user'] = $this->user;
-        $data['exchange'] = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3',  '4', '5', '6', '7', '8', '9'])
-            ->where('utr', $utr)->firstOrFail();
+        $data['exchange'] = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3', '4', '5', '6', '7', '8', '9'])
+        ->where('utr', $utr)->firstOrFail();
         $data['exchangex'] = ExchangeActivation::where('user_id', $this->user->id)->where('status', 'active')
-            ->where('txn_id', $utr)->firstOrFail();
+        ->where('txn_id', $utr)->firstOrFail();
         return view($this->theme . 'user.trade-history.exchange-details', $data);
     }
 
@@ -151,7 +151,7 @@ class TradeHistrotyController extends Controller
     public function buyDetails($utr)
     {
         $data['buy'] = BuyRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3', '5', '6'])
-            ->where('utr', $utr)->firstOrFail();
+        ->where('utr', $utr)->firstOrFail();
         return view($this->theme . 'user.trade-history.buy-details', $data);
     }
 
@@ -193,7 +193,7 @@ class TradeHistrotyController extends Controller
     public function sellDetails($utr)
     {
         $data['sell'] = SellRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3', '5', '6'])
-            ->where('utr', $utr)->firstOrFail();
+        ->where('utr', $utr)->firstOrFail();
         return view($this->theme . 'user.trade-history.sell-details', $data);
     }
 
