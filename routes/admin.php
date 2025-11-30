@@ -50,10 +50,6 @@ Route::get('clear', function () {
     return view('artisan_output', ['output' => $output]);
 })->name('clear');
 
-// Route::get('bot-cron-1', [BaseCronController::class, 'botCronOne'])->name('bot-cron-one');
-// Route::get('delete-logs', [BaseCronController::class, 'deleteLogs'])->name('delete-logs');
-
-
 Route::get('queue-work', function () {
     return Illuminate\Support\Facades\Artisan::call('queue:work', ['--stop-when-empty' => true]);
 })->name('queue.work');
@@ -64,6 +60,9 @@ Route::get('schedule-run', function () {
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+
+    Route::get('bot-cron-1', [BaseCronController::class, 'botCronOne'])->name('bot-cron-one');
+    Route::get('delete-logs', [BaseCronController::class, 'deleteLogs'])->name('delete-logs');      
 
     Route::any('two-fa/check', [BasicControlController::class, 'twoFaCheck'])->name('twoFaCheck');
 
