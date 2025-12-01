@@ -67,8 +67,6 @@ Route::get('exchange/final/{utr}', [ExchangeController::class, 'exchangeFinal'])
         Route::get('sell/final/{utr}', 'sellFinal')->name('sellFinal');
     });
 
-    Route::group(['middleware' => ['auth', 'verifyUser'], 'prefix' => 'user', 'as' => 'user.'], function () {
-
     // TradeHistrotyController Routes
     Route::get('exchange-request/list', [TradeHistrotyController::class, 'exchangeList'])
         ->name('exchangeList');
@@ -112,5 +110,4 @@ Route::get('exchange/final/{utr}', [ExchangeController::class, 'exchangeFinal'])
 
     Route::get('chartPayoutMovements', [HomeController::class, 'chartPayoutMovements'])
         ->name('chartPayoutRecords'); // matches your original name
-});
 });
