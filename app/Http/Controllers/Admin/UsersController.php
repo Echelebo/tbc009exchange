@@ -1193,7 +1193,7 @@ class UsersController extends Controller
         }
         return back();
 
-
+    }
 
         //grok sample
         public function confirm(Request $request, $id)
@@ -1252,10 +1252,6 @@ class UsersController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
-    }
-
-    //grok sample ends
-    
     }
 
     public function payout()
