@@ -66,7 +66,7 @@ class TradeHistrotyController extends Controller
         $data['exchange'] = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3', '4', '5', '6', '7', '8', '9'])
         ->where('utr', $utr)->firstOrFail();
         $data['exchangex'] = ExchangeActivation::where('user_id', $this->user->id)->where('status', 'active')
-        ->where('txn_id', $utr)->firstOrFail();
+        ->where('txn_id', $utr)->first();
         return view($this->theme . 'user.trade-history.exchange-details', $data);
     }
 
