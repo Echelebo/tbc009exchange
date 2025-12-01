@@ -69,45 +69,45 @@ Route::get('exchange/final/{utr}', [ExchangeController::class, 'exchangeFinal'])
 
     // TradeHistrotyController Routes
     Route::get('exchange-request/list', [TradeHistrotyController::class, 'exchangeList'])
-        ->name('exchangeList');
+        ->name('exchangeList')->middleware('auth');
 
     Route::get('exchange-request/details/{utr}', [TradeHistrotyController::class, 'exchangeDetails'])
-        ->name('exchangeDetails');
+        ->name('exchangeDetails')->middleware('auth');
 
     Route::get('exchange-request/rate-floating/{utr}', [TradeHistrotyController::class, 'exchangeRateFloating'])
-        ->name('exchangeRateFloating');
+        ->name('exchangeRateFloating')->middleware('auth');
 
     Route::get('buy-request/list', [TradeHistrotyController::class, 'buyList'])
-        ->name('buyList');
+        ->name('buyList')->middleware('auth');
 
     Route::get('buy-request/details/{utr}', [TradeHistrotyController::class, 'buyDetails'])
-        ->name('buyDetails');
+        ->name('buyDetails')->middleware('auth');
 
     Route::get('sell-request/list', [TradeHistrotyController::class, 'sellList'])
-        ->name('sellList');
+        ->name('sellList')->middleware('auth');
 
     Route::get('sell-request/details/{utr}', [TradeHistrotyController::class, 'sellDetails'])
-        ->name('sellDetails');
+        ->name('sellDetails')->middleware('auth');
 
     // HomeController Chart & Records Routes
     Route::get('getRecords', [HomeController::class, 'getRecords'])
-        ->name('getRecords');
+        ->name('getRecords')->middleware('auth');
 
     Route::get('chartExchangeFigures', [HomeController::class, 'chartExchangeFigures'])
-        ->name('chartExchangeFigures');
+        ->name('chartExchangeFigures')->middleware('auth');
 
     Route::get('chartTopUpFigures', [HomeController::class, 'chartTopUpFigures'])
-        ->name('chartTopUpFigures');
+        ->name('chartTopUpFigures')->middleware('auth');
 
     Route::get('chartPayoutFigures', [HomeController::class, 'chartPayoutFigures'])
-        ->name('chartPayoutFigures');
+        ->name('chartPayoutFigures')->middleware('auth');
 
     Route::get('chartExchangeMovements', [HomeController::class, 'chartExchangeMovements'])
-        ->name('chartExchangeRecords'); // matches your original name
+        ->name('chartExchangeRecords')->middleware('auth'); // matches your original name
 
     Route::get('chartTopUpMovements', [HomeController::class, 'chartTopUpMovements'])
-        ->name('chartTopUpRecords'); // matches your original name
+        ->name('chartTopUpRecords')->middleware('auth'); // matches your original name
 
     Route::get('chartPayoutMovements', [HomeController::class, 'chartPayoutMovements'])
-        ->name('chartPayoutRecords'); // matches your original name
+        ->name('chartPayoutRecords')->middleware('auth'); // matches your original name
 });
