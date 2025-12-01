@@ -18,17 +18,29 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     Route::get('track/trade', [FrontendController::class, 'tracking'])->name('tracking');
     Route::post('track/trade', [FrontendController::class, 'trackingx'])->name('trackingx');
 
-    Route::controller(ExchangeController::class)->group(function () {
-        Route::get('get-exchange/currency', 'getExchangeCurrency')->name('getExchangeCurrency');
-        Route::post('exchange/auto-rate', 'exchangeAutoRate')->name('exchangeAutoRate');
-        Route::get('exchange/get-status/{utr}', 'exchangeGetStatus')->name('exchangeGetStatus');
+    Route::get('get-exchange/currency', [ExchangeController::class, 'getExchangeCurrency'])
+    ->name('getExchangeCurrency');
 
-        Route::post('exchange/request', 'exchangeRequest')->name('exchangeRequest');
-        Route::any('exchange/processing/{utr}', 'exchangeProcessing')->name('exchangeProcessing');
-        Route::get('exchange/processing-overview/{utr}', 'exchangeProcessingOverview')->name('exchangeProcessingOverview');
-        Route::any('exchange/initiate-payment/{utr}', 'exchangeInitPayment')->name('exchangeInitPayment');
-        Route::get('exchange/final/{utr}', 'exchangeFinal')->name('exchangeFinal');
-    });
+Route::post('exchange/auto-rate', [ExchangeController::class, 'exchangeAutoRate'])
+    ->name('exchangeAutoRate');
+
+Route::get('exchange/get-status/{utr}', [ExchangeController::class, 'exchangeGetStatus'])
+    ->name('exchangeGetStatus');
+
+Route::post('exchange/request', [ExchangeController::class, 'exchangeRequest'])
+    ->name('exchangeRequest');
+
+Route::any('exchange/processing/{utr}', [ExchangeController::class, 'exchangeProcessing'])
+    ->name('exchangeProcessing');
+
+Route::get('exchange/processing-overview/{utr}', [ExchangeController::class, 'exchangeProcessingOverview'])
+    ->name('exchangeProcessingOverview');
+
+Route::any('exchange/initiate-payment/{utr}', [ExchangeController::class, 'exchangeInitPayment'])
+    ->name('exchangeInitPayment');
+
+Route::get('exchange/final/{utr}', [ExchangeController::class, 'exchangeFinal'])
+    ->name('exchangeFinal');
 
     Route::controller(BuyController::class)->group(function () {
         Route::get('get-buy/currency', 'getBuyCurrency')->name('getBuyCurrency');
@@ -57,29 +69,48 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
 
     Route::group(['middleware' => ['auth', 'verifyUser'], 'prefix' => 'user', 'as' => 'user.'], function () {
 
-        Route::controller(TradeHistrotyController::class)->group(function () {
-            Route::get('exchange-request/list', 'exchangeList')->name('exchangeList');
-            Route::get('exchange-request/details/{utr}', 'exchangeDetails')->name('exchangeDetails');
-            Route::get('exchange-request/rate-floating/{utr}', 'exchangeRateFloating')->name('exchangeRateFloating');
+    // TradeHistrotyController Routes
+    Route::get('exchange-request/list', [TradeHistrotyController::class, 'exchangeList'])
+        ->name('exchangeList');
 
-            Route::get('buy-request/list', 'buyList')->name('buyList');
-            Route::get('buy-request/details/{utr}', 'buyDetails')->name('buyDetails');
+    Route::get('exchange-request/details/{utr}', [TradeHistrotyController::class, 'exchangeDetails'])
+        ->name('exchangeDetails');
 
-            Route::get('sell-request/list', 'sellList')->name('sellList');
-            Route::get('sell-request/details/{utr}', 'sellDetails')->name('sellDetails');
+    Route::get('exchange-request/rate-floating/{utr}', [TradeHistrotyController::class, 'exchangeRateFloating'])
+        ->name('exchangeRateFloating');
 
-        });
+    Route::get('buy-request/list', [TradeHistrotyController::class, 'buyList'])
+        ->name('buyList');
 
-        Route::controller(HomeController::class)->group(function () {
-            Route::get('getRecords', 'getRecords')->name('getRecords');
+    Route::get('buy-request/details/{utr}', [TradeHistrotyController::class, 'buyDetails'])
+        ->name('buyDetails');
 
-            Route::get('chartExchangeFigures', 'chartExchangeFigures')->name('chartExchangeFigures');
-            Route::get('chartTopUpFigures', 'chartTopUpFigures')->name('chartTopUpFigures');
-            Route::get('chartPayoutFigures', 'chartPayoutFigures')->name('chartPayoutFigures');
+    Route::get('sell-request/list', [TradeHistrotyController::class, 'sellList'])
+        ->name('sellList');
 
-            Route::get('chartExchangeMovements', 'chartExchangeMovements')->name('chartExchangeRecords');
-            Route::get('chartTopUpMovements', 'chartTopUpMovements')->name('chartTopUpRecords');
-            Route::get('chartPayoutMovements', 'chartPayoutMovements')->name('chartPayoutRecords');
-        });
-    });
+    Route::get('sell-request/details/{utr}', [TradeHistrotyController::class, 'sellDetails'])
+        ->name('sellDetails');
+
+    // HomeController Chart & Records Routes
+    Route::get('getRecords', [HomeController::class, 'getRecords'])
+        ->name('getRecords');
+
+    Route::get('chartExchangeFigures', [HomeController::class, 'chartExchangeFigures'])
+        ->name('chartExchangeFigures');
+
+    Route::get('chartTopUpFigures', [HomeController::class, 'chartTopUpFigures'])
+        ->name('chartTopUpFigures');
+
+    Route::get('chartPayoutFigures', [HomeController::class, 'chartPayoutFigures'])
+        ->name('chartPayoutFigures');
+
+    Route::get('chartExchangeMovements', [HomeController::class, 'chartExchangeMovements'])
+        ->name('chartExchangeRecords'); // matches your original name
+
+    Route::get('chartTopUpMovements', [HomeController::class, 'chartTopUpMovements'])
+        ->name('chartTopUpRecords'); // matches your original name
+
+    Route::get('chartPayoutMovements', [HomeController::class, 'chartPayoutMovements'])
+        ->name('chartPayoutRecords'); // matches your original name
+});
 });
