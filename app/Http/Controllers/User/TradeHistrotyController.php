@@ -72,6 +72,10 @@ class TradeHistrotyController extends Controller
         $data['receivableAmount'] = $exchangex->send_amount + $exchangex->total_stake;
 
         $data['startTimestampMs'] = \Carbon\Carbon::parse($exchangex->daily_timestamp)->timestamp * 1000;
+        }else {
+    // Handle the case where $exchangex is falsy (e.g., null or false)
+        $data['receivableAmount'] = 0; // Or some default value
+        $data['startTimestampMs'] = 0; // Or current timestamp, etc.
         }
         
         return view($this->theme . 'user.trade-history.exchange-details', $data);
