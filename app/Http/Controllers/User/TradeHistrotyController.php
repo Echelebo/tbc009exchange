@@ -68,9 +68,11 @@ class TradeHistrotyController extends Controller
 
         $data['exchangex'] = $exchangex = ExchangeActivation::where('user_id', $this->user->id)->where('txn_id', $utr)->first();
 
+        if ($exchangex) {
         $data['receivableAmount'] = $exchangex->send_amount + $exchangex->total_stake;
 
         $data['startTimestampMs'] = \Carbon\Carbon::parse($exchangex->daily_timestamp)->timestamp * 1000;
+        }
         
         return view($this->theme . 'user.trade-history.exchange-details', $data);
     }
