@@ -160,9 +160,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                @if ($exchangex)
                                 @if ($exchange->status == 8)
-
+                                @if ($exchangex)
                                 <div class="col-md-6 mt-4">
                                     <ul class="list-style-none ms-4">
                                         <li class="my-2 border-bottom pb-3">
@@ -264,8 +263,6 @@
                                         </li>
 
                                 </div>
-
-                                @endif
                                 @else
                                 <div class="col-md-6 mt-4">
                                     <ul class="list-style-none ms-4">
@@ -283,6 +280,9 @@
                                 </div>
                                 
                                 @endif
+
+                                @endif
+                                
 
                                 @if ($exchange->status == 2)
                     <div class="mt-8">
