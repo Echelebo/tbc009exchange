@@ -216,7 +216,7 @@
                                 @if ($exchange->status == 2)
                     <div class="mt-8">
 
-                    <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i><font color="red">Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.</font>
+                    <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i><font color="#a93e3e">Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.</font>
                     
                     
                     <p class="mt-4">User Balance: {{ $user->balance }} USD</p>
