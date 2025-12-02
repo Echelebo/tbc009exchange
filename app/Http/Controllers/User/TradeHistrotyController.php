@@ -67,7 +67,7 @@ class TradeHistrotyController extends Controller
         $data['exchange'] = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3', '4', '5', '6', '7', '8', '9'])
         ->where('utr', $utr)->firstOrFail();
 
-        $data['exchangex'] = ExchangeActivation::where('user_id', $this->user->id)->where('status', 'active')
+        $data['exchangex'] = $exchangex = ExchangeActivation::where('user_id', $this->user->id)->where('status', 'active')
         ->where('txn_id', $utr)->first();
 
         $data['startTimestampMs'] = \Carbon\Carbon::parse($exchangex->daily_timestamp)->timestamp * 1000;
