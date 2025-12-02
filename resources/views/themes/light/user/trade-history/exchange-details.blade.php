@@ -167,7 +167,7 @@
                                     <ul class="list-style-none ms-4">
                                         <li class="my-2 border-bottom pb-3">
                                             <span class="font-weight-medium "><i
-                                                    class="far fa-coins me-2 text-base"></i> @lang("Time Left") @php
+                                                    class="far fa-coins me-2 text-base"></i>  @php
     $left = now()->diffInSeconds($exchange->created_at->addHours(24), false);
     $left = $left < 0 ? 0 : $left;
     $hours = floor($left / 3600);
