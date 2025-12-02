@@ -167,21 +167,94 @@
                                     <ul class="list-style-none ms-4">
                                         <li class="my-2 border-bottom pb-3">
                                             <span class="font-weight-medium "><i
-                                                    class="far fa-coins me-2 text-base"></i>  @php
-    $left = now()->diffInSeconds($exchange->created_at->addHours(24), false);
-    $left = $left < 0 ? 0 : $left;
-    $hours = floor($left / 3600);
-    $minutes = floor(($left % 3600) / 60);
-@endphp
+                                                    class="far fa-coins me-2 text-base"></i> 
+                                                    <div class="countdown-container">
+    <div class="countdown-circle">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle class="circle-bg" cx="40" cy="40" r="36" stroke="#e0e0e0" stroke-width="8" fill="none"/>
+            <circle class="circle-progress" cx="40" cy="40" r="36" stroke="#10b981" stroke-width="8" fill="none"
+                    stroke-dasharray="226.19" stroke-dashoffset="226.19" transform="rotate(-90 40 40)"/>
+        </svg>
+        <div class="countdown-text">
+            <span id="countdown-{{ $exchange->id }}">Loading...</span>
+        </div>
+    </div>
+</div>
 
-Time left: 
-@if($left <= 0)
-    <span class="text-red-600">Expired</span>
-@elseif($hours > 0)
-    <span class="text-green-600">{{ $hours }} hour{{ $hours > 1 ? 's' : '' }}</span>
-@else
-    <span class="text-orange-600">{{ $minutes }} minute{{ $minutes > 1 ? 's' : '' }}</span>
-@endif
+<style>
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.countdown-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.circle-bg {
+    stroke: #e5e7eb;
+}
+.circle-progress {
+    stroke: #10b981;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.8s linear;
+}
+.countdown-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    font-weight: bold;
+    color: #1f2937;
+    text-align: center;
+    line-height: 1.2;
+}
+</style>
+
+<script>
+// Run immediately when page loads
+document.addEventListener("DOMContentLoaded", function () {
+    const createdAt = new Date("{{ $exchange->created_at->toISOString() }}"); // exact server time
+    const endTime = new Date(createdAt.getTime() + 24 * 60 * 60 * 1000); // +24 hours
+
+    const countdownEl = document.getElementById("countdown-{{ $exchange->id }}");
+    const progressCircle = document.querySelector(".circle-progress");
+
+    function updateCountdown() {
+        const now = new Date();
+        const diff = endTime - now; // milliseconds left
+
+        if (diff <= 0) {
+            countdownEl.innerHTML = "Expired";
+            progressCircle.style.stroke = "#ef4444";
+            progressCircle.style.strokeDashoffset = 226.19;
+            return;
+        }
+
+        const totalSeconds = 24 * 60 * 60; // 86400 seconds
+        const secondsLeft = Math.floor(diff / 1000);
+        const percentUsed = (totalSeconds - secondsLeft) / totalSeconds;
+        const dashoffset = 226.19 * percentUsed;
+
+        progressCircle.style.strokeDashoffset = dashoffset;
+
+        const h = Math.floor(secondsLeft / 3600);
+        const m = Math.floor((secondsLeft % 3600) / 60);
+        const s = secondsLeft % 60;
+
+        countdownEl.innerHTML = `
+            Time Left:<br>
+            <strong>${h}h ${m}m ${s}s</strong>
+        `;
+    }
+
+    // Update now + every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+});
+</script>
                                         </li>
 
                                         <li class="my-3">
