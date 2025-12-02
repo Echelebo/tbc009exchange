@@ -196,7 +196,7 @@
 
 <script>
 // THIS IS BULLETPROOF — works even if created_at is 2 seconds ago
-const startTime = {{ $exchangex->daily_timestamp }} * 1000;   // server time in milliseconds
+const startTime = {{ $exchangex->daily_timestamp->timestamp }} * 1000;   // server time in milliseconds
 const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
 const endTime = startTime + TWENTY_FOUR_HOURS;
 
