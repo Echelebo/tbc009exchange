@@ -231,21 +231,21 @@
                                         <li class="my-3">
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Next Return') : <span
-                                                    class="font-weight-bold">$ {{optional($exchange->daily_return)}}
+                                                    class="font-weight-bold">$ {{optional($exchangex->daily_return)}}
                                                 </span>
                                             </span>
                                         </li>
                                         <li class="my-3">
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Locked Stake') : <span
-                                                    class="font-weight-bold">${{optional($exchange->locked_stake)}}
+                                                    class="font-weight-bold">${{optional($exchangex->locked_stake)}}
                                                 </span>
                                             </span>
                                         </li>
                                         <li class="my-3">
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Stake') : <span
-                                                    class="font-weight-bold">${{optional($exchange->released_stake)}}
+                                                    class="font-weight-bold">${{optional($exchangex->released_stake)}}
                                                 </span>
                                             </span>
                                         </li>
@@ -253,7 +253,7 @@
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Return') : <span
                                                     class="font-weight-bold"
-                                                    id="receiveAmount">${{optional($exchange->released_return)}}
+                                                    id="receiveAmount">${{optional($exchangex->released_return)}}
                                                 </span>
                                             </span>
                                         </li>
