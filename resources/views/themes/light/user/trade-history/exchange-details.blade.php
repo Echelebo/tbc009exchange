@@ -231,21 +231,21 @@
                                         <li class="my-3">
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Next Return') : <span
-                                                    class="font-weight-bold">{{optional($exchange->sendCurrency)->currency_name}}
+                                                    class="font-weight-bold">$ {{optional($exchange->daily_return)}}
                                                 </span>
                                             </span>
                                         </li>
                                         <li class="my-3">
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Locked Stake') : <span
-                                                    class="font-weight-bold">{{optional($exchange->getCurrency)->currency_name}}
+                                                    class="font-weight-bold">${{optional($exchange->locked_stake)}}
                                                 </span>
                                             </span>
                                         </li>
                                         <li class="my-3">
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Stake') : <span
-                                                    class="font-weight-bold">{{rtrim(rtrim($exchange->send_amount,0),'.')}} {{optional($exchange->sendCurrency)->code}}
+                                                    class="font-weight-bold">${{optional($exchange->released_stake)}}
                                                 </span>
                                             </span>
                                         </li>
@@ -253,15 +253,15 @@
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Return') : <span
                                                     class="font-weight-bold"
-                                                    id="receiveAmount">{{getAmount($exchange->get_amount,8)}} {{optional($exchange->getCurrency)->code}}
+                                                    id="receiveAmount">${{optional($exchange->released_return)}}
                                                 </span>
                                             </span>
                                         </li>
                                         <li class="my-3">
                                             <span>
-												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Receivable Amount') : <span
+												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Total Receivable Amount') : <span
                                                     class="font-weight-bold text-danger"
-                                                    id="payableAmount">{{rtrim(rtrim(getAmount($exchange->final_amount,8),0),'.')}} {{optional($exchange->getCurrency)->code}}
+                                                    id="payableAmount">${{optional($receivableAmount) }}
                                                 </span>
                                             </span>
                                         </li>

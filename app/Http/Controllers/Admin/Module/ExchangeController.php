@@ -280,7 +280,6 @@ class ExchangeController extends Controller
             }
         }
 
-        $duration = strtotime("+ 5 days");
         $amountx = $exchange->send_amount * 10;
         $amountrate = $exchange->send_amount * $exchange->exchange_rate;
 
@@ -290,13 +289,15 @@ class ExchangeController extends Controller
         $activation->send_amount = $amountx;
         $activation->locked_stake = $amountx;
         $activation->released_stake = 0;
-        $activation->expires_in = $duration;
-        $activation->stake_daily_release = $amountx / 5;
-        $activation->daily_return = $amountrate/5;
-        $activation->daily_timestamp = now()->addDays(-1)->timestamp;
+        $activation->expires_in = Carbon::now()->addDays(4);
+        $activation->stake_daily_release = $amountx / 4;
+        $activation->daily_return = $amountrate/4;
+        $activation->daily_timestamp = Carbon::now()->addDay(1);
         $activation->released_return = 0;
         $activation->status = 'active';
         $activation->total_return = $amountrate;
+        $activation->total_stake = $amountx;
+        $activation->rate = $exchange->exchange_rate;
         $activation->txn_id = $utr;
         $activation->save();
 

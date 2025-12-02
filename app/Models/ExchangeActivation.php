@@ -15,7 +15,7 @@ class ExchangeActivation extends Model
     use HasFactory, SoftDeletes, Status, Prunable;
 
     protected $fillable = ['user_id', 'account_level', 'send_amount', 'locked_stake', 'released_stake',
-        'expires_in', 'stake_daily_release', 'daily_return', 'daily_timestamp', 'released_return', 'status', 'created_at', 'updated_at', 'deleted_at', 'total_return', 'txn_id'];
+        'expires_in', 'stake_daily_release', 'daily_return', 'daily_timestamp', 'released_return', 'status', 'created_at', 'updated_at', 'deleted_at', 'total_return', 'total_stake', 'rate', 'txn_id'];
 
     protected $appends = ['tracking_status', 'admin_status', 'user_status'];
 

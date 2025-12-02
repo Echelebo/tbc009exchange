@@ -164,7 +164,7 @@ class FrontendController extends Controller
         if ($request->trx_id) {
             $firstCharacter = substr($request->trx_id, 0, 1);
             if ($firstCharacter == 'E') {
-                $exchange = ExchangeRequest::whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->first();
+                $exchange = ExchangeRequest::whereIn('status', [2, 3, 4, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->first();
                 if ($exchange) {
                     $data['type'] = 'exchange';
                     $data['object'] = $exchange;
@@ -190,7 +190,7 @@ class FrontendController extends Controller
     {
         if ($request->trx_id) {
            $data['user'] = $user = Auth::user();
-            $data['exchange'] = $exchange = ExchangeRequest::where('user_id', $user->id)->whereIn('status', [2, 3, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->firstOrFail();
+            $data['exchange'] = $exchange = ExchangeRequest::where('user_id', $user->id)->whereIn('status', [2, 3, 4, 5, 6, 7, 8, 9])->where('utr', $request->trx_id)->latest()->firstOrFail();
             if ($exchange) {
                 $data['type'] = 'exchange';
                 $data['object'] = $exchange;
@@ -248,7 +248,7 @@ class FrontendController extends Controller
                 $amount,
                 0,
                 '-',
-                'Staking With' .$stakingMode,
+                'Staking With ' .$stakingMode,
                 $exchange->id,
                 ExchangeRequest::class,
                 $exchange->user_id,
