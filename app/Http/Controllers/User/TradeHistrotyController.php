@@ -64,11 +64,9 @@ class TradeHistrotyController extends Controller
     {
         $data['user'] = $this->user;
 
-        $data['exchange'] = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3', '4', '5', '6', '7', '8', '9'])
-        ->where('utr', $utr)->firstOrFail();
+        $data['exchange'] = ExchangeRequest::where('user_id', $this->user->id)->whereIn('status', ['2', '3', '4', '5', '6', '7', '8', '9'])->where('utr', $utr)->firstOrFail();
 
-        $data['exchangex'] = $exchangex = ExchangeActivation::where('user_id', $this->user->id)->where('status', 'active')
-        ->where('txn_id', $utr)->first();
+        $data['exchangex'] = $exchangex = ExchangeActivation::where('user_id', $this->user->id)->where('txn_id', $utr)->first();
 
         $data['receivableAmount'] = $exchangex->send_amount + $exchangex->total_stake;
 

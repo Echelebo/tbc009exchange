@@ -230,8 +230,7 @@
 
                                         <li class="my-3">
                                             <span>
-												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Next Return') : <span
-                                                    class="font-weight-bold">$ {{optional($exchangex->daily_return)}}
+												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Next Return'): <span class="font-weight-bold">${{$exchangex->daily_return}}
                                                 </span>
                                             </span>
                                         </li>
