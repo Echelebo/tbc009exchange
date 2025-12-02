@@ -160,7 +160,7 @@
                                         </li>
                                     </ul>
                                 </div>
-
+                                @if ($exchangex)
                                 @if ($exchange->status == 8)
 
                                 <div class="col-md-6 mt-4">
@@ -265,6 +265,23 @@
 
                                 </div>
 
+                                @endif
+                                @else
+                                <div class="col-md-6 mt-4">
+                                    <ul class="list-style-none ms-4">
+                                        <li class="my-2 border-bottom pb-3">
+                                            <span class="font-weight-medium "><i
+                                                    class="far fa-coins me-2 text-base"></i> 
+                                                    <div class="text-center my-10">
+                                                        
+                                                        Exchange Record Not Found
+
+                                                    </div>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
                                 @endif
 
                                 @if ($exchange->status == 2)
