@@ -168,25 +168,26 @@
                                         <li class="my-2 border-bottom pb-3">
                                             <span class="font-weight-medium "><i
                                                     class="far fa-coins me-2 text-base"></i> 
-                                                    <div class="text-center my-8">
+                                                    <div class="text-center my-10">
     <div class="relative inline-block">
-        <!-- Circle -->
-        <svg width="120" height="120" viewBox="0 0 120 120" class=" -rotate-90">
-            <circle cx="60" cy="60" r="54" fill="none" stroke="#e5e7eb" stroke-width="10"/>
-            <circle cx="60" cy="60" r="54" fill="none" stroke="#10b981" stroke-width="10"
-                    stroke-linecap="round" stroke-dasharray="339" 
-                    stroke-dashoffset="339"
-                    class="transition-all duration-1000 ease-linear"
-                    id="progress-{{ $exchange->id }}">
+        <!-- SVG Circle -->
+        <svg width="130" height="130" viewBox="0 0 130 130" class="-rotate-90">
+            <circle cx="65" cy="65" r="60" fill="none" stroke="#e2e8f0" stroke-width="10"/>
+            <circle cx="65" cy="65" r="60" fill="none" stroke="#10b981" stroke-width="10"
+                    stroke-linecap="round"
+                    stroke-dasharray="377"
+                    stroke-dashoffset="377"
+                    class="transition-all duration-1000"
+                    id="circle-{{ $exchange->id }}">
             </circle>
         </svg>
 
         <!-- Countdown Text -->
         <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-center leading-tight">
-                <div class="text-xs text-gray-600">Time Left</div>
-                <div id="timer-{{ $exchange->id }}" class="text-lg font-bold text-gray-800">
-                    Calculating...
+            <div class="text-center">
+                <div class="text-sm text-gray-600">Time Left</div>
+                <div id="countdown-{{ $exchange->id }}" class="text-2xl font-bold text-gray-800">
+                    24h 0m 0s
                 </div>
             </div>
         </div>
@@ -194,41 +195,43 @@
 </div>
 
 <script>
-// THIS IS THE ONLY THING THAT MATTERS - correct server time in milliseconds
-const createdAtMs = {{ $exchange->created_at->timestamp * 1000 }};  // Laravel timestamp → JS milliseconds
-const durationMs = 24 * 60 * 60 * 1000;  // 24 hours
-const endTimeMs  = createdAtMs + durationMs;
+// THIS IS BULLETPROOF — works even if created_at is 2 seconds ago
+const startTime = {{ $exchange->created_at->timestamp }} * 1000;   // server time in milliseconds
+const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+const endTime = startTime + TWENTY_FOUR_HOURS;
 
-const timerEl    = document.getElementById('timer-{{ $exchange->id }}');
-const progressEl = document.getElementById('progress-{{ $exchange->id }}');
-const circumference = 339; // 2π×54
+const timerEl   = document.getElementById('countdown-{{ $exchange->id }}');
+const circleEl  = document.getElementById('circle-{{ $exchange->id }}');
+const fullCircle = 377; // 2 * π * 60
 
-function update() {
+function updateCountdown() {
     const now = Date.now();
-    const left = endTimeMs - now;
+    const remaining = endTime - now;
 
-    if (left <= 0) {
+    // If somehow expired (should never happen on new records)
+    if (remaining <= 0) {
         timerEl.innerHTML = '<span class="text-red-600">Expired</span>';
-        progressEl.setAttribute('stroke', '#ef4444');
-        progressEl.setAttribute('stroke-dashoffset', 0);
+        circleEl.setAttribute('stroke', '#ef4444');
+        circleEl.setAttribute('stroke-dashoffset', 0);
         return;
     }
 
-    const totalSeconds = Math.floor(left / 1000);
+    const totalSeconds = Math.floor(remaining / 1000);
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
     const s = totalSeconds % 60;
 
     timerEl.textContent = `${h}h ${m}m ${s}s`;
 
-    // Circle progress (starts full green → empties)
-    const used = durationMs - left;
-    const offset = circumference * (used / durationMs);
-    progressEl.setAttribute('stroke-dashoffset', offset);
+    // Progress circle (starts full → slowly empties)
+    const usedPercent = (TWENTY_FOUR_HOURS - remaining) / TWENTY_FOUR_HOURS;
+    const offset = fullCircle * usedPercent;
+    circleEl.setAttribute('stroke-dashoffset', offset);
 }
 
-update();                  // first run
-setInterval(update, 1000); // every second
+// Run immediately + every second
+updateCountdown();
+setInterval(updateCountdown, 1000);
 </script>
                                         </li>
 
