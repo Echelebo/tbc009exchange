@@ -251,9 +251,7 @@
                                         </li>
                                         <li class="my-3">
                                             <span>
-												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Return') : <span
-                                                    class="font-weight-bold"
-                                                    id="receiveAmount">${{optional($exchangex->released_return)}}
+												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Return') : <span class="font-weight-bold" id="receiveAmount">${{optional($exchangex->released_return)}}
                                                 </span>
                                             </span>
                                         </li>
