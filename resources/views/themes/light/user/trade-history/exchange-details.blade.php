@@ -171,14 +171,14 @@
                                                     <div class="text-center my-10">
     <div class="relative inline-block">
         <!-- SVG Circle -->
-        <svg width="130" height="130" viewBox="0 0 130 130" class="-rotate-90">
+        <svg width="50" height="50" viewBox="0 0 130 130" class="-rotate-90">
             <circle cx="65" cy="65" r="60" fill="none" stroke="#e2e8f0" stroke-width="10"/>
             <circle cx="65" cy="65" r="60" fill="none" stroke="#10b981" stroke-width="10"
                     stroke-linecap="round"
                     stroke-dasharray="377"
                     stroke-dashoffset="377"
                     class="transition-all duration-1000"
-                    id="circle-{{ $exchange->id }}">
+                    id="circle-{{ $exchangex->id }}">
             </circle>
         </svg>
 
@@ -186,7 +186,7 @@
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-center">
                 <div class="text-sm text-gray-600">Time Left</div>
-                <div id="countdown-{{ $exchange->id }}" class="text-2xl font-bold text-gray-800">
+                <div id="countdown-{{ $exchangex->id }}" class="text-2xl font-bold text-gray-800">
                     24h 0m 0s
                 </div>
             </div>
@@ -196,12 +196,12 @@
 
 <script>
 // THIS IS BULLETPROOF — works even if created_at is 2 seconds ago
-const startTime = {{ $exchange->created_at->timestamp }} * 1000;   // server time in milliseconds
+const startTime = {{ $exchangex->daily_timestamp }} * 1000;   // server time in milliseconds
 const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
 const endTime = startTime + TWENTY_FOUR_HOURS;
 
-const timerEl   = document.getElementById('countdown-{{ $exchange->id }}');
-const circleEl  = document.getElementById('circle-{{ $exchange->id }}');
+const timerEl   = document.getElementById('countdown-{{ $exchangex->id }}');
+const circleEl  = document.getElementById('circle-{{ $exchangex->id }}');
 const fullCircle = 377; // 2 * π * 60
 
 function updateCountdown() {
