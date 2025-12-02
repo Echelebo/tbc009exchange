@@ -167,8 +167,21 @@
                                     <ul class="list-style-none ms-4">
                                         <li class="my-2 border-bottom pb-3">
                                             <span class="font-weight-medium "><i
-                                                    class="far fa-coins me-2 text-base"></i> @lang("Elapsed Time") <small
-                                                    class="float-end">{{dateTime($exchange->created_at,basicControl()->date_time_format)}}</small></span>
+                                                    class="far fa-coins me-2 text-base"></i> @lang("Time Left") @php
+    $left = now()->diffInSeconds($exchange->created_at->addHours(24), false);
+    $left = $left < 0 ? 0 : $left;
+    $hours = floor($left / 3600);
+    $minutes = floor(($left % 3600) / 60);
+@endphp
+
+Time left: 
+@if($left <= 0)
+    <span class="text-red-600">Expired</span>
+@elseif($hours > 0)
+    <span class="text-green-600">{{ $hours }} hour{{ $hours > 1 ? 's' : '' }}</span>
+@else
+    <span class="text-orange-600">{{ $minutes }} minute{{ $minutes > 1 ? 's' : '' }}</span>
+@endif
                                         </li>
 
                                         <li class="my-3">
