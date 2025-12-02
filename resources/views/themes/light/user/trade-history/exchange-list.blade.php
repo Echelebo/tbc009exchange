@@ -42,6 +42,8 @@
                             </option>
                             <option value="3" {{ @request()->status == '3' ? 'selected' : '' }}>Initiated
                             </option>
+                            <option value="4" {{ @request()->status == '3' ? 'selected' : '' }}>Awaiting TBC
+                            </option>
                             <option value="5" {{ @request()->status == '5' ? 'selected' : '' }}>@lang('Canceled')
                             </option>
                             <option value="6" {{ @request()->status == '6' ? 'selected' : '' }}>@lang('Refunded')
