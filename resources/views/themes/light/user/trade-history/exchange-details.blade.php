@@ -241,9 +241,11 @@
 
 
                             <input type="hidden" value="{{$exchange->utr}}" name="trx_id">
+
+                            <label for="hash_id">Hash ID/TXID:</label>
                             <input type="text" value="" name="hash_id" class="form-control"
                                 id="search-box2"
-                                placeholder="e.g 65defbe618d07">
+                                placeholder="e.g 65defbe618d07" style="width:50%;">
                         </div>
                         <button type="submit" class="search-btn2 mt-4 px-8" style="background-color:#c1923f; border-radius: 15px; padding: 10px; font-size: 15px; color: #ffffff; ">Submit</button>
                     </form>
