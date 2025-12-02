@@ -274,7 +274,7 @@
 
             <div class="table-row">
                 <div class="itemx">
-                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(63, 193, 87)"></i>Exchange running. Go to Exchange List to view.
+                    <i class="fa fa-info-circle" aria-hidden="true" style="color:rgb(63, 193, 87)"></i> Exchange running. Go to Exchange List to view.
                 </div>
 
             </div>
