@@ -237,20 +237,20 @@
                                         <li class="my-3">
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Locked Stake') : <span
-                                                    class="font-weight-bold">${{optional($exchangex->locked_stake)}}
+                                                    class="font-weight-bold">${{$exchangex->locked_stake}}
                                                 </span>
                                             </span>
                                         </li>
                                         <li class="my-3">
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Stake') : <span
-                                                    class="font-weight-bold">${{optional($exchangex->released_stake)}}
+                                                    class="font-weight-bold">${{$exchangex->released_stake}}
                                                 </span>
                                             </span>
                                         </li>
                                         <li class="my-3">
                                             <span>
-												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Return') : <span class="font-weight-bold" id="receiveAmount">${{optional($exchangex->released_return)}}
+												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Released Return') : <span class="font-weight-bold" id="receiveAmount">${{$exchangex->released_return}}
                                                 </span>
                                             </span>
                                         </li>
@@ -258,7 +258,7 @@
                                             <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Total Receivable Amount') : <span
                                                     class="font-weight-bold text-danger"
-                                                    id="payableAmount">${{optional($receivableAmount) }}
+                                                    id="payableAmount">${{$receivableAmount}}
                                                 </span>
                                             </span>
                                         </li>
