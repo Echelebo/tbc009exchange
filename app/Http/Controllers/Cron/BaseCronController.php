@@ -7,6 +7,7 @@ use App\Models\CronJob;
 use App\Traits\RunBot;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cache;
 
 class BaseCronController extends Controller
 {
