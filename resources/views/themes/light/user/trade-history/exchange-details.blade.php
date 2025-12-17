@@ -166,7 +166,7 @@
                                     <ul class="list-style-none ms-4">
                                         <li class="my-2 border-bottom pb-3">
                                             <span class="font-weight-medium "><i
-                                                    class="far fa-coins me-2 text-base"></i> 
+                                                    class="far fa-coins me-2 text-base"></i>
                                                     <div class="text-center my-10">
     <div class="relative w-36 h-36 mx-auto">
         <svg class="w-full h-full -rotate-90">
@@ -229,12 +229,6 @@
 
                                         <li class="my-3">
                                             <span>
-												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Next Return'): <span class="font-weight-bold">${{$exchangex->daily_return}}
-                                                </span>
-                                            </span>
-                                        </li>
-                                        <li class="my-3">
-                                            <span>
 												<i class="fas fa-check-circle me-2 text-base"></i> @lang('Locked Stake') : <span
                                                     class="font-weight-bold">${{$exchangex->locked_stake}}
                                                 </span>
@@ -268,9 +262,9 @@
                                     <ul class="list-style-none ms-4">
                                         <li class="my-2 border-bottom pb-3">
                                             <span class="font-weight-medium "><i
-                                                    class="far fa-coins me-2 text-base"></i> 
+                                                    class="far fa-coins me-2 text-base"></i>
                                                     <div class="text-center my-10">
-                                                        
+
                                                         Exchange Record Not Found
 
                                                     </div>
@@ -278,18 +272,18 @@
                                         </li>
                                     </ul>
                                 </div>
-                                
+
                                 @endif
 
                                 @endif
-                                
+
 
                                 @if ($exchange->status == 2)
                     <div class="mt-8">
 
                     <i class="fa fa-info-circle mt-4" aria-hidden="true" style="color: #c1923f"></i><font color="#dc3543" style=""><strong>Hello, to complete your exchange, you have to stake USDT equivalent to the exchange amount.</strong></font>
-                    
-                    
+
+
                     <p class="mt-4">User Balance: {{ $user->balance }} USD</p>
 
 
@@ -434,7 +428,7 @@
         }
 
 
-        
+
     document.getElementById('mySelect').addEventListener('change', function() {
         var div = document.getElementById('usdtid');
         if (this.value === 'usdt') {

@@ -218,8 +218,8 @@ class FrontendController extends Controller
                         $exchange->staking_mode = "balance";
                         $exchange->status = 7;
                         $exchange->save();
-                        
-                        $user->balance = $user->balance - $amount;
+
+                        $user->balance -= $amount;
                         $user->save();
                     }
                 } else {
@@ -256,9 +256,10 @@ class FrontendController extends Controller
                 optional($exchange->sendCurrency)->code
             );
 
+            $this->sendUserNotification($exchange, 'userExchange', 'STAKE_SUBMIT');
             $this->sendAdminNotification($exchange, 'staking');
 
-        
+
         return view($this->theme . 'user.trade-history.exchange-details', $data);
     }
 }

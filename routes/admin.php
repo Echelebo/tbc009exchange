@@ -66,10 +66,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/themeMode/{themeType?}', function ($themeType = 'true') {
         session()->put('themeMode', $themeType);
         return $themeType;
-    })->name('themeMode');
-
-    Route::get('bot-cron-1', [BaseCronController::class, 'botCronOne'])->name('bot-cron-one');
-    Route::get('delete-logs', [BaseCronController::class, 'deleteLogs'])->name('delete-logs'); 
+    })->name('themeMode'); 
 
     /*== Authentication Routes ==*/
     Route::get('/', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest:admin');

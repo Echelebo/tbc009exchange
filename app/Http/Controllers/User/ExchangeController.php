@@ -70,7 +70,7 @@ class ExchangeController extends Controller
             $ratex = $accountLevelx->rate;
             $maxActive = $accountLevelx->max_running_exchange;
             $maxPending = $accountLevelx->max_pending_exchange;
-            
+
         }
 
         if (Auth::guest()) {
@@ -138,13 +138,13 @@ class ExchangeController extends Controller
                 $active = ExchangeRequest::where('status', 8)->where('user_id', Auth::user()->id)->get();
                 $pending = ExchangeRequest::where('status', 7)->where('user_id', Auth::user()->id)->get();
 
-                
+
                 $min_send = $accountLevelx->min_exchange;
                 $max_send = $accountLevelx->max_exchange;
                 $ratex = $accountLevelx->rate;
                 $maxActive = $accountLevelx->max_running_exchange;
                 $maxPending = $accountLevelx->max_pending_exchange;
-                
+
             }
 
             if (Auth::guest()) {
@@ -260,6 +260,7 @@ class ExchangeController extends Controller
                 optional($exchangeRequest->sendCurrency)->code
             );
 
+            $this->sendUserNotification($exchangeRequest, 'userExchange', 'EXCHANGE_SUBMIT');
             $this->sendAdminNotification($exchangeRequest, 'exchange');
             return redirect()->route('exchangeFinal', $exchangeRequest->utr);
         }

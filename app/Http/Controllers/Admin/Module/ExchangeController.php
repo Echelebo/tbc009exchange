@@ -33,8 +33,8 @@ class ExchangeController extends Controller
             ->selectRaw('(COUNT(CASE WHEN status = 5 THEN id END) / COUNT(id)) * 100 AS cancelExchangePercentage')
             ->selectRaw('COUNT(CASE WHEN status = 6 THEN id END) AS refundExchange')
             ->selectRaw('(COUNT(CASE WHEN status = 6 THEN id END) / COUNT(id)) * 100 AS refundExchangePercentage')
-            ->selectRaw('COUNT(CASE WHEN status = 7 THEN id END) AS checkingExchange')
-            ->selectRaw('(COUNT(CASE WHEN status = 7 THEN id END) / COUNT(id)) * 100 AS checkingExchangePercentage')
+            ->selectRaw('COUNT(CASE WHEN status IN (7, 4) THEN id END) AS checkingExchange')
+            ->selectRaw('(COUNT(CASE WHEN status IN (7, 4) THEN id END) / COUNT(id)) * 100 AS checkingExchangePercentage')
             ->selectRaw('COUNT(CASE WHEN status = 8 THEN id END) AS runingExchange')
             ->selectRaw('(COUNT(CASE WHEN status = 8 THEN id END) / COUNT(id)) * 100 AS runingExchangePercentage')
             ->selectRaw('COUNT(CASE WHEN status = 9 THEN id END) AS expiredExchange')
@@ -61,6 +61,8 @@ class ExchangeController extends Controller
                     return $query->where('status', 2);
                 } elseif ($exchangeType == 'complete') {
                     return $query->where('status', 3);
+                } elseif ($exchangeType == 'awaitingTBC') {
+                    return $query->where('status', 4);
                 } elseif ($exchangeType == 'cancel') {
                     return $query->where('status', 5);
                 } elseif ($exchangeType == 'refund') {
@@ -72,7 +74,7 @@ class ExchangeController extends Controller
                 } elseif ($exchangeType == 'expired') {
                     return $query->where('status', 9);
                 } else {
-                    return $query->whereIn('status', ['2', '3', '5', '6', '7', '8', '9']);
+                    return $query->whereIn('status', ['2', '3', '4', '5', '6', '7', '8', '9']);
                 }
             })
             ->when(isset($filterName), function ($query) use ($filterName) {
@@ -289,10 +291,10 @@ class ExchangeController extends Controller
         $activation->send_amount = $amountx;
         $activation->locked_stake = $amountx;
         $activation->released_stake = 0;
-        $activation->expires_in = Carbon::now()->addDays(4);
+        $activation->expires_in = Carbon::now()->addDays(4)->timestamp;
         $activation->stake_daily_release = $amountx / 4;
         $activation->daily_return = $amountrate/4;
-        $activation->daily_timestamp = Carbon::now()->addDay(1);
+        $activation->daily_timestamp = Carbon::now()->timestamp;
         $activation->released_return = 0;
         $activation->status = 'active';
         $activation->total_return = $amountrate;
@@ -301,12 +303,12 @@ class ExchangeController extends Controller
         $activation->txn_id = $utr;
         $activation->save();
 
-        
+
         //ends
         $exchange->status = 8;
         $exchange->save();
 
-        $user->count_of_exchange = $user->count_of_exchange + 1;
+        $user->count_of_exchange += 1;
         $user->save();
 
         $amount = getBaseAmount($exchange->final_amount, optional($exchange->getCurrency)->code, 'crypto');
@@ -327,11 +329,65 @@ class ExchangeController extends Controller
             $user->save();
         }
 
+        if ($user->referral_by != null) {
+    $referralBonusPercentage = 5; // 5%
+    $bonusAmount = $amountx * ($referralBonusPercentage / 100);
+
+    $referrer = User::where('id', $user->referral_by)->first();
+
+    if ($referrer) {
+        // Add bonus to referrer's balance
+        $referrer->balance += $bonusAmount;
+        $referrer->save();
+
         BasicService::makeTransaction(
-            $amount,
+            $amountx * $referralBonus,
+            0,
+            '+',
+            'Referral Bonus From ' . $user->firstname . $user->lastname,
+            $exchange->id,
+            ExchangeRequest::class,
+            $referrer->id,
+            $exchange->final_amount,
+            optional($exchange->getCurrency)->code
+        );
+
+        // Prepare parameters for the email/notification template
+        $params = [
+            'referrername' => $referrer->username ?? 'Anonymous',
+            'referreduser' => $user->username ?? $user->firstname ?? 'A user',
+            'bonusamount'  => number_format($bonusAmount, 2),
+            'exchangedamount' => number_format($amountx, 2),
+            'currency'      => 'USD', // Change this to dynamic if needed (e.g., $exchangeRequest->getCurrency->code)
+            'date'          => now()->format('Y-m-d H:i'),
+        ];
+
+        // Send email (and optionally SMS) to the referrer
+        // Assuming you have a method like sendMailSms() and a template key
+        $this->sendMailSms(
+            $referrer,
+            'REFERRAL_BONUS', // Your email/SMS template key
+            $params
+        );
+
+        // Optional: Also send push notification to referrer
+        $action = [
+            "link" => '#', // or wherever they can view balance
+            "icon" => "fa fa-gift text-white"
+        ];
+
+        $this->userPushNotification($referrer, 'REFERRAL_BONUS', $params, $action);
+        $this->userFirebasePushNotification($referrer, 'REFERRAL_BONUS', $params);
+    }
+}
+
+
+
+        BasicService::makeTransaction(
+            $amountx,
             0,
             '-',
-            'Crypto Exchange Started',
+            'TBC Exchange Starts',
             $exchange->id,
             ExchangeRequest::class,
             $exchange->user_id,
@@ -348,7 +404,7 @@ class ExchangeController extends Controller
         $exchange = ExchangeRequest::where(['status' => 7, 'utr' => $utr])->latest()->firstOrFail();
         $exchange->status = 4;
         $exchange->save();
-        
+
         return back()->with('success', 'Exchange Request For TBC Successful');
     }
 

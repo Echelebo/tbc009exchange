@@ -38,40 +38,44 @@ trait SendNotification
         }
     }
 
-    public function userReferrer($referrer, $templateKey): void
+    public function userExchangeActivation($exchangeActivation, $templateKey): void
     {
-        if ($referrer->user_id && $referrer->user) {
+        if ($exchangeActivation->user_id && $exchangeActivation->user) {
             $params = [
-                'username' => optional($referrer->user)->username ?? 'Anonymous',
-                'amount' => rtrim(rtrim($referrer->send_amount, 0), '.'),
-                'referralsusername' => optional($referrer->user)->username ?? 'Anonymous',
+                'user' => optional($exchangeActivation->user)->username ?? 'Anonymous',
+                'dailyReturn' => rtrim(rtrim($exchangeActivation->daily_return, 0), '.'),
+                'dailyStake' => rtrim(rtrim($exchangeActivation->stake_daily_release, 0), '.'),
+                'exchangeAmount' => rtrim(rtrim($exchangeActivation->send_amount, 0), '.'),
+                'transaction' => $exchangeActivation->txn_id,
             ];
 
             $action = [
                 "link" => '#',
                 "icon" => "fa fa-money-bill-alt text-white"
             ];
-            $this->sendMailSms($referrer->user, $templateKey, $params);
-            $this->userPushNotification($referrer->user, $templateKey, $params, $action);
-            $this->userFirebasePushNotification($referrer->user, $templateKey, $params);
+            $this->sendMailSms($exchangeActivation->user, $templateKey, $params);
+            $this->userPushNotification($exchangeActivation->user, $templateKey, $params, $action);
+            $this->userFirebasePushNotification($exchangeActivation->user, $templateKey, $params);
         }
     }
 
-    public function userRegisterReferrer($referrer, $templateKey): void
+    public function userBasic($userBasic, $templateKey): void
     {
-        if ($referrer->user_id && $referrer->user) {
+        if ($userBasic->id) {
             $params = [
-                'username' => optional($referrer->user)->username ?? 'Anonymous',
-                'referralsusername' => optional($referrer->user)->username ?? 'Anonymous',
+                'username' => optional($userBasic->referrer)->username ?? 'Anonymous',
+                'dowlineFirstname' => $userBasic->firstname ?? 'Anonymous',
+                'downlineLastname' => $userBasic->lastname ?? 'Anonymous',
+                'accountLevel' => $userBasic->account_level,
             ];
 
             $action = [
                 "link" => '#',
                 "icon" => "fa fa-money-bill-alt text-white"
             ];
-            $this->sendMailSms($referrer->user, $templateKey, $params);
-            $this->userPushNotification($referrer->user, $templateKey, $params, $action);
-            $this->userFirebasePushNotification($referrer->user, $templateKey, $params);
+            $this->sendMailSms($userBasic->user, $templateKey, $params);
+            $this->userPushNotification($userBasic->user, $templateKey, $params, $action);
+            $this->userFirebasePushNotification($userBasic->user, $templateKey, $params);
         }
     }
 
@@ -112,72 +116,6 @@ trait SendNotification
             $this->sendMailSms($payout->user, $templateKey, $params);
             $this->userPushNotification($payout->user, $templateKey, $params, $action);
             $this->userFirebasePushNotification($payout->user, $templateKey, $params);
-        }
-    }
-
-    public function userStaking($exchange, $templateKey): void
-    {
-        if ($exchange->user_id && $exchange->user) {
-            $params = [
-                'user' => optional($exchange->user)->username ?? 'Anonymous',
-            'sendAmount' => rtrim(rtrim($exchange->send_amount, 0), '.'),
-            'getAmount' => rtrim(rtrim($exchange->get_amount, 0), '.'),
-            'sendCurrency' => optional($exchange->sendCurrency)->code,
-            'getCurrency' => optional($exchange->getCurrency)->code,
-            'transaction' => $exchange->utr,
-            ];
-
-            $action = [
-                "link" => '#',
-                "icon" => "fa fa-money-bill-alt text-white"
-            ];
-            $this->sendMailSms($exchange->user, $templateKey, $params);
-            $this->userPushNotification($exchange->user, $templateKey, $params, $action);
-            $this->userFirebasePushNotification($exchange->user, $templateKey, $params);
-        }
-    }
-
-    public function userBuy($buyRequest, $templateKey): void
-    {
-        if ($buyRequest->user_id && $buyRequest->user) {
-            $params = [
-                'user' => optional($buyRequest->user)->username ?? 'Anonymous',
-                'sendAmount' => number_format($buyRequest->send_amount, 2),
-                'getAmount' => rtrim(rtrim($buyRequest->get_amount, 0), '.'),
-                'sendCurrency' => optional($buyRequest->sendCurrency)->code,
-                'getCurrency' => optional($buyRequest->getCurrency)->code,
-                'transaction' => $buyRequest->utr,
-            ];
-
-            $action = [
-                "link" => '#',
-                "icon" => "fa fa-money-bill-alt text-white"
-            ];
-            $this->sendMailSms($buyRequest->user, $templateKey, $params);
-            $this->userPushNotification($buyRequest->user, $templateKey, $params, $action);
-            $this->userFirebasePushNotification($buyRequest->user, $templateKey, $params);
-        }
-    }
-
-    public function userSell($sellRequest, $templateKey): void
-    {
-        if ($sellRequest->user_id && $sellRequest->user) {
-            $params = [
-                'user' => optional($sellRequest->user)->username ?? 'Anonymous',
-                'sendAmount' => rtrim(rtrim($sellRequest->send_amount, 0), '.'),
-                'getAmount' => number_format($sellRequest->get_amount, 2),
-                'sendCurrency' => optional($sellRequest->sendCurrency)->code,
-                'getCurrency' => optional($sellRequest->getCurrency)->code,
-                'transaction' => $sellRequest->utr,
-            ];
-
-            $action = [
-                "link" => '#',
-                "icon" => "fa fa-money-bill-alt text-white"
-            ];
-            $this->sendMailSms($sellRequest->user, $templateKey, $params);
-            $this->userPushNotification($sellRequest->user, $templateKey, $params, $action);
-            $this->userFirebasePushNotification($sellRequest->user, $templateKey, $params);
         }
     }
 
@@ -260,47 +198,4 @@ trait SendNotification
         $this->adminPushNotification('PAYOUT', $params, $action);
         $this->adminFirebasePushNotification('PAYOUT', $params, $action);
     }
-
-    public function buy($buyRequest): void
-    {
-        $params = [
-            'user' => optional($buyRequest->user)->username ?? 'Anonymous',
-            'sendAmount' => number_format($buyRequest->send_amount, 2),
-            'getAmount' => rtrim(rtrim($buyRequest->get_amount, 0), '.'),
-            'sendCurrency' => optional($buyRequest->sendCurrency)->code,
-            'getCurrency' => optional($buyRequest->getCurrency)->code,
-            'transaction' => $buyRequest->utr,
-        ];
-
-        $action = [
-            "link" => route('admin.buyView') . '?id=' . $buyRequest->id,
-            "icon" => "fa fa-money-bill-alt text-white"
-        ];
-
-        $this->adminMail('BUY_REQUEST', $params);
-        $this->adminPushNotification('BUY_REQUEST', $params, $action);
-        $this->adminFirebasePushNotification('BUY_REQUEST', $params, $action);
-    }
-
-    public function sell($sellRequest): void
-    {
-        $params = [
-            'user' => optional($sellRequest->user)->username ?? 'Anonymous',
-            'sendAmount' => rtrim(rtrim($sellRequest->send_amount, 0), '.'),
-            'getAmount' => number_format($sellRequest->get_amount, 2),
-            'sendCurrency' => optional($sellRequest->sendCurrency)->code,
-            'getCurrency' => optional($sellRequest->getCurrency)->code,
-            'transaction' => $sellRequest->utr,
-        ];
-
-        $action = [
-            "link" => route('admin.sellView') . '?id=' . $sellRequest->id,
-            "icon" => "fa fa-money-bill-alt text-white"
-        ];
-
-        $this->adminMail('SELL_REQUEST', $params);
-        $this->adminPushNotification('SELL_REQUEST', $params, $action);
-        $this->adminFirebasePushNotification('SELL_REQUEST', $params, $action);
-    }
-
 }

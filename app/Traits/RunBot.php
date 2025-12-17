@@ -1,94 +1,135 @@
 <?php
 
-//give profit for running bot
+namespace App\Traits;
 
+use App\Models\ExchangeActivation;
 use App\Models\ExchangeRequest;
-use App\Traits\SendNotification;
+use Facades\App\Services\BasicService;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Facades\App\Services\BasicService;
+use Illuminate\Support\Facades\DB;
 
-//update daily timestamp
-function updateTimestamp()
+
+trait RunBot
 {
 
-    // Generate timestamp for the new day
-    $togrow = Carbon::now()->subHours(24)->timestamp;
+use SendNotification;
 
-    // Chunk the records
-    ExchangeRequest::where('daily_timestamp', '<=', $togrow)
-        ->where('status', 8)
-        ->chunk(100, function ($bot_activations) {
-            //update these records
-            foreach ($bot_activations as $act) {
+public function updateTimestamp()
+    {
+        $cutoff = Carbon::now()->subHours(24)->timestamp;
 
-                // credit the user the amount that was realized for that day
+        // Get only active ones that are exactly 24+ hours old
+        ExchangeActivation::where('status', 'active')
+            ->where('daily_timestamp', '<=', $cutoff)
+            ->chunk(100, function ($activations) {
+                foreach ($activations as $act) {
+                    DB::transaction(function () use ($act) {
+                        $return = $act->daily_return + $act->stake_daily_release;
+                        // Credit the user
+                        $user = User::find($act->user_id);
+                        if ($user) {
+                            $user->increment('balance', $return);
+                        }
 
-                $user = User::find($act->user_id);
-                $user->return = $user->return + $act->profit;
-                $user->available_stake = $user->available_stake + ($act->send_amount * 10) / 4;
-                $user->stake = $user->stake - ($act->send_amount * 10) / 4;
-                $user->save();
+                        $act->locked_stake -= $act->stake_daily_release;
+                        $act->released_stake += $act->stake_daily_release;
+                        $act->released_return += $act->daily_return;
+                        // Update timestamp to now - prevents double credit
+                        $act->daily_timestamp = now()->timestamp;
+                        $act->save();
+                    });
 
+                    //record transaction
                 BasicService::makeTransaction(
-                    $act->profit,
+                    $act->daily_return,
                     0,
-                    '-',
-                    'Exchange Return',
+                    '+',
+                    'Exchange Daily Return',
                     $act->id,
-                    ExchangeRequest::class,
+                    ExchangeActivation::class,
                     $act->user_id,
-                    $act->send_amount,
-                    optional($act->sendCurrency)->code
+                    $act->daily_return,
+                    'USDT'
                 );
-
-
-                //update timestamp
-                $update = ExchangeRequest::find($act->id);
-                $update->daily_timestamp = time();
-                $update->save();
-            }
-        });
-
-    return true;
-}
-
-//change the status of all completed bots
-function endBot()
-{
-    ExchangeRequest::where('status', 8)
-        ->where('expires_in', '<', time())
-        ->chunk(100, function ($bot_activations) {
-            foreach ($bot_activations as $act) {
-                $update = ExchangeRequest::find($act->id);
-                $update->status = 9;
-                $update->save();
-
-                //credit the user
-                $user = $act->user_id;
-                $credit = User::find($user);
-                $credit->return = $user->return  + $act->profit;
-                $credit->available_stake = $user->available_stake + ($act->send_amount * 10) / 4;
-                $credit->save();
 
                 //record transaction
                 BasicService::makeTransaction(
-                    $act->profit,
+                    $act->stake_daily_release,
                     0,
-                    '-',
-                    'Exchange Expired',
+                    '+',
+                    'Daily Stake Release',
                     $act->id,
-                    ExchangeRequest::class,
+                    ExchangeActivation::class,
                     $act->user_id,
-                    $act->send_amount,
-                    optional($act->sendCurrency)->code
+                    $act->stake_daily_release,
+                    'USDT'
                 );
-            }
-        });
 
-    return true;
+                $this->sendUserNotification($act, 'userExchangeActivation', 'EXCHANGE_DAILY_RETURN');
+                $this->sendUserNotification($act, 'userExchangeActivation', 'EXCHANGE_DAILY_STAKE');
+                }
+            });
+    }
+
+    public function endBot()
+    {
+        $now = now()->timestamp;
+
+        ExchangeActivation::where('status', 'active')
+            ->where('expires_in', '<', $now)
+            ->chunk(100, function ($activations) {
+                foreach ($activations as $act) {
+                    DB::transaction(function () use ($act) {
+                        $return = $act->daily_return + $act->stake_daily_release;
+                        // Credit the user
+                        $user = User::find($act->user_id);
+                        if ($user) {
+                            $user->increment('balance', $return);
+                        }
+
+                        $act->locked_stake -= $act->stake_daily_release;
+                        $act->released_stake += $act->stake_daily_release;
+                        $act->released_return += $act->daily_return;
+                        $act->status = 'expired';
+
+                        $act->save();
+                    });
+
+                    //record transaction
+                BasicService::makeTransaction(
+                    $act->daily_return,
+                    0,
+                    '+',
+                    'Exchange Daily Return',
+                    $act->id,
+                    ExchangeActivation::class,
+                    $act->user_id,
+                    $act->daily_return,
+                    'USDT'
+                );
+
+                //record transaction
+                BasicService::makeTransaction(
+                    $act->stake_daily_release,
+                    0,
+                    '+',
+                    'Daily Stake Release',
+                    $act->id,
+                    ExchangeActivation::class,
+                    $act->user_id,
+                    $act->stake_daily_release,
+                    'USDT'
+                );
+
+                $this->sendUserNotification($act, 'userExchangeActivation', 'EXCHANGE_DAILY_RETURN');
+                $this->sendUserNotification($act, 'userExchangeActivation', 'EXCHANGE_DAILY_STAKE');
+                $this->sendUserNotification($act, 'userExchangeActivation', 'EXCHANGE_EXPIRES');
+                }
+            });
+    }
 }

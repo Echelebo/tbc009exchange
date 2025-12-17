@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\Module\CoinAnnounceController;
 use App\Http\Controllers\Admin\Module\CryptoMethodController;
 use App\Http\Controllers\Admin\Module\ExchangeController;
 use App\Http\Controllers\Admin\Module\BuyController;
+use App\Http\Controllers\Admin\Module\PayoutController;
+use App\Http\Controllers\Admin\Module\TopupController;
 use App\Http\Controllers\Admin\Module\SellController;
 use App\Http\Controllers\Admin\Module\FiatSendGatewayController;
 
@@ -70,6 +72,30 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::post('exchange/awaitingtbc-confirm/{utr}', 'exchangeAwaitingtbc')->name('exchangeAwaitingtbc');
             Route::post('exchange/cancel-confirm/{utr}', 'exchangeCancel')->name('exchangeCancel');
             Route::post('exchange/refund-confirm/{utr}', 'exchangeRefund')->name('exchangeRefund');
+        });
+
+        Route::controller(PayoutController::class)->group(function () {
+            Route::get('payout/list', 'payoutList')->name('payoutList');
+            Route::get('payout/list/search', 'payoutListSearch')->name('payoutListSearch');
+            Route::get('payout/view', 'payoutView')->name('payoutView');
+            Route::delete('payout/delete/{id}', 'payoutDelete')->name('payoutDelete');
+            Route::post('payout/multiple-delete', 'payoutMultipleDelete')->name('payoutMultipleDelete');
+
+            Route::post('payout/send-confirm/{utr}', 'payoutSend')->name('payoutSend');
+            Route::post('payout/cancel-confirm/{utr}', 'payoutCancel')->name('payoutCancel');
+            Route::post('payout/refund-confirm/{utr}', 'payoutRefund')->name('payoutRefund');
+        });
+
+        Route::controller(TopupController::class)->group(function () {
+            Route::get('topup/list', 'topupList')->name('topupList');
+            Route::get('topup/list/search', 'topupListSearch')->name('topupListSearch');
+            Route::get('topup/view', 'topupView')->name('topupView');
+            Route::delete('topup/delete/{id}', 'topupDelete')->name('topupDelete');
+            Route::post('topup/multiple-delete', 'topupMultipleDelete')->name('topupMultipleDelete');
+
+            Route::post('topup/send-confirm/{utr}', 'topupSend')->name('topupSend');
+            Route::post('topup/cancel-confirm/{utr}', 'topupCancel')->name('topupCancel');
+            Route::post('topup/refund-confirm/{utr}', 'topupRefund')->name('topupRefund');
         });
 
         Route::controller(BuyController::class)->group(function () {

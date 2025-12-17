@@ -34,7 +34,7 @@ class HomeController extends Controller
     {
         // Better way: use proper middleware syntax instead of doing it manually
         $this->middleware('auth');
-        
+
         $this->middleware(function ($request, $next) {
             $this->user = auth()->user();
             $this->theme = template();    // now allowed because $theme is declared above
@@ -187,7 +187,7 @@ class HomeController extends Controller
             'totalReturn' => fractionNumber($returnRecord['totalReturn'], false),
             'totalSumReturn' => fractionNumber($returnRecord['totalSumReturn']),
             'totalSumExchange' => fractionNumber($exchangeRecord['totalSumExchange']),
-        
+
         ]);
     }
 
@@ -515,7 +515,7 @@ class HomeController extends Controller
         $data['payouts'] = PayoutRequest::where('user_id', $userId)
             ->orderBy('id', 'desc')
             ->latest()->paginate($basic->paginate);
-    
+
         $data['uniqueAddresses'] = ExchangeRequest::query()
         ->where('user_id', $userId)
         ->select('destination_wallet')
@@ -588,7 +588,7 @@ class HomeController extends Controller
             $data['upline'] = User::where('id', $uplineId->referral_by)
             ->first();
         }
-        
+
 
         return view($this->theme . 'user.referral.index', $data);
     }
@@ -601,7 +601,7 @@ class HomeController extends Controller
         ->where('remarks', 'LIKE', '%Referral Bonus%')
         ->orderBy('id', 'desc')
         ->paginate(basicControl()->paginate);
-        
+
         return view($this->theme . 'user.referral.bonus', $data);
     }
 
@@ -627,7 +627,7 @@ class HomeController extends Controller
             if ($user->balance < $amount) {
                 return back()->withInput()->with('error', 'Insufficient balance');
             }
-            
+
             $user->balance -= $amount;
             $user->save();
 
@@ -641,8 +641,9 @@ class HomeController extends Controller
                 'status' => 0, // Pending
             ]);
 
-     //   $this->sendAdminNotification($payout, 'adminpayout');
-        
+     $this->sendUserNotification($payout, 'userPayout', 'PAYOUT_SUBMIT');
+    $this->sendAdminNotification($payout, 'adminpayout');
+
         return back()->with('success', 'Payout request submitted successfully.');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
@@ -676,8 +677,9 @@ class HomeController extends Controller
                 'status' => 0, // Pending
             ]);
 
-       // $this->sendAdminNotification($topup, 'admintopup');
-        
+    $this->sendUserNotification($topup, 'userTopup', 'TOPUP_SUBMIT');
+    $this->sendAdminNotification($topup, 'admintopup');
+
         return back()->with('success', 'Top Up request submitted successfully.');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());

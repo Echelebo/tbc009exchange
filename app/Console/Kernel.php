@@ -39,6 +39,9 @@ class Kernel extends ConsoleKernel
                 SellRequest::class,
             ],
         ])->daily();
+
+        $schedule->command('queue:restart')->everyTenMinutes();
+        $schedule->exec('php ' . base_path('artisan') . ' queue:work --stop-when-empty')->everyTenMinutes();
     }
 
     /**
