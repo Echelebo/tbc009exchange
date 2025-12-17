@@ -100,6 +100,10 @@ public function updateTimestamp()
                         $act->save();
                     });
 
+                    $exchangeRequest = ExchangeRequest::where('utr', $act->txn_id)->first();
+                    $exchangeRequest->status = 9;
+                    $exchangeRequest->save();
+
                     //record transaction
                 BasicService::makeTransaction(
                     $act->daily_return,
