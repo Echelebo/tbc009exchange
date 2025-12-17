@@ -341,7 +341,7 @@ class ExchangeController extends Controller
         $referrer->save();
 
         BasicService::makeTransaction(
-            $amountx * $referralBonus,
+            $bonusAmount,
             0,
             '+',
             'Referral Bonus From ' . $user->firstname . $user->lastname,
