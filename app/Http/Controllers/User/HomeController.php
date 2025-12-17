@@ -632,14 +632,17 @@ class HomeController extends Controller
             $user->save();
 
             // Create deposit with status = 0
-            $payout = PayoutRequest::create([
-                'utr' => uniqid('P'),
-                'user_id' => $user->id,
-                'method' => $method,
-                'amount' => $amount,
-                'address' => $selectedAddress,
-                'status' => 0, // Pending
-            ]);
+
+        $payout = new PayoutRequest();
+        $payout->utr = uniqid('P');
+        $payout->user_id = $user->id;
+        $payout->method = $method;
+        $payout->amount = $amount;
+        $payout->address = $selectedAddress;
+        $payout->status = 0;
+        $payout->save();
+
+
 
      $this->sendUserNotification($payout, 'userPayout', 'PAYOUT_SUBMIT');
     $this->sendAdminNotification($payout, 'adminpayout');
@@ -668,17 +671,19 @@ class HomeController extends Controller
             $amount = $request->amount;
             $method = $request->method;
             // Create deposit with status = 0
-    $topup = TopUpRequest::create([
-                'utr' => uniqid('TOPUP-'),
-                'user_id' => $user->id,
-                'method' => $method,
-                'amount' => $amount,
-                'hash' => $request->hash_id,
-                'status' => 0, // Pending
-            ]);
 
-    $this->sendUserNotification($topup, 'userTopup', 'TOPUP_SUBMIT');
-    $this->sendAdminNotification($topup, 'admintopup');
+
+            $payout = new TopUpRequest();
+        $payout->utr = uniqid('TOP');
+        $payout->user_id = $user->id;
+        $payout->method = $method;
+        $payout->amount = $amount;
+        $payout->hash = $request->hash_id;
+        $payout->status = 0;
+        $payout->save();
+
+    $this->sendUserNotification($payout, 'userTopup', 'TOPUP_SUBMIT');
+    $this->sendAdminNotification($payout, 'admintopup');
 
         return back()->with('success', 'Top Up request submitted successfully.');
         } catch (\Exception $e) {
