@@ -19,11 +19,19 @@
                                     <div class="col-md-6">
                                         <div class="commission d-flex align-items-center justify-content-start">
                                             <div><i class="fa-duotone fa-sack-dollar"></i></div>
-                                            <div class="ms-4"><h5>Total count of Top Up.</h5>
+                                            <div class="ms-4"><h5>Total count of Top Up</h5>
                                                 <p>{{ $commissions->count() }}</p></div>
                                         </div>
                                     </div>
-                                    
+
+                                    <div class="col-md-6">
+                                        <div class="commission d-flex align-items-center justify-content-start">
+                                            <div><i class="fa-duotone fa-sack-dollar"></i></div>
+                                            <div class="ms-4"><h5>Balance</h5>
+                                                <p>${{ number_format($userId->balance) }}</p></div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                <!-- <div class="qna mt-4">
                                     <h5>Referral bonus is 5% of your downlines staked amount.</h5>
@@ -31,7 +39,7 @@
                                 </div> -->
 
                                 <p class="refurlText mt-4">Copy your preferred wallet to Top Up your balance.</p>
-                               
+
                                <div class=" share_link d-flex align-items-center mt-4">
                                 <label id="usdttrc20label">USDT TRC-20: </label>
                                     <input type="text" class="input form-control border-0" style="background-color: #2e403e; color: #ffffff; width: 50%;" id="usdttrc20" value="TBFLFQGifn29ZrJS2Mk6UXQYHRjs8yVmG9" readonly="">
@@ -53,7 +61,7 @@
                                     </button>
                                 </div>
 
-                                
+
 
                             <form method="POST" action="{{ route('topup.fromSubmit') }}"  class="col-md-6 mt-4">
                                 @csrf
@@ -63,15 +71,15 @@
                                     <option value="usdterc20">USDT ERC-20</option>
                                     <option value="usdtbep20">USDT BEP-20</option>
                                 </select>
-                                
-                                
+
+
                                 <label id="amount" class="mt-4">Amount ($)</label>
                                 <input type="text" class="input form-control" style="color: #ffffff; width: 50%" name="amount" id="amount" value="" required>
-                                
-                                
+
+
                                 <label id="hash" class="mt-4">Hash Id (paste the hash Id of the usdt payment, for fast confirmation.)</label>
                                 <input type="text" class="input form-control" style="color: #ffffff; width: 80%" name="hash" id="hash_id" value="" required>
-                                
+
 
                                 <p class="mt-4">Make sure you have sent USDT payment before clicking submit.</p>
 
@@ -84,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                                     <div class="user-wrapper">
                         <div class="user-table">
@@ -92,7 +100,7 @@
                                 <div class="card-body">
                                     <div class="cmn-table skltbs-panel">
                                         <div class="table-responsive">
-                                            
+
                                             <table class="table align-middle">
                                                 <thead>
                                                 <tr>
@@ -102,16 +110,16 @@
                                                     <th scope="col">TIme</th>
                                                 </tr>
                                                 </thead>
-                                               
-                                                
+
+
                                                     <tbody class="block-statistics">
                                                         @if(count($topups) > 0)
                                                         @foreach ( $topups as $topup)
                                                         <tr >
-                                                        <td data-label="Amount">  
+                                                        <td data-label="Amount">
                                                             ${{ $topup->amount }}
                                                         </td>
-                                                        
+
                                                         <td data-label="Method">
                                                             {{ $topup->method }}
                                                         </td>
@@ -132,8 +140,8 @@
                                                     @include('empty')
                                                     @endif
                                                                                                 </tbody>
-                                                
-                                                
+
+
                                             </table>
 
                                         </div>
@@ -147,9 +155,9 @@
     </div>
     @endsection
     @push('extra_scripts')
-    
+
     <script>
-        
+
         function copyFunction() {
             var copyText = document.getElementById("usdttrc20");
             copyText.select();

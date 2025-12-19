@@ -505,7 +505,7 @@ class HomeController extends Controller
     public function payout(Request $request)
     {
         $basic = basicControl();
-        $userId = Auth::id();
+        $data['userId'] = $userId = Auth::id();
         $commission = PayoutRequest::where('user_id', $userId)
         ->sum('amount');
         $commissions = PayoutRequest::where('user_id', $userId)
@@ -531,7 +531,7 @@ class HomeController extends Controller
     public function topup(Request $request)
     {
         $basic = basicControl();
-        $userId = Auth::id();
+        $data['userId'] = $userId = Auth::id();
         $commission = TopUpRequest::where('user_id', $userId)
         ->sum('amount');
         $commissions = TopUpRequest::where('user_id', $userId)

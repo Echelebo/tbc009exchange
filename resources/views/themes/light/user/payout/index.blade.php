@@ -19,11 +19,18 @@
                                     <div class="col-md-6">
                                         <div class="commission d-flex align-items-center justify-content-start">
                                             <div><i class="fa-duotone fa-sack-dollar"></i></div>
-                                            <div class="ms-4"><h5>Total count of Payouts.</h5>
-                                                <p>${{ $commissions->count() }}</p></div>
+                                            <div class="ms-4"><h5>Total count of Payouts</h5>
+                                                <p>{{ $commissions->count() }}</p></div>
                                         </div>
                                     </div>
-                                    
+                                    <div class="col-md-6">
+                                        <div class="commission d-flex align-items-center justify-content-start">
+                                            <div><i class="fa-duotone fa-sack-dollar"></i></div>
+                                            <div class="ms-4"><h5>Balance</h5>
+                                                <p>${{ number_format($userId->balance) }}</p></div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="row mt-5">
                             <form method="POST" action="{{ route('payout.fromSubmit') }}"  class="col-md-6 mt-4">
@@ -61,7 +68,7 @@
                                     <option value="usdterc20">USDT ERC-20</option>
                                     <option value="usdtbep20">USDT BEP-20</option>
                                 </select>
-                                
+
                                 <label id="amount" class="mt-4">Amount ($)</label>
                                 <input type="text" class="input form-control" style="color: #ffffff; width: 50%;" name="amount" id="amount" value="" required>
 
@@ -73,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                                     <div class="user-wrapper">
                         <div class="user-table">
@@ -81,7 +88,7 @@
                                 <div class="card-body">
                                     <div class="cmn-table skltbs-panel">
                                         <div class="table-responsive">
-                                            
+
                                             <table class="table align-middle">
                                                 <thead>
                                                 <tr>
@@ -91,16 +98,16 @@
                                                     <th scope="col">TIme</th>
                                                 </tr>
                                                 </thead>
-                                               
-                                                
+
+
                                                     <tbody class="block-statistics">
                                                         @if(count($payouts) > 0)
                                                         @foreach ( $payouts as $payout)
                                                         <tr >
-                                                        <td data-label="Amount">  
+                                                        <td data-label="Amount">
                                                               ${{ $payout->amount }}
                                                         </td>
-                                                        
+
                                                         <td data-label="Method">
                                                             {{ $payout->method }}
                                                         </td>
@@ -121,8 +128,8 @@
                                                     @include('empty')
                                                     @endif
                                                                                                 </tbody>
-                                                
-                                                
+
+
                                             </table>
 
                                         </div>
@@ -136,9 +143,9 @@
     </div>
     @endsection
     @push('extra_scripts')
-    
+
     <script>
-        
+
         function copyFunction() {
             var copyText = document.getElementById("referralURL");
             copyText.select();
