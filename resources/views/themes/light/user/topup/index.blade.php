@@ -28,7 +28,7 @@
                                         <div class="commission d-flex align-items-center justify-content-start">
                                             <div><i class="fa-duotone fa-sack-dollar"></i></div>
                                             <div class="ms-4"><h5>Balance</h5>
-                                                <p>${{ number_format($user->balance, 2) }}</p></div>
+                                                <p>${{ number_format($users->balance, 2) }}</p></div>
                                         </div>
                                     </div>
 
