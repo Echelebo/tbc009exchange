@@ -644,7 +644,6 @@ class HomeController extends Controller
 
 
 
-     $this->sendUserNotification($payout, 'userPayout', 'PAYOUT_SUBMIT');
     $this->sendAdminNotification($payout, 'adminpayout');
 
         return back()->with('success', 'Payout request submitted successfully.');
@@ -673,7 +672,7 @@ class HomeController extends Controller
             // Create deposit with status = 0
 
 
-            $payout = new TopUpRequest();
+        $payout = new TopUpRequest();
         $payout->utr = uniqid('TOP');
         $payout->user_id = $user->id;
         $payout->method = $method;
@@ -682,7 +681,6 @@ class HomeController extends Controller
         $payout->status = 0;
         $payout->save();
 
-    $this->sendUserNotification($payout, 'userTopup', 'TOPUP_SUBMIT');
     $this->sendAdminNotification($payout, 'admintopup');
 
         return back()->with('success', 'Top Up request submitted successfully.');
