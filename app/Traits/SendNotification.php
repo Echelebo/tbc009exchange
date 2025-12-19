@@ -161,7 +161,7 @@ trait SendNotification
         $this->adminFirebasePushNotification('EXCHANGE_STAKING', $params, $action);
     }
 
-    public function admintopup($topup): void
+    public function adminTopup($topup): void
     {
         $params = [
             'user' => optional($topup->user)->username ?? 'Anonymous',
@@ -175,12 +175,12 @@ trait SendNotification
             "icon" => "fa fa-money-bill-alt text-white"
         ];
 
-        $this->adminMail('TOPUP', $params);
-        $this->adminPushNotification('TOPUP', $params, $action);
-        $this->adminFirebasePushNotification('TOPUP', $params, $action);
+        $this->adminMail('TOPUP_REQUEST', $params);
+        $this->adminPushNotification('TOPUP_REQUEST', $params, $action);
+        $this->adminFirebasePushNotification('TOPUP_REQUEST', $params, $action);
     }
 
-    public function adminpayout($payout): void
+    public function adminPayout($payout): void
     {
         $params = [
             'user' => optional($payout->user)->username ?? 'Anonymous',
@@ -194,8 +194,8 @@ trait SendNotification
             "icon" => "fa fa-money-bill-alt text-white"
         ];
 
-        $this->adminMail('PAYOUT', $params);
-        $this->adminPushNotification('PAYOUT', $params, $action);
-        $this->adminFirebasePushNotification('PAYOUT', $params, $action);
+        $this->adminMail('PAYOUT_REQUEST', $params);
+        $this->adminPushNotification('PAYOUT_REQUEST', $params, $action);
+        $this->adminFirebasePushNotification('PAYOUT_REQUEST', $params, $action);
     }
 }
