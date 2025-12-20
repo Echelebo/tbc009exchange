@@ -53,7 +53,7 @@
                     <div class="box-card grayish-green-card exchangeRecord">
                         <div class="box-card-header">
                             <h5 class="box-card-title"><i
-                                    class="fa-light fa-exclamation-triangle"></i>@lang('Complete Exchange')
+                                    class="fa-light fa-exclamation-triangle"></i>@lang('Expired Exchange')
                             </h5>
                         </div>
                         <div class="box-card-body">
@@ -307,13 +307,7 @@
                                 <sub><small>@lang('from') <span
                                             class="totalBalance"></span></small></sub>
                             </h4>
-                            <div class="statistics">
-                                <p class="growth"><i
-                                        class="fa-light fa-chart-line-up"></i><span
-                                        class="last30DaysTotalPercentageBalance"></span>
-                                    %</p>
-                                <div class="time">@lang('last 30 days')</div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -332,9 +326,9 @@
                             </h4>
                             <div class="statistics">
                                 <p class="growth"><i
-                                        class="fa-light fa-chart-line-up"></i><span
+                                        class="fa-light fa-chart-line-up"></i>$<span
                                         class="totalSumReferralBonus"></span>
-                                    %</p>
+                                    </p>
                                 <div class="time">@lang('in USD')</div>
                             </div>
                         </div>
@@ -354,8 +348,8 @@
                             </h4>
                             <div class="statistics">
                                 <p class="growth down"><i
-                                        class="fa-light fa-chart-line-down"></i><span class="totalSumReturn"></span>
-                                    %</p>
+                                        class="fa-light fa-chart-line-down"></i>$<span class="totalSumReturn"></span>
+                                    </p>
                                 <div class="time">@lang('in USD')</div>
                             </div>
                         </div>
@@ -374,9 +368,9 @@
                                     </small></sub></h4>
                             <div class="statistics">
                                 <p class="growth"><i
-                                        class="fa-light fa-chart-line-up"></i><span
+                                        class="fa-light fa-chart-line-up"></i>$<span
                                         class="totalSumExchange"></span>
-                                    %</p>
+                                    </p>
                                 <div class="time">@lang('in USD')</div>
                             </div>
                         </div>

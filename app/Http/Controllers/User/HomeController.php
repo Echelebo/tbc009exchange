@@ -87,15 +87,14 @@ class HomeController extends Controller
 
         $topupRequestQuery = $this->topupRequestQuery();
 
-        $topupRecord = collect((clone $topupRequestQuery)->where('user_id', auth()->id())->whereIn('status', [0, 1, 2])->selectRaw('COUNT(id) AS totalTopUp')
+        $topupRecord = collect((clone $topupRequestQuery)->where('user_id', auth()->id())->whereIn('status', [0, 1, 2]) ->selectRaw('COUNT(id) AS totalTopUp')
             ->selectRaw('(COUNT(CASE WHEN status = 0 THEN id END)) AS pendingTopUp')
             ->selectRaw('(COUNT(CASE WHEN status = 0 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysPendingPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
             ->selectRaw('(COUNT(CASE WHEN status = 1 THEN id END)) AS completeTopUp')
             ->selectRaw('(COUNT(CASE WHEN status = 1 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCompletePercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
             ->selectRaw('(COUNT(CASE WHEN status = 2 THEN id END)) AS cancelTopUp')
             ->selectRaw('(COUNT(CASE WHEN status = 2 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCancelPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
-            ->selectRaw('(COUNT(CASE WHEN status IN (0, 1, 2) THEN id END)) AS totalTopUps')
-            ->selectRaw('(COUNT(CASE WHEN status IN (0, 1, 2) AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysTotalPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
+            ->selectRaw('(COUNT(CASE WHEN status IN (0,1,2) AND created_at >= ? THEN id END) / COUNT(id)) * 100 AS last30DaysTotalPercentage', [$thirtyDaysAgo])
             ->get()
             ->makeHidden(['tracking_status', 'admin_status', 'user_status'])
             ->toArray())->collapse();
@@ -112,8 +111,7 @@ class HomeController extends Controller
             ->selectRaw('(COUNT(CASE WHEN status = 1 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCompletePercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
             ->selectRaw('(COUNT(CASE WHEN status = 2 THEN id END)) AS cancelPayout')
             ->selectRaw('(COUNT(CASE WHEN status = 2 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCancelPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
-            ->selectRaw('(COUNT(CASE WHEN status IN (0, 1, 2) THEN id END)) AS totalPayouts')
-            ->selectRaw('(COUNT(CASE WHEN status IN (0, 1, 2) AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysTotalPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
+            ->selectRaw('(COUNT(CASE WHEN status IN (0,1,2) AND created_at >= ? THEN id END) / COUNT(id)) * 100 AS last30DaysTotalPercentage', [$thirtyDaysAgo])
             ->get()
             ->makeHidden(['tracking_status', 'admin_status', 'user_status'])
             ->toArray())->collapse();
@@ -142,7 +140,7 @@ class HomeController extends Controller
 
         $returnRecord = collect((clone $returnRequestQuery)
             ->where('user_id', auth()->id())
-            ->where('remarks', 'Return')
+            ->where('remarks', '%Return%')
             ->selectRaw('COUNT(id) AS totalReturn')
             ->selectRaw('SUM(amount) AS totalSumReturn')
             ->get()
@@ -154,7 +152,7 @@ class HomeController extends Controller
             'pendingExchange' => fractionNumber($exchangeRecord['pendingExchange'], false),
             'last30DaysPendingPercentage' => fractionNumber($exchangeRecord['last30DaysPendingPercentage']),
             'completeExchange' => fractionNumber($exchangeRecord['completeExchange'], false),
-            'last30DaysCompletePercentage' => fractionNumber($exchangeRecord['last30DaysComplPercentage']),
+            'last30DaysCompletePercentage' => fractionNumber($exchangeRecord['last30DaysCompletePercentage']),
             'activeExchange' => fractionNumber($exchangeRecord['activeExchange'], false),
             'last30DaysActivePercentage' => fractionNumber($exchangeRecord['last30DaysActivePercentage']),
             'refundExchange' => fractionNumber($exchangeRecord['refundExchange'], false),
@@ -177,11 +175,7 @@ class HomeController extends Controller
             'cancelPayout' => fractionNumber($payoutRecord['cancelPayout'], false),
             'last30DaysCancelPercentagePayout' => fractionNumber($payoutRecord['last30DaysCancelPercentage']),
             'last30DaysTotalPercentagePayout' => fractionNumber($payoutRecord['last30DaysTotalPercentage']),
-
-            'last30DaysTotalPercentageBalance' => fractionNumber($balanceRecord['last30DaysTotalPercentage']),
-
             'totalBalance' => fractionNumber($balanceRecord['totalBalance'], false),
-
             'totalReferralBonus' => fractionNumber($referralbonusRecord['totalReferralBonus'], false),
             'totalSumReferralBonus' => fractionNumber($referralbonusRecord['totalSumReferralBonus']),
             'totalReturn' => fractionNumber($returnRecord['totalReturn'], false),

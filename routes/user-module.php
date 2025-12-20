@@ -18,28 +18,13 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
     Route::get('track/trade', [FrontendController::class, 'tracking'])->name('tracking');
     Route::post('track/trade', [FrontendController::class, 'trackingx'])->name('trackingx');
 
-    Route::get('get-exchange/currency', [ExchangeController::class, 'getExchangeCurrency'])
-    ->name('getExchangeCurrency');
-
-Route::post('exchange/auto-rate', [ExchangeController::class, 'exchangeAutoRate'])
-    ->name('exchangeAutoRate');
-
-Route::get('exchange/get-status/{utr}', [ExchangeController::class, 'exchangeGetStatus'])
-    ->name('exchangeGetStatus');
-
-Route::post('exchange/request', [ExchangeController::class, 'exchangeRequest'])
-    ->name('exchangeRequest');
-
-Route::any('exchange/processing/{utr}', [ExchangeController::class, 'exchangeProcessing'])
-    ->name('exchangeProcessing');
-
-Route::get('exchange/processing-overview/{utr}', [ExchangeController::class, 'exchangeProcessingOverview'])
-    ->name('exchangeProcessingOverview');
-
-Route::any('exchange/initiate-payment/{utr}', [ExchangeController::class, 'exchangeInitPayment'])
-    ->name('exchangeInitPayment');
-
-Route::get('exchange/final/{utr}', [ExchangeController::class, 'exchangeFinal'])
+    Route::post('exchange/auto-rate', [ExchangeController::class, 'exchangeAutoRate'])->name('exchangeAutoRate');
+    Route::get('exchange/get-status/{utr}', [ExchangeController::class, 'exchangeGetStatus'])->name('exchangeGetStatus');
+    Route::post('exchange/request', [ExchangeController::class, 'exchangeRequest'])->name('exchangeRequest');
+    Route::any('exchange/processing/{utr}', [ExchangeController::class, 'exchangeProcessing'])->name('exchangeProcessing');
+    Route::get('exchange/processing-overview/{utr}', [ExchangeController::class, 'exchangeProcessingOverview'])->name('exchangeProcessingOverview');
+    Route::any('exchange/initiate-payment/{utr}', [ExchangeController::class, 'exchangeInitPayment'])->name('exchangeInitPayment');
+    Route::get('exchange/final/{utr}', [ExchangeController::class, 'exchangeFinal'])
     ->name('exchangeFinal');
 
     Route::controller(BuyController::class)->group(function () {

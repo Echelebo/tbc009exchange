@@ -50,7 +50,7 @@
             <div class="box-card grayish-green-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fa-exclamation-triangle"></i>@lang('Complete Exchange')
+                            class="fa-light fa-exclamation-triangle"></i>@lang('Expired Exchange')
                     </h5>
                 </div>
                 <div class="box-card-body">
@@ -169,8 +169,7 @@
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"> <span class="totalTopUp"></span>
-                        <sub><small>@lang('from') <span
-                                    class="totalTopUp"></span></small></sub>
+
                     </h4>
                     <div class="statistics">
                         <p class="growth"><i
@@ -260,9 +259,7 @@
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"> <span class="totalPayout"></span>
-                        <sub><small>@lang('from') <span
-                                    class="totalPayout"></span>
-                            </small></sub></h4>
+                        </h4>
                     <div class="statistics">
                         <p class="growth"><i
                                 class="fa-light fa-chart-line-up"></i><span
@@ -289,16 +286,9 @@
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"><span class="totalBalance"></span>
-                        <sub><small>@lang('from') <span
-                                    class="totalBalance"></span></small></sub>
+
                     </h4>
-                    <div class="statistics">
-                        <p class="growth"><i
-                                class="fa-light fa-chart-line-up"></i><span
-                                class="last30DaysTotalPercentageBalance"></span>
-                            %</p>
-                        <div class="time">@lang('last 30 days')</div>
-                    </div>
+                    <div class="time">@lang('in USD')</div>
                 </div>
             </div>
         </div>
@@ -311,14 +301,13 @@
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"><span class="totalReferralBonus"></span>
-                        <sub><small>@lang('from') <span
-                                    class="totalReferralBonus"></span></small></sub>
+
                     </h4>
                     <div class="statistics">
                         <p class="growth"><i
                                 class="fa-light fa-chart-line-up"></i><span
                                 class="totalSumReferralBonus"></span>
-                            %</p>
+                            </p>
                         <div class="time">@lang('in USD')</div>
                     </div>
                 </div>
@@ -333,14 +322,13 @@
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"><span class="totalReturn"></span>
-                        <sub><small>@lang('from') <span
-                                    class="totalReturn"></span></small></sub>
+
                     </h4>
                     <div class="statistics">
                         <p class="growth down"><i
                                 class="fa-light fa-chart-line-down"></i><span
                                 class="totalSumReturn"></span>
-                            %</p>
+                            </p>
                         <div class="time">@lang('in USD')</div>
                     </div>
                 </div>
@@ -354,14 +342,13 @@
                 </div>
                 <div class="box-card-body">
                     <h4 class="mb-0"><span class="totalExchange"></span>
-                        <sub><small>@lang('from') <span
-                                    class="totalExchange"></span></small></sub>
+
                     </h4>
                     <div class="statistics">
                         <p class="growth"><i
                                 class="fa-light fa-chart-line-up"></i><span
                                 class="totalSumExchange"></span>
-                            %</p>
+                            </p>
                         <div class="time">@lang('in USD')</div>
                     </div>
                 </div>
@@ -403,7 +390,6 @@
                 $('.cancelPayout').text(res.data.cancelPayout);
                 $('.last30DaysCancelPercentagePayout').text(res.data.last30DaysCancelPercentagePayout);
                 $('.last30DaysTotalPercentagePayout').text(res.data.last30DaysTotalPercentagePayout);
-                $('.last30DaysTotalPercentageBalance').text(res.data.last30DaysTotalPercentageBalance);
                 $('.totalBalance').text(res.data.totalBalance);
                 $('.totalReferralBonus').text(res.data.totalReferralBonus);
                 $('.totalReturn').text(res.data.totalReturn);
@@ -414,7 +400,8 @@
                 Notiflix.Block.remove('.exchangeRecord');
             })
             .catch(function (error) {
-
+                Notiflix.Notify.failure('Error loading stats');
+                Notiflix.Block.remove('.exchangeRecord');
             });
     </script>
 @endpush
