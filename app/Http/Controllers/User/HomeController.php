@@ -94,7 +94,7 @@ class HomeController extends Controller
             ->selectRaw('(COUNT(CASE WHEN status = 1 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCompletePercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
             ->selectRaw('(COUNT(CASE WHEN status = 2 THEN id END)) AS cancelTopUp')
             ->selectRaw('(COUNT(CASE WHEN status = 2 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCancelPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
-            ->selectRaw('(COUNT(CASE WHEN status IN (0,1,2) AND created_at >= ? THEN id END) / COUNT(id)) * 100 AS last30DaysTotalPercentage', [$thirtyDaysAgo])
+            ->selectRaw('(COUNT(CASE WHEN status IN (0,1,2) AND created_at >= ? THEN id END) / COUNT(id)) * 100 AS last30DaysTotalPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
             ->get()
             ->makeHidden(['tracking_status', 'admin_status', 'user_status'])
             ->toArray())->collapse();
@@ -111,7 +111,7 @@ class HomeController extends Controller
             ->selectRaw('(COUNT(CASE WHEN status = 1 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCompletePercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
             ->selectRaw('(COUNT(CASE WHEN status = 2 THEN id END)) AS cancelPayout')
             ->selectRaw('(COUNT(CASE WHEN status = 2 AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysCancelPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
-            ->selectRaw('(COUNT(CASE WHEN status IN (0,1,2) AND created_at >= ? THEN id END) / COUNT(id)) * 100 AS last30DaysTotalPercentage', [$thirtyDaysAgo])
+            ->selectRaw('(COUNT(CASE WHEN status IN (0,1,2) AND created_at >= ? THEN id END) / COUNT(id)) * 100 AS last30DaysTotalPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
             ->get()
             ->makeHidden(['tracking_status', 'admin_status', 'user_status'])
             ->toArray())->collapse();
