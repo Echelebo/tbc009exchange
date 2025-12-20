@@ -116,7 +116,7 @@
                             <div class="statistics">
                                 <p class="growth"><i
                                         class="fa-light fa-chart-line-up"></i><span
-                                        class="last30DaysPendingPercentage"></span>
+                                        class="last30DaysPendingPercentageTopUp"></span>
                                     %</p>
                                 <div class="time">@lang('last 30 days')</div>
                             </div>
@@ -138,7 +138,7 @@
                             <div class="statistics">
                                 <p class="growth"><i
                                         class="fa-light fa-chart-line-up"></i><span
-                                        class="last30DaysCompletePercentage"></span>
+                                        class="last30DaysCompletePercentageTopUp"></span>
                                     %</p>
                                 <div class="time">@lang('last 30 days')</div>
                             </div>
@@ -160,7 +160,7 @@
                             <div class="statistics">
                                 <p class="growth down"><i
                                         class="fa-light fa-chart-line-down"></i><span
-                                        class="last30DaysCancelPercentage"></span>
+                                        class="last30DaysCancelPercentageTopUp"></span>
                                     %</p>
                                 <div class="time">@lang('last 30 days')</div>
                             </div>
@@ -175,13 +175,12 @@
                         </div>
                         <div class="box-card-body">
                             <h4 class="mb-0"> <span class="totalTopUp"></span>
-                                <sub><small>@lang('from') <span
-                                            class="totalTopUp"></span></small></sub>
+
                             </h4>
                             <div class="statistics">
                                 <p class="growth"><i
                                         class="fa-light fa-chart-line-up"></i><span
-                                        class="last30DaysTotalPercentage"></span>
+                                        class="last30DaysTotalPercentageTopUp"></span>
                                     %</p>
                                 <div class="time">@lang('last 30 days')</div>
                             </div>
@@ -272,9 +271,7 @@
                         </div>
                         <div class="box-card-body">
                             <h4 class="mb-0"> <span class="totalPayout"></span>
-                                <sub><small>@lang('from') <span
-                                            class="totalPayout"></span>
-                                    </small></sub></h4>
+                               </h4>
                             <div class="statistics">
                                 <p class="growth"><i
                                         class="fa-light fa-chart-line-up"></i><span
@@ -304,8 +301,7 @@
                         </div>
                         <div class="box-card-body">
                             <h4 class="mb-0"> <span class="totalBalance"></span>
-                                <sub><small>@lang('from') <span
-                                            class="totalBalance"></span></small></sub>
+
                             </h4>
 
                         </div>
@@ -321,8 +317,7 @@
                         </div>
                         <div class="box-card-body">
                             <h4 class="mb-0"> <span class="totalReferralBonus"></span>
-                                <sub><small>@lang('from') <span
-                                            class="totalReferralBonus"></span></small></sub>
+
                             </h4>
                             <div class="statistics">
                                 <p class="growth"><i
@@ -343,8 +338,7 @@
                         </div>
                         <div class="box-card-body">
                             <h4 class="mb-0"> <span class="totalReturn"></span>
-                                <sub><small>@lang('from') <span
-                                            class="totalReturn"></span></small></sub>
+
                             </h4>
                             <div class="statistics">
                                 <p class="growth down"><i
@@ -363,9 +357,7 @@
                         </div>
                         <div class="box-card-body">
                             <h4 class="mb-0"> <span class="totalExchange"></span>
-                                <sub><small>@lang('from') <span
-                                            class="totalExchange"></span>
-                                    </small></sub></h4>
+                                </h4>
                             <div class="statistics">
                                 <p class="growth"><i
                                         class="fa-light fa-chart-line-up"></i>$<span

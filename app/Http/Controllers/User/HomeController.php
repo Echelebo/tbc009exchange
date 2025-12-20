@@ -70,9 +70,9 @@ class HomeController extends Controller
 
 
         $exchangeRecord = collect((clone $exchangeRequestQuery)
-                ->whereIn('status', ['2', '4', '6', '7', '8', '9'])
+                ->whereIn('status', ['2', '4', '5', '6', '7', '8', '9'])
                 ->selectRaw('COUNT(id) AS totalExchange')
-                ->selectRaw('SUM(amount) AS totalSumExchange')
+                ->selectRaw('SUM(send_amount) AS totalSumExchange')
                 ->selectRaw('(COUNT(CASE WHEN status IN (2, 4, 7) THEN id END)) AS pendingExchange')
                 ->selectRaw('(COUNT(CASE WHEN status IN (2, 4, 7) AND created_at >= ? THEN id END) / COUNT(CASE WHEN created_at >= ? THEN id END)) * 100 AS last30DaysPendingPercentage', [$thirtyDaysAgo, $thirtyDaysAgo])
                 ->selectRaw('(COUNT(CASE WHEN status = 6 THEN id END)) AS refundExchange')
@@ -140,7 +140,7 @@ class HomeController extends Controller
 
         $returnRecord = collect((clone $returnRequestQuery)
             ->where('user_id', auth()->id())
-            ->where('remarks', '%Return%')
+            ->where('remarks', 'LIKE', '%Return%')
             ->selectRaw('COUNT(id) AS totalReturn')
             ->selectRaw('SUM(amount) AS totalSumReturn')
             ->get()
