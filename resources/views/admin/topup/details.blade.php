@@ -54,22 +54,7 @@
                                     <ul class="list-checked list-checked-lg list-checked-soft-bg-primary">
                                         <li class="list-checked-item">@lang('Trx ID') : <strong
                                                 class="text-dark font-weight-bold">{{$topup->utr}}</strong></li>
-                                        <li class="list-checked-item">@lang('Service Fees') : <strong
-                                                class="text-dark font-weight-bold">{{rtrim(rtrim(getAmount($topup->service_fee,8),0),'.')}} {{optional($topup->currency)->code}}</strong>
-                                        </li>
-                                        <li class="list-checked-item">@lang('Network Fees') : <strong
-                                                class="text-dark font-weight-bold">{{rtrim(rtrim(getAmount($topup->network_fee,8),0),'.')}} {{optional($topup->currency)->code}}</strong>
-                                        </li>
-                                        <li class="list-checked-item">@lang('Payment Method')
-                                            : {{optional($topup->method)->name}}
-                                            @if(optional($topup->method)->is_automatic)
-                                                <span
-                                                    class="badge bg-soft-success text-success">@lang("Automatic")</span>
-                                            @else
-                                                <span
-                                                    class="badge bg-soft-secondary text-danger">@lang('manual')</span>
-                                            @endif
-                                        </li>
+
                                         <li class="list-checked-item">@lang('Requester') : <a
                                                 href="{{$topup->user_id ? route('admin.user.edit',$topup->user_id) : 'javascript:void(0)'}}">{{optional($topup->user)->fullname??'Anonymous'}}</a>
                                         </li>
@@ -91,13 +76,13 @@
                                 <div class="col-sm">
                                     <ul class="list-checked list-checked-lg list-checked-soft-bg-secondary">
                                         <li class="list-checked-item">@lang('Currency') : <strong
-                                                class="text-dark font-weight-bold">{{optional($topup->currency)->currency_name}}</strong>
+                                                class="text-dark font-weight-bold">USDT</strong>
                                         </li>
                                         <li class="list-checked-item">@lang('Amount') : <strong
-                                                class="text-dark font-weight-bold">{{rtrim(rtrim($topup->amount,0),'.')}} {{optional($topup->currency)->code}}</strong>
+                                                class="text-dark font-weight-bold">${{rtrim(rtrim($topup->amount,0),'.')}} </strong>
                                         </li>
                                         <li class="list-checked-item">@lang('Payable Amount') : <strong
-                                                class="text-danger font-weight-bold">{{rtrim(rtrim(getAmount($topup->final_amount,8),0),'.')}} {{optional($topup->currency)->code}}</strong>
+                                                class="text-danger font-weight-bold">${{rtrim(rtrim(getAmount($topup->final_amount,8),0),'.')}}</strong>
                                         </li>
                                     </ul>
                                 </div>
@@ -118,7 +103,7 @@
                                 <div class="col-sm">
                                     <ul class="list-checked list-checked-lg list-checked-soft-bg-warning">
                                         <li class="list-checked-item">@lang('Destination address')
-                                            ({{optional($topup->currency)->code}}) :
+                                            (USDT) :
                                             <a href="javascript:void(0)"
                                                onclick="copyDestinationAddress()"
                                                data-bs-toggle="tooltip"
@@ -126,7 +111,7 @@
                                                title="@lang("copy to clipboard")"><i
                                                     class="fas fa-copy"></i></a><strong
                                                 class="text-dark font-weight-bold"
-                                                id="destinationId">{{$topup->wallet}}</strong>
+                                                id="destinationId">{{$topup->hash}}</strong>
                                         </li>
                                     </ul>
                                 </div>
@@ -172,7 +157,7 @@
     <script>
         'use strict';
         $(document).on("click", "#complete", function () {
-            let route = "{{route("admin.topupComplete",$topup->utr)}}";
+            let route = "{{route("admin.topupSend",$topup->utr)}}";
             $("#deleteModalHeader").text(`Complete Confirmation`);
             $("#deleteModalBody").text(`Do you wish to proceed with completing the top up?`);
             $(".deleteModalRoute").attr('action', route);

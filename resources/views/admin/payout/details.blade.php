@@ -54,21 +54,9 @@
                                     <ul class="list-checked list-checked-lg list-checked-soft-bg-primary">
                                         <li class="list-checked-item">@lang('Trx ID') : <strong
                                                 class="text-dark font-weight-bold">{{$payout->utr}}</strong></li>
-                                        <li class="list-checked-item">@lang('Service Fees') : <strong
-                                                class="text-dark font-weight-bold">{{rtrim(rtrim(getAmount($payout->service_fee,8),0),'.')}} {{optional($payout->currency)->code}}</strong>
-                                        </li>
-                                        <li class="list-checked-item">@lang('Network Fees') : <strong
-                                                class="text-dark font-weight-bold">{{rtrim(rtrim(getAmount($payout->network_fee,8),0),'.')}} {{optional($payout->currency)->code}}</strong>
-                                        </li>
+
                                         <li class="list-checked-item">@lang('Payment Method')
-                                            : {{optional($payout->method)->name}}
-                                            @if(optional($payout->method)->is_automatic)
-                                                <span
-                                                    class="badge bg-soft-success text-success">@lang("Automatic")</span>
-                                            @else
-                                                <span
-                                                    class="badge bg-soft-secondary text-danger">@lang('manual')</span>
-                                            @endif
+                                            : {{$payout->method}}
                                         </li>
                                         <li class="list-checked-item">@lang('Requester') : <a
                                                 href="{{$payout->user_id ? route('admin.user.edit',$payout->user_id) : 'javascript:void(0)'}}">{{optional($payout->user)->fullname??'Anonymous'}}</a>
@@ -91,13 +79,13 @@
                                 <div class="col-sm">
                                     <ul class="list-checked list-checked-lg list-checked-soft-bg-secondary">
                                         <li class="list-checked-item">@lang('Currency') : <strong
-                                                class="text-dark font-weight-bold">{{optional($payout->currency)->currency_name}}</strong>
+                                                class="text-dark font-weight-bold">USDT</strong>
                                         </li>
                                         <li class="list-checked-item">@lang('Amount') : <strong
-                                                class="text-dark font-weight-bold">{{rtrim(rtrim($payout->amount,0),'.')}} {{optional($payout->currency)->code}}</strong>
+                                                class="text-dark font-weight-bold">${{rtrim(rtrim($payout->amount,0),'.')}} </strong>
                                         </li>
                                         <li class="list-checked-item">@lang('Payable Amount') : <strong
-                                                class="text-danger font-weight-bold">{{rtrim(rtrim(getAmount($payout->final_amount,8),0),'.')}} {{optional($payout->currency)->code}}</strong>
+                                                class="text-danger font-weight-bold">${{rtrim(rtrim(getAmount($payout->amount,8),0),'.')}}</strong>
                                         </li>
                                     </ul>
                                 </div>
@@ -118,7 +106,7 @@
                                 <div class="col-sm">
                                     <ul class="list-checked list-checked-lg list-checked-soft-bg-warning">
                                         <li class="list-checked-item">@lang('Destination address')
-                                            ({{optional($payout->currency)->code}}) :
+                                            (USDT) :
                                             <a href="javascript:void(0)"
                                                onclick="copyDestinationAddress()"
                                                data-bs-toggle="tooltip"
@@ -126,7 +114,7 @@
                                                title="@lang("copy to clipboard")"><i
                                                     class="fas fa-copy"></i></a><strong
                                                 class="text-dark font-weight-bold"
-                                                id="destinationId">{{$payout->wallet}}</strong>
+                                                id="destinationId">{{$payout->address}}</strong>
                                         </li>
                                     </ul>
                                 </div>
@@ -172,7 +160,7 @@
     <script>
         'use strict';
         $(document).on("click", "#complete", function () {
-            let route = "{{route("admin.payoutComplete",$payout->utr)}}";
+            let route = "{{route("admin.payoutSend",$payout->utr)}}";
             $("#deleteModalHeader").text(`Complete Confirmation`);
             $("#deleteModalBody").text(`Do you wish to proceed with completing the payout?`);
             $(".deleteModalRoute").attr('action', route);
