@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Module;
 
 use App\Http\Controllers\Controller;
 use App\Models\PayoutRequest;
+use App\Models\User;
 use App\Traits\SendNotification;
 use Carbon\Carbon;
 use Facades\App\Services\BasicService;
