@@ -79,10 +79,10 @@
                                                 class="text-dark font-weight-bold">USDT</strong>
                                         </li>
                                         <li class="list-checked-item">@lang('Amount') : <strong
-                                                class="text-dark font-weight-bold">${{rtrim(rtrim($topup->amount,0),'.')}} </strong>
+                                                class="text-dark font-weight-bold">${{ number_format($topup->amount) }}</strong>
                                         </li>
                                         <li class="list-checked-item">@lang('Payable Amount') : <strong
-                                                class="text-danger font-weight-bold">${{rtrim(rtrim(getAmount($topup->final_amount,8),0),'.')}}</strong>
+                                                class="text-danger font-weight-bold">${{ number_format($topup->amount) }}</strong>
                                         </li>
                                     </ul>
                                 </div>
