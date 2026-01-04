@@ -568,8 +568,8 @@ class HomeController extends Controller
     public function referral()
     {
         $userIds = Auth::id();
-
-        $data['userId'] = $userIds->referral_id;
+        $user = User::where('id', $userIds)->first();
+        $data['userId'] = $user->referral_id;
         $data['commission'] = Transaction::where('user_id', $userIds)
         ->where('remarks', 'LIKE', '%Referral Bonus%')
         ->sum('amount');
