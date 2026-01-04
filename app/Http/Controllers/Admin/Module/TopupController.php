@@ -40,7 +40,7 @@ public function topupListSearch(Request $request)
     $filterDate = explode('-', $request->filterDate);
     $startDate = $filterDate[0];
     $endDate = isset($filterDate[1]) ? trim($filterDate[1]) : null;
-    $topups = TopupRequest::with(['currency', 'user:id,firstname,lastname,username,image,image_driver'])
+    $topups = TopupRequest::with(['user:id,firstname,lastname,username,image,image_driver'])
         ->orderBy('id', 'DESC')
         ->when(isset($topupType), function ($query) use ($topupType) {
             if ($topupType == 'pending') {
@@ -73,8 +73,7 @@ public function topupListSearch(Request $request)
         ->when(!empty($search), function ($query) use ($search) {
             return $query->where(function ($subquery) use ($search) {
                 $subquery->where('utr', 'LIKE', "%$search%")
-                    ->orWhere('amount', 'LIKE', "%$search%")
-                    ->orWhere('final_amount', 'LIKE', "%$search%");
+                    ->orWhere('amount', 'LIKE', "%$search%");
             });
         });
     return DataTables::of($topups)
@@ -87,35 +86,13 @@ public function topupListSearch(Request $request)
             return $item->utr;
         })
         ->addColumn('amount', function ($item) {
-            $url = getFile(optional($item->currency)->driver, optional($item->currency)->image);
-            return '<a class="d-flex align-items-center me-2">
-                            <div class="flex-shrink-0">
-                              <div class="avatar avatar-sm avatar-circle">
-                                <img class="avatar-img" src="' . $url . '" alt="Image Description">
-                              </div>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <h5 class="text-hover-primary mb-0">' . rtrim(rtrim($item->amount, 0), '.') . ' ' . optional($item->currency)->code . '</h5>
-                              <span class="fs-6 text-body">' . optional($item->currency)->currency_name . '</span>
-                            </div>
-                          </a>';
+            return $item->amount;
         })
         ->addColumn('payable_amount', function ($item) {
-            $url = getFile(optional($item->currency)->driver, optional($item->currency)->image);
-            return '<a class="d-flex align-items-center me-2">
-                            <div class="flex-shrink-0">
-                              <div class="avatar avatar-sm avatar-circle">
-                                <img class="avatar-img" src="' . $url . '" alt="Image Description">
-                              </div>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <h5 class="text-hover-primary mb-0">' . rtrim(rtrim($item->final_amount, 0), '.') . ' ' . optional($item->currency)->code . '</h5>
-                              <span class="fs-6 text-body">' . optional($item->currency)->currency_name . '</span>
-                            </div>
-                          </a>';
+            return $item->amount;
         })
         ->addColumn('status', function ($item) {
-            return $item->admin_status;
+            return $item->status;
         })
         ->addColumn('requester', function ($item) {
             if (optional($item->user)->image) {
@@ -186,12 +163,16 @@ public function topupView(Request $request)
     $topup = TopupRequest::findOrFail($request->id);
     return view('admin.topup.details', compact('topup'));
 }
-public function topupComplete(Request $request, $utr)
+public function topupSend(Request $request, $utr)
 {
     $topup = TopupRequest::where(['status' => 0, 'utr' => $utr])->latest()->firstOrFail();
     $user = User::where('id', $topup->user_id)->first();
     $topup->status = 1;
     $topup->save();
+
+    $user->balance += $topup->amount;
+    $user->save();
+
     BasicService::makeTransaction(
         $topup->amount,
         0,
@@ -200,8 +181,8 @@ public function topupComplete(Request $request, $utr)
         $topup->id,
         TopupRequest::class,
         $topup->user_id,
-        $topup->final_amount,
-        optional($topup->currency)->code
+        $topup->amount,
+        'USDT'
     );
     $this->sendUserNotification($topup, 'userTopup', 'TOPUP_COMPLETE');
     return back()->with('success', 'Top Up Completed Successfully');

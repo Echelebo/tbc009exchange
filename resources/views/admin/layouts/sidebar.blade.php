@@ -125,7 +125,7 @@
                             </a>
                         </div>
                     </div>
-                    
+
                     <div class="nav-item">
                         <a class="nav-link {{ menuActive(['admin.referral']) }}"
                            href="{{ route('admin.referral') }}" data-placement="left">
@@ -136,7 +136,7 @@
 
                     <div class="nav-item">
                         <a class="nav-link {{ menuActive(['admin.topup']) }}"
-                           href="{{ route('admin.topup') }}" data-placement="left">
+                           href="{{ route('admin.topup').'?type=all' }}" data-placement="left">
                             <i class="bi bi-send nav-icon"></i>
                             <span class="nav-link-title">@lang("Top Up")</span>
                         </a>
@@ -144,13 +144,13 @@
 
                     <div class="nav-item">
                         <a class="nav-link {{ menuActive(['admin.payout']) }}"
-                           href="{{ route('admin.payout') }}" data-placement="left">
+                           href="{{ route('admin.payout').'?type=all' }}" data-placement="left">
                             <i class="bi bi-send nav-icon"></i>
                             <span class="nav-link-title">@lang("Payout")</span>
                         </a>
                     </div>
 
-                    
+
 
                     <div class="nav-item">
                         <a class="nav-link {{ menuActive(['admin.transaction']) }}"
