@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin\Module;
 
 use App\Http\Controllers\Controller;
-use App\Models\SellRequest;
+use App\Models\TopUpRequest;
 use App\Traits\SendNotification;
 use Carbon\Carbon;
 use Facades\App\Services\BasicService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class SellController extends Controller
+class TopupController extends Controller
 {
     use SendNotification;
 

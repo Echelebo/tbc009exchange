@@ -567,17 +567,18 @@ class HomeController extends Controller
 
     public function referral()
     {
-        $data['userId']= $userId = Auth::id();
+        $userIds = Auth::id();
 
-        $data['commission'] = Transaction::where('user_id', $userId)
+        $data['userId'] = $userIds->referral_id;
+        $data['commission'] = Transaction::where('user_id', $userIds)
         ->where('remarks', 'LIKE', '%Referral Bonus%')
         ->sum('amount');
 
-        $data['referrals'] = User::where('referral_by', $userId)
+        $data['referrals'] = User::where('referral_by', $userIds)
         ->orderBy('id', 'desc')
         ->paginate(basicControl()->paginate);
 
-        $data['uplineId'] = $uplineId = User::where('id', $userId)
+        $data['uplineId'] = $uplineId = User::where('id', $userIds)
         ->whereNotNull('referral_by')
         ->first();
 

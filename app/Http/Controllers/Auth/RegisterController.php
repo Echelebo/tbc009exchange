@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Facades\App\Services\Google\GoogleRecaptchaService;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -124,12 +125,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        do {
+            $referralCode = 'REF-' . Str::upper(Str::random(6));
+        } while (User::where('referral_id', $referralCode)->exists());
 
-        $referredBy = null;
-        $referralCode = request()->input('ref'); // Or from $data if in form
+        $referralCodex = $data['ref_id']; // Or from $data if in form
 
-        if ($referralCode) {
-            $referrer = User::where('referral_code', $referralCode)->first();
+        if ($referralCodex) {
+            $referrer = User::where('referral_id', $referralCodex)->first();
             if ($referrer) {
                 $referredBy = $referrer->id;
             }
@@ -141,18 +144,14 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'tbcWallet' => $data['tbcWallet'],
-            'referral_by' => $data['ref_id'],
+            'referral_by' => $referredBy ?? null,
+            'referral_id' => $referralCode,
             'phone_code' => '+' . $data['phone_code'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
             'email_verification' => ($basic->email_verification) ? 0 : 1,
             'sms_verification' => ($basic->sms_verification) ? 0 : 1,
         ]);
-
-        // Notify upline if exists
-        if ($referredBy) {
-            $referrer->notify(new DownlineSignup($user));
-        }
     }
 
     public function register(Request $request)

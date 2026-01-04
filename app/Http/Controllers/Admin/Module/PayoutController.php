@@ -186,7 +186,7 @@ public function payoutView(Request $request)
     $payout = PayoutRequest::findOrFail($request->id);
     return view('admin.payout.details', compact('payout'));
 }
-public function payoutComplete(Request $request, $utr)
+public function payoutSend(Request $request, $utr)
 {
     $payout = PayoutRequest::where(['status' => 0, 'utr' => $utr])->latest()->firstOrFail();
     $user = User::where('id', $payout->user_id)->first();

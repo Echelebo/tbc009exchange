@@ -29,10 +29,10 @@
                                             <button type="button" class="cmn-btn3 reset">@lang('reset')</button>
                                         </div>
                                         <small>@lang('Allowed JPG or PNG. Max size of 3 MB')</small>
-                                        
+
                                     </div>
-                                
-                                    
+
+
                                 </div>
                                 <div class="col-md-6">
                                 <p align="center" class="mt-4" style="background-color: #b59245; padding: 4px; border-radius: 15px; font-family: Monotype-Corsiva;"><strong><font size="3">{{ $userProfile->account_level }} User </font> @if ($userProfile->tagged_account_level != NULL) <font size="3">({{ $userProfile->tagged_account_level }})  </font> @else @endif </strong></p>
@@ -43,10 +43,12 @@
                                         <li><strong>@lang('Maximum Exchange'):</strong> {{ $userAccountLevel->max_exchange }} Kringles (${{ $userAccountLevel->max_exchange * 10 }})</li>
                                         <li><strong>@lang('Max. Active Exchange'):</strong> {{ $userAccountLevel->max_running_exchange }}</li>
                                         <li><strong>@lang('Exchange Rate'):</strong> {{ $userAccountLevel->rate }} </li>
+                                        <li><strong>@lang('Min. Payouts'):</strong> ${{ $userAccountLevel->min_payout }}</li>
+                                        <li><strong>@lang('Max. Pending Payouts'):</strong> {{ $userAccountLevel->max_pending_payout }}</li>
                                     </ul>
                                 </p>
                             </div>
-                               
+
                             </div>
                         </div>
                         <div class="card-body pt-0">
