@@ -82,10 +82,10 @@
                                                 class="text-dark font-weight-bold">USDT</strong>
                                         </li>
                                         <li class="list-checked-item">@lang('Amount') : <strong
-                                                class="text-dark font-weight-bold">${{ number_format($topup->amount) }} </strong>
+                                                class="text-dark font-weight-bold">${{ number_format($payout->amount) }} </strong>
                                         </li>
                                         <li class="list-checked-item">@lang('Payable Amount') : <strong
-                                                class="text-danger font-weight-bold">${{ number_format($topup->amount) }}</strong>
+                                                class="text-danger font-weight-bold">${{ number_format($payout->amount) }}</strong>
                                         </li>
                                     </ul>
                                 </div>
