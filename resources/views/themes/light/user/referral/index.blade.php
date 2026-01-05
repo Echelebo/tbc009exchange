@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="qna mt-4">
                                     <h5>Referral bonus is 5% of referrals stake.</h5>
-                                    <p>Refer other TBCians and earn more commission</p>
+                                    <p>Refer other TBCians and earn more.</p>
                                 </div>
                                 <div class=" share_link d-flex align-items-center mt-4">
                                     <i class="fa-sharp fa-regular fa-share-nodes"></i> &nbsp; &nbsp; Referral ID:
