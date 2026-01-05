@@ -105,8 +105,7 @@
                             <div class="card-body mt-2">
                                 <div class="col-sm">
                                     <ul class="list-checked list-checked-lg list-checked-soft-bg-warning">
-                                        <li class="list-checked-item">@lang('Destination address')
-                                            (USDT) :
+                                        <li class="list-checked-item">@lang('Destination address'):
                                             <a href="javascript:void(0)"
                                                onclick="copyDestinationAddress()"
                                                data-bs-toggle="tooltip"
