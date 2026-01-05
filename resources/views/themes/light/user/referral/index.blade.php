@@ -16,25 +16,25 @@
                                                 <p>${{ number_format($commission, 2) }}</p></div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="qna mt-4">
-                                    <h5>Referral bonus is 5% of your downlines staked amount.</h5>
-                                    <p>Refer TBCians and earn more commission</p>
+                                    <h5>Referral bonus is 5% of referrals stake.</h5>
+                                    <p>Refer other TBCians and earn more commission</p>
                                 </div>
                                 <div class=" share_link d-flex align-items-center mt-4">
-                                    <i class="fa-sharp fa-regular fa-share-nodes"></i> &nbsp; &nbsp; Referral ID: 
-                                    <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 50px;" id="referralURL" value=" {{ $userId }} " readonly="">
+                                    <i class="fa-sharp fa-regular fa-share-nodes"></i> &nbsp; &nbsp; Referral ID:
+                                    <input type="text" class="input border-0" style="background-color: #2e403e; color: #ffffff; width: 120px;" id="referralURL" value=" {{ $userId }} " readonly="">
                                     <button class="copy_btn" onclick="copyFunction()"><i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                                     </button>
                                 </div>
                                 <p class="refurlText mt-4">Copy your referral ID and share with your friends</p>
 
-                                
+
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                                     <div class="user-wrapper">
                         <div class="user-table">
@@ -43,7 +43,7 @@
                                     <div class="cmn-table skltbs-panel">
                                         <div class="table-responsive">
                                             <h5>Parent</h5>
-                                            <p class=""> 
+                                            <p class="">
                                             @if($uplineId)
                                             <i class="fa-sharp fa-regular fa-share-nodes"></i> &nbsp; &nbsp;    {{ $upline->username }}
                                             @else
@@ -56,8 +56,8 @@
                                                     <th scope="col">Joined At</th>
                                                 </tr>
                                                 </thead>
-                                               
-                                                
+
+
                                                     <tbody class="block-statistics">
                                                         @if(count($referrals) > 0)
                                                         @foreach ( $referrals as $referral)
@@ -67,7 +67,7 @@
                                                               {{ $referral->username }}
                                                             </a>
                                                         </td>
-                                                        
+
                                                         <td data-label="Joined At">
                                                             {{ dateTime($referral->created_at,basicControl()->date_time_format) }}
                                                         </td>
@@ -78,8 +78,8 @@
                                                     @include('empty')
                                                     @endif
                                                                                                 </tbody>
-                                                
-                                                
+
+
                                             </table>
 
                                         </div>
@@ -93,9 +93,9 @@
     </div>
     @endsection
     @push('extra_scripts')
-    
+
     <script>
-        
+
         function copyFunction() {
             var copyText = document.getElementById("referralURL");
             copyText.select();
