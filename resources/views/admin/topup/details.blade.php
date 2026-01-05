@@ -102,8 +102,7 @@
                             <div class="card-body mt-2">
                                 <div class="col-sm">
                                     <ul class="list-checked list-checked-lg list-checked-soft-bg-warning">
-                                        <li class="list-checked-item">@lang('Hash')
-                                            (USDT) :
+                                        <li class="list-checked-item">@lang('Hash'):
                                             <strong
                                                 class="text-dark font-weight-bold"
                                                 id="topuphash">{{$topup->hash}}</strong>
