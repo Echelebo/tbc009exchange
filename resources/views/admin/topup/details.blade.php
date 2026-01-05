@@ -97,21 +97,16 @@
                     <div class="d-grid gap-3 gap-lg-5">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title mt-2">@lang("Address Information's")</h4>
+                                <h4 class="card-title mt-2">@lang("Payment Information's")</h4>
                             </div>
                             <div class="card-body mt-2">
                                 <div class="col-sm">
                                     <ul class="list-checked list-checked-lg list-checked-soft-bg-warning">
-                                        <li class="list-checked-item">@lang('Destination address')
+                                        <li class="list-checked-item">@lang('Hash')
                                             (USDT) :
-                                            <a href="javascript:void(0)"
-                                               onclick="copyDestinationAddress()"
-                                               data-bs-toggle="tooltip"
-                                               data-bs-placement="top"
-                                               title="@lang("copy to clipboard")"><i
-                                                    class="fas fa-copy"></i></a><strong
+                                            <strong
                                                 class="text-dark font-weight-bold"
-                                                id="destinationId">{{$topup->hash}}</strong>
+                                                id="topuphash">{{$topup->hash}}</strong>
                                         </li>
                                     </ul>
                                 </div>
