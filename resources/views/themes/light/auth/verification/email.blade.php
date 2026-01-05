@@ -30,7 +30,7 @@
                             <div class="section-header">
                                 <h3>Admin Fee Verification Here!</h3>
                                 <div
-                                    class="description">Your exchange account is under verification, We want to make sure you paid the admin fee before accessing the TBC exchange. Try to login again after an hour or 3 hours.</div>
+                                    class="description">Please wait while we verify your exchange account. Try to login again later.</div>
                             </div>
                             <!-- <div class="row g-4">
                                 <div class="col-12">
