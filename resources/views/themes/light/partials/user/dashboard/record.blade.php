@@ -168,7 +168,7 @@
                             class="fa-light fas fa-undo-alt"></i>@lang('Total Completed Top Up($)')</h5>
                 </div>
                 <div class="box-card-body">
-                    <h4 class="mb-0"> <span class="totalCompletedTopUp"></span>
+                    <h4 class="mb-0"> $<span class="totalCompletedTopUp"></span>
 
                     </h4>
 
@@ -252,7 +252,7 @@
                             class="fa-light fas fa-undo-alt"></i>@lang('Total Completed Payout($)')</h5>
                 </div>
                 <div class="box-card-body">
-                    <h4 class="mb-0"> <span class="totalCompletedPayout"></span>
+                    <h4 class="mb-0"> $<span class="totalCompletedPayout"></span>
                         </h4>
 
                 </div>

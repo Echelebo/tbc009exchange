@@ -70,7 +70,7 @@ class HomeController extends Controller
         $exchangeActivationQuery = $this->exchangeActivationQuery()->where('user_id', auth()->id());
 
         $activationRecord = collect((clone $exchangeActivationQuery)
-            ->whereIn('status', ['0', '1', '2'])
+            ->whereIn('status', ['active', 'expired'])
             ->selectRaw('COUNT(id) AS totalStaked')
             ->selectRaw('SUM(send_amount) AS totalExchanged')
             ->selectRaw('SUM(total_stake) AS totalStakedAmount')
