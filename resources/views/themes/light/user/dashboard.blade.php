@@ -31,6 +31,7 @@
     </div>
 
     <div class="section dashboard">
+        @include($theme.'partials.user.dashboard.others')
         @include($theme.'partials.user.dashboard.mobile')
         @include($theme.'partials.user.dashboard.record')
         @include($theme.'partials.user.dashboard.figures')

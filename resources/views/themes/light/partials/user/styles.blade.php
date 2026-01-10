@@ -10,6 +10,7 @@
 <link rel=" stylesheet" href="{{ asset($themeTrue . "css/swiper-bundle.min.css")}}">
 <link rel="stylesheet" href="{{ asset($themeTrue . "css/select2.min.css")}}">
 <link rel="stylesheet" href="{{ asset($themeTrue . "/css/dashboard.css")}}">
+<link rel="stylesheet" href="{{ asset($themeTrue . "/css/wallet-balance.css")}}">
 
 
 @stack('extra_styles')

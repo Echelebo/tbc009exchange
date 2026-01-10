@@ -165,19 +165,13 @@
             <div class="box-card grayish-custom-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-undo-alt"></i>@lang('Total Top Up')</h5>
+                            class="fa-light fas fa-undo-alt"></i>@lang('Total Completed Top Up($)')</h5>
                 </div>
                 <div class="box-card-body">
-                    <h4 class="mb-0"> <span class="totalTopUp"></span>
+                    <h4 class="mb-0"> <span class="totalCompletedTopUp"></span>
 
                     </h4>
-                    <div class="statistics">
-                        <p class="growth"><i
-                                class="fa-light fa-chart-line-up"></i><span
-                                class="last30DaysTotalPercentageTopUp"></span>
-                            %</p>
-                        <div class="time">@lang('last 30 days')</div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -255,107 +249,18 @@
             <div class="box-card grayish-green-card exchangeRecord">
                 <div class="box-card-header">
                     <h5 class="box-card-title"><i
-                            class="fa-light fas fa-undo-alt"></i>@lang('Total Payout')</h5>
+                            class="fa-light fas fa-undo-alt"></i>@lang('Total Completed Payout($)')</h5>
                 </div>
                 <div class="box-card-body">
-                    <h4 class="mb-0"> <span class="totalPayout"></span>
+                    <h4 class="mb-0"> <span class="totalCompletedPayout"></span>
                         </h4>
-                    <div class="statistics">
-                        <p class="growth"><i
-                                class="fa-light fa-chart-line-up"></i><span
-                                class="last30DaysTotalPercentagePayout"></span>
-                            %</p>
-                        <div class="time">@lang('last 30 days')</div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="col-12 d-none d-lg-block">
-    <h5 class="mb-10 mt-4"> @lang('Other Wallet Statistics')</h5>
-    <div class="row g-4">
-
-        <div class="col-xxl-3 col-sm-6 box-item">
-            <div class="box-card grayish-custom-card exchangeRecord">
-                <div class="box-card-header">
-                    <h5 class="box-card-title"><i
-                            class="fa-light fas fa-spinner"></i>@lang('Balance')
-                    </h5>
-                </div>
-                <div class="box-card-body">
-                    <h4 class="mb-0"><span class="totalBalance"></span>
-
-                    </h4>
-                    <div class="time">@lang('in USD')</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-sm-6 box-item">
-            <div class="box-card grayish-blue-card exchangeRecord">
-                <div class="box-card-header">
-                    <h5 class="box-card-title"><i
-                            class="fa-light fas fa-check"></i>@lang('Referral Bonus')
-                    </h5>
-                </div>
-                <div class="box-card-body">
-                    <h4 class="mb-0"><span class="totalReferralBonus"></span>
-
-                    </h4>
-                    <div class="statistics">
-                        <p class="growth"><i
-                                class="fa-light fa-chart-line-up"></i><span
-                                class="totalSumReferralBonus"></span>
-                            </p>
-                        <div class="time">@lang('in USD')</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-sm-6 box-item">
-            <div class="box-card grayish-green-card exchangeRecord">
-                <div class="box-card-header">
-                    <h5 class="box-card-title"><i
-                            class="fa-light fa-exclamation-triangle"></i>@lang('Total Return')
-                    </h5>
-                </div>
-                <div class="box-card-body">
-                    <h4 class="mb-0"><span class="totalReturn"></span>
-
-                    </h4>
-                    <div class="statistics">
-                        <p class="growth down"><i
-                                class="fa-light fa-chart-line-down"></i><span
-                                class="totalSumReturn"></span>
-                            </p>
-                        <div class="time">@lang('in USD')</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-sm-6 box-item">
-            <div class="box-card strong-orange-card exchangeRecord">
-                <div class="box-card-header">
-                    <h5 class="box-card-title"><i
-                            class="fa-light fas fa-undo-alt"></i>@lang('Total Exchange')</h5>
-                </div>
-                <div class="box-card-body">
-                    <h4 class="mb-0"><span class="totalExchange"></span>
-
-                    </h4>
-                    <div class="statistics">
-                        <p class="growth"><i
-                                class="fa-light fa-chart-line-up"></i><span
-                                class="totalSumExchange"></span>
-                            </p>
-                        <div class="time">@lang('in USD')</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @push('extra_scripts')
     <script>
         'use strict';
@@ -365,6 +270,10 @@
 
         axios.get("{{route('user.getRecords')}}")
             .then(function (res) {
+                $('.userBalance').text(res.data.userBalance);
+                $('.totalExchanged').text(res.data.totalExchanged);
+                $('.totalStaked').text(res.data.totalStaked);
+                $('.totalStakedAmount').text(res.data.totalStakedAmount);
                 $('.totalExchange').text(res.data.totalExchange);
                 $('.pendingExchange').text(res.data.pendingExchange);
                 $('.last30DaysPendingPercentage').text(res.data.last30DaysPendingPercentage);
@@ -381,7 +290,7 @@
                 $('.last30DaysCompletePercentageTopUp').text(res.data.last30DaysCompletePercentageTopUp);
                 $('.cancelTopUp').text(res.data.cancelTopUp);
                 $('.last30DaysCancelPercentageTopUp').text(res.data.last30DaysCancelPercentageTopUp);
-                $('.last30DaysTotalPercentageTopUp').text(res.data.last30DaysTotalPercentageTopUp);
+                $('.totalCompletedTopUp').text(res.data.totalCompletedTopUp);
                 $('.totalPayout').text(res.data.totalPayout);
                 $('.pendingPayout').text(res.data.pendingPayout);
                 $('.last30DaysPendingPercentagePayout').text(res.data.last30DaysPendingPercentagePayout);
@@ -389,13 +298,7 @@
                 $('.last30DaysCompletePercentagePayout').text(res.data.last30DaysCompletePercentagePayout);
                 $('.cancelPayout').text(res.data.cancelPayout);
                 $('.last30DaysCancelPercentagePayout').text(res.data.last30DaysCancelPercentagePayout);
-                $('.last30DaysTotalPercentagePayout').text(res.data.last30DaysTotalPercentagePayout);
-                $('.totalBalance').text(res.data.totalBalance);
-                $('.totalReferralBonus').text(res.data.totalReferralBonus);
-                $('.totalReturn').text(res.data.totalReturn);
-                $('.totalSumReferralBonus').text(res.data.totalSumReferralBonus);
-                $('.totalSumReturn').text(res.data.totalSumReturn);
-                $('.totalSumExchange').text(res.data.totalSumExchange);
+                $('.totalCompletedPayout').text(res.data.totalCompletedPayout);
 
                 Notiflix.Block.remove('.exchangeRecord');
             })

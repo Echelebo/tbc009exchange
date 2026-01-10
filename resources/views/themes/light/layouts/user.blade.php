@@ -15,6 +15,7 @@
 <body class="">
 @include($theme.'partials.loader')
 @include($theme.'partials.user.topbar')
+@include($theme.'partials.user.walletSidebar')
 @include($theme.'partials.user.mobileNav')
 @include($theme.'partials.user.sidebar')
 

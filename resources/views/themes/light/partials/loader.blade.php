@@ -8,7 +8,7 @@
                     <img src="{{asset('assets/themes/light/img/coin/coin-2.png')}}" alt="img">
                 </div>
                 <div class="txt-loading">
-                    @foreach (str_split(basicControl()->site_title??'Coinectra') as $key => $value)
+                    @foreach (str_split(basicControl()->site_title??'TBC Exchange') as $key => $value)
                         <span data-text-preloader="{{$value}}" class="letters-loading">
                                 {{$value}}
                             </span>

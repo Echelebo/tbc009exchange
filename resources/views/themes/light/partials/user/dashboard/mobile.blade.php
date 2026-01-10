@@ -171,19 +171,13 @@
                     <div class="box-card strong-orange-card exchangeRecord">
                         <div class="box-card-header">
                             <h5 class="box-card-title"><i
-                                    class="fa-light fas fa-undo-alt"></i>@lang('Total Top Up')</h5>
+                                    class="fa-light fas fa-undo-alt"></i>@lang('Total Completed Top Up($)')</h5>
                         </div>
                         <div class="box-card-body">
-                            <h4 class="mb-0"> <span class="totalTopUp"></span>
+                            <h4 class="mb-0"> <span class="totalCompletedTopUp"></span>
 
                             </h4>
-                            <div class="statistics">
-                                <p class="growth"><i
-                                        class="fa-light fa-chart-line-up"></i><span
-                                        class="last30DaysTotalPercentageTopUp"></span>
-                                    %</p>
-                                <div class="time">@lang('last 30 days')</div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -267,18 +261,12 @@
                     <div class="box-card grayish-custom-card exchangeRecord">
                         <div class="box-card-header">
                             <h5 class="box-card-title"><i
-                                    class="fa-light fas fa-undo-alt"></i>@lang('Total Payout')</h5>
+                                    class="fa-light fas fa-undo-alt"></i>@lang('Total Completed Payout($)')</h5>
                         </div>
                         <div class="box-card-body">
-                            <h4 class="mb-0"> <span class="totalPayout"></span>
+                            <h4 class="mb-0"> <span class="totalCompletedPayout"></span>
                                </h4>
-                            <div class="statistics">
-                                <p class="growth"><i
-                                        class="fa-light fa-chart-line-up"></i><span
-                                        class="last30DaysTotalPercentagePayout"></span>
-                                    %</p>
-                                <div class="time">@lang('last 30 days')</div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -286,90 +274,3 @@
         </div>
     </div>
 </div>
-<div class="tab-mobile-view-carousel-section mb-30 d-lg-none">
-    <div class="row">
-        <div class="col-12">
-            <h5 class="mb-10"> @lang('Other Wallet Statistics')</h5>
-
-            <div class="owl-carousel owl-theme carousel-1">
-                <div class="item">
-                    <div class="box-card strong-orange-card exchangeRecord">
-                        <div class="box-card-header">
-                            <h5 class="box-card-title"><i
-                                    class="fa-light fas fa-spinner"></i>@lang('Balance')
-                            </h5>
-                        </div>
-                        <div class="box-card-body">
-                            <h4 class="mb-0"> <span class="totalBalance"></span>
-
-                            </h4>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="box-card grayish-green-card exchangeRecord">
-                        <div class="box-card-header">
-                            <h5 class="box-card-title"><i
-                                    class="fa-light fas fa-check"></i>@lang('Referral Bonus')
-                            </h5>
-                        </div>
-                        <div class="box-card-body">
-                            <h4 class="mb-0"> <span class="totalReferralBonus"></span>
-
-                            </h4>
-                            <div class="statistics">
-                                <p class="growth"><i
-                                        class="fa-light fa-chart-line-up"></i>$<span
-                                        class="totalSumReferralBonus"></span>
-                                    </p>
-                                <div class="time">@lang('in USD')</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="box-card grayish-blue-card exchangeRecord">
-                        <div class="box-card-header">
-                            <h5 class="box-card-title"><i
-                                    class="fa-light fa-exclamation-triangle"></i>@lang('Total Return')
-                            </h5>
-                        </div>
-                        <div class="box-card-body">
-                            <h4 class="mb-0"> <span class="totalReturn"></span>
-
-                            </h4>
-                            <div class="statistics">
-                                <p class="growth down"><i
-                                        class="fa-light fa-chart-line-down"></i>$<span class="totalSumReturn"></span>
-                                    </p>
-                                <div class="time">@lang('in USD')</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="box-card grayish-custom-card exchangeRecord">
-                        <div class="box-card-header">
-                            <h5 class="box-card-title"><i
-                                    class="fa-light fas fa-undo-alt"></i>@lang('Total Exchange')</h5>
-                        </div>
-                        <div class="box-card-body">
-                            <h4 class="mb-0"> <span class="totalExchange"></span>
-                                </h4>
-                            <div class="statistics">
-                                <p class="growth"><i
-                                        class="fa-light fa-chart-line-up"></i>$<span
-                                        class="totalSumExchange"></span>
-                                    </p>
-                                <div class="time">@lang('in USD')</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
