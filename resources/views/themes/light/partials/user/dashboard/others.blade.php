@@ -9,7 +9,7 @@
                 </div>
                 <div class="ms-3">
                     <p class="mb-1 text-muted fw-semibold">Balance</p>
-                    $<h4 class="mb-0 fw-bold text-dark userBalance"></h4>
+                    <h4 class="mb-0 fw-bold text-dark">$<span class="userBalance"></span></h4>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="ms-3">
                     <p class="mb-1 text-muted fw-semibold">Total Exchanged Amount</p>
-                    $<h4 class="mb-0 fw-bold text-dark totalExchanged"></h4>
+                    <h4 class="mb-0 fw-bold text-dark">$<span class="totalExchanged"></span></h4>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="ms-3">
                     <p class="mb-1 text-muted fw-semibold">Total Stake</p>
-                    <h4 class="mb-0 fw-bold text-dark totalStaked"></h4>
+                    <h4 class="mb-0 fw-bold text-dark"><span class="totalStaked"></span></h4>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="ms-3">
                     <p class="mb-1 text-muted fw-semibold">Total Staked Amount</p>
-                    $<h4 class="mb-0 fw-bold text-dark totalStakedAmount"></h4>
+                    <h4 class="mb-0 fw-bold text-dark">$<span class="totalStakedAmount"></span></h4>
                 </div>
             </div>
         </div>
