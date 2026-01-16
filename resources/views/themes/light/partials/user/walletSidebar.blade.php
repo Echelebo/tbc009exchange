@@ -9,7 +9,7 @@
                 <small>Account Level</small>
             </div>
             <div class="text-end">
-                $<h5 class="mb-0 userBalance"></h5>
+                <h5 class="mb-0">$<span class="userBalance"></span></h5>
                 <small>Total Balance</small>
             </div>
         </div>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="right-side">
-                    $<h5 class="mb-0 totalReturned"></h5>
+                    <h5 class="mb-0">$<span class="totalReturned"></span></h5>
                 </div>
             </div>
             <div class="wallet-item">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="right-side">
                     <div class="right-side">
-                    $<h5 class="mb-0 totalOutcome"></h5>
+                    <h5 class="mb-0">$<span class="totalOutcome"></span></h5>
                 </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="right-side">
-                    $<h5 class="mb-0 totalBonus"></h5>
+                    <h5 class="mb-0">$<span class="totalBonus"></span></h5>
                 </div>
             </div>
             <div class="wallet-item">
@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="right-side">
-                    <h5 class="mb-0 totalReferrals"></h5>
+                    <h5 class="mb-0"><span class="totalReferrals"></span></h5>
                 </div>
             </div>
             </div>
