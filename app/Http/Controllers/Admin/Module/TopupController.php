@@ -185,7 +185,32 @@ public function topupSend(Request $request, $utr)
         $topup->amount,
         'USDT'
     );
-    $this->sendUserNotification($topup, 'userTopup', 'TOPUP_COMPLETE');
+
+
+   $params = [
+            'username' => $user->username ?? 'Anonymous',
+            'sendAmount' => rtrim(rtrim($topup->amount, 0), '.'),
+            'sendCurrency' => $topup->method,
+            'transaction' => $topup->utr,
+        ];
+
+        // Send email (and optionally SMS) to the referrer
+        // Assuming you have a method like sendMailSms() and a template key
+        $this->sendMailSms(
+            $user,
+            'TOPUP_COMPLETE', // Your email/SMS template key
+            $params
+        );
+
+        // Optional: Also send push notification to referrer
+        $action = [
+            "link" => '#', // or wherever they can view balance
+            "icon" => "fa fa-gift text-white"
+        ];
+
+        $this->userPushNotification($user, 'TOPUP_COMPLETE', $params, $action);
+        $this->userFirebasePushNotification($user, 'TOPUP_COMPLETE', $params);
+
     return back()->with('success', 'Top Up Completed Successfully');
 }
 public function topupCancel($utr)
@@ -193,7 +218,7 @@ public function topupCancel($utr)
     $topup = TopupRequest::where(['status' => 0, 'utr' => $utr])->latest()->firstOrFail();
     $topup->status = 2;
     $topup->save();
-    $this->sendUserNotification($topup, 'userTopup', 'TOPUP_CANCEL');
+   // $this->sendUserNotification($topup, 'userTopup', 'TOPUP_CANCEL');
     return back()->with('success', 'Top Up Cancel Successfully');
 }
 }

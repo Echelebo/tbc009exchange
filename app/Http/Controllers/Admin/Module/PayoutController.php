@@ -181,7 +181,35 @@ public function payoutSend(Request $request, $utr)
         $payout->final_amount,
         optional($payout->currency)->code
     );
-    $this->sendUserNotification($payout, 'userPayout', 'PAYOUT_COMPLETE');
+
+        $params = [
+            'username' => $user->username ?? 'Anonymous',
+            'sendAmount' => rtrim(rtrim($payout->amount, 0), '.'),
+            'sendCurrency' => $payout->method,
+            'transaction' => $payout->utr,
+        ];
+
+        // Send email (and optionally SMS) to the referrer
+        // Assuming you have a method like sendMailSms() and a template key
+        $this->sendMailSms(
+            $user,
+            'PAYOUT_COMPLETE', // Your email/SMS template key
+            $params
+        );
+
+        // Optional: Also send push notification to referrer
+        $action = [
+            "link" => '#', // or wherever they can view balance
+            "icon" => "fa fa-gift text-white"
+        ];
+
+        $this->userPushNotification($user, 'PAYOUT_COMPLETE', $params, $action);
+        $this->userFirebasePushNotification($user, 'PAYOUT_COMPLETE', $params);
+
+        //stops
+
+
+    //$this->sendUserNotification($payout, 'userPayout', 'PAYOUT_COMPLETE');
     return back()->with('success', 'Payout Completed Successfully');
 }
 public function payoutCancel($utr)
@@ -189,7 +217,7 @@ public function payoutCancel($utr)
     $payout = PayoutRequest::where(['status' => 0, 'utr' => $utr])->latest()->firstOrFail();
     $payout->status = 2;
     $payout->save();
-    $this->sendUserNotification($payout, 'userPayout', 'PAYOUT_CANCEL');
+   // $this->sendUserNotification($payout, 'userPayout', 'PAYOUT_CANCEL');
     return back()->with('success', 'Payout Cancel Successfully');
 }
 }
