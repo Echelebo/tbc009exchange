@@ -77,6 +77,9 @@ Route::group(['middleware' => ['maintenanceMode']], function () use ($basicContr
         ->name('sellDetails');
 
     // HomeController Chart & Records Routes
+    Route::get('getWallets', [HomeController::class, 'getWallets'])
+        ->name('getWallets');
+
     Route::get('getRecords', [HomeController::class, 'getRecords'])
         ->name('getRecords');
 

@@ -63,6 +63,53 @@ class HomeController extends Controller
         return view($this->theme . 'user.dashboard', $data);
     }
 
+    public function getWallets()
+    {
+        $exchangeActivationQuery = $this->exchangeActivationQuery()->where('user_id', auth()->id());
+
+        $activationRecord = collect((clone $exchangeActivationQuery)
+            ->whereIn('status', ['active', 'expired'])
+            ->selectRaw('total_return AS totalReturned')
+            ->selectRaw('SUM(released_stake) AS releasedStake')
+            ->selectRaw('SUM(released_return) AS releasedReturn')
+            ->get()
+            ->makeHidden(['tracking_status', 'admin_status', 'user_status'])
+            ->toArray())->collapse();
+
+        $balanceRequestQuery = $this->balanceRequestQuery();
+
+        $balanceRecord = collect((clone $balanceRequestQuery)
+            ->where('id', auth()->id())
+            ->selectRaw('balance AS userBalance')
+            ->selectRaw('account_level AS accountLevel')
+            ->get()
+            ->toArray())->collapse();
+
+        $referralRecord = collect((clone $balanceRequestQuery)
+            ->where('referral_by', auth()->id())
+            ->selectRaw('COUNT(id) AS totalReferrals')
+            ->get()
+            ->toArray())->collapse();
+
+        $transRequestQuery = $this->transRequestQuery();
+
+        $transRecord = collect((clone $transRequestQuery)
+            ->where('id', auth()->id())
+            ->where('remarks', 'LIKE', '%Referral Bonus%')
+            ->selectRaw('SUM(amount) AS totalBonus')
+            ->get()
+            ->toArray())->collapse();
+
+        return response()->json([
+            'accountLevel' => $balanceRecord['accountLevel'],
+            'userBalance' => fractionNumber($balanceRecord['userBalance'], false),
+            'totalReturned' => fractionNumber($activationRecord['totalReturned'], false),
+            'totalOutcome' => fractionNumber($activationRecord['releasedStake'] + $activationRecord['releasedReturn'], false),
+            'totalBonus' => fractionNumber($transRecord['totalBonus'], false),
+            'totalReferrals' => fractionNumber($referralRecord['totalReferrals'], false),
+        ]);
+    }
+
     public function getRecords()
     {
         $thirtyDaysAgo = Carbon::now()->subDays(30);
@@ -273,6 +320,11 @@ class HomeController extends Controller
     public function balanceRequestQuery()
     {
         return User::query();
+    }
+
+    public function transRequestQuery()
+    {
+        return Transaction::query();
     }
 
     public function exchangeActivationQuery()
