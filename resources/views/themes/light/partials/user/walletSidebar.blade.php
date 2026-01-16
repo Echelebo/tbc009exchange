@@ -16,9 +16,6 @@
         <div class="wallet-item-container" id="showAssetsBalance">
             <div class="wallet-item">
                 <div class="left-side">
-                    <a href="javascript:void(0)" class="deposit-btn" title="Return"><i class="fa-regular fa-arrow-up"></i></a>
-                </div>
-                <div class="middle-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
@@ -32,10 +29,8 @@
                 </div>
             </div>
             <div class="wallet-item">
+
                 <div class="left-side">
-                    <a href="javascript:void(0)" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
-                </div>
-                <div class="middle-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
@@ -52,9 +47,6 @@
             </div>
             <div class="wallet-item">
                 <div class="left-side">
-                    <a href="javascript:void(0)" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
-                </div>
-                <div class="middle-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
@@ -68,9 +60,6 @@
             </div>
             <div class="wallet-item">
                 <div class="left-side">
-                    <a href="javascript:void(0)" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
-                </div>
-                <div class="middle-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
