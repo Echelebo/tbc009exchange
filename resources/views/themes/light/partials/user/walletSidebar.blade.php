@@ -15,7 +15,7 @@
         </div>
         <div class="wallet-item-container" id="showAssetsBalance">
             <div class="wallet-item">
-                <div class="left-side">
+                <div class="middle-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
@@ -30,12 +30,12 @@
             </div>
             <div class="wallet-item">
 
-                <div class="left-side">
+                <div class="middle-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
                     <div>
-                        <h5 class="mb-0">Outcome</h5>
+                        <h5 class="mb-0">PNL</h5>
                         <small>(return + stake)</small>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="wallet-item">
-                <div class="left-side">
+                <div class="middle-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
@@ -59,12 +59,12 @@
                 </div>
             </div>
             <div class="wallet-item">
-                <div class="left-side">
+                <div class="middle-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
                     <div>
-                        <h5 class="mb-0">Tot. Referrals</h5>
+                        <h5 class="mb-0">Referrals</h5>
                     </div>
                 </div>
                 <div class="right-side">

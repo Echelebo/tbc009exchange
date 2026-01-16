@@ -69,7 +69,7 @@ class HomeController extends Controller
 
         $activationRecord = collect((clone $exchangeActivationQuery)
             ->whereIn('status', ['active', 'expired'])
-            ->selectRaw('total_return AS totalReturned')
+            ->selectRaw('SUM(total_return) AS totalReturned')
             ->selectRaw('SUM(released_stake) AS releasedStake')
             ->selectRaw('SUM(released_return) AS releasedReturn')
             ->get()
