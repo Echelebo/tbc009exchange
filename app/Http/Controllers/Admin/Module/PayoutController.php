@@ -184,7 +184,7 @@ public function payoutSend(Request $request, $utr)
 
         $params = [
             'username' => $user->username ?? 'Anonymous',
-            'sendAmount' => rtrim(rtrim($payout->amount, 0), '.'),
+            'sendAmount' => number_format($payout->amount, 2),
             'sendCurrency' => $payout->method,
             'transaction' => $payout->utr,
         ];

@@ -189,7 +189,7 @@ public function topupSend(Request $request, $utr)
 
    $params = [
             'username' => $user->username ?? 'Anonymous',
-            'sendAmount' => rtrim(rtrim($topup->amount, 0), '.'),
+            'sendAmount' => number_format($topup->amount, 2),
             'sendCurrency' => $topup->method,
             'transaction' => $topup->utr,
         ];
