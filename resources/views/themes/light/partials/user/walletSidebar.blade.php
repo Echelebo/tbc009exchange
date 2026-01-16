@@ -5,26 +5,27 @@
         <h4 class="mb-20">Assets</h4>
         <div class="d-flex justify-content-between gap-4 mb-30">
             <div>
-                <h5 class="mb-0">USD</h5>
-                <small>Market Value</small>
+                <h5 class="mb-0" id="accountLevel"></h5>
+                <small>Account Level</small>
             </div>
             <div class="text-end">
-                <h5 class="mb-0" id="totalUsdValue">$0.00</h5>
+                $<h5 class="mb-0" id="userBalance"></h5>
                 <small>Total Balance</small>
             </div>
         </div>
         <div class="wallet-item-container" id="showAssetsBalance">
             <div class="wallet-item">
                 <div class="left-side">
-                    <a href="https://coinectra.bugfinder.app/user/deposit/BTC" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
+                    <a href="javascript:void(0)" class="deposit-btn" title="Return"><i class="fa-regular fa-arrow-up"></i></a>
                 </div>
                 <div class="middle-side">
-                    <div class="img-box">
-                        <img src="https://coinectra.bugfinder.app/assets/upload/cryptoCurrency/GReffkZl30rN2n5WmGyIYf1KQv6too.webp" alt="...">
-                    </div>
+                    <div class="icon-wrapper">
+                    <i class="fa-regular fa-coins"></i>
+                </div>
+
                     <div>
-                        <h5 class="mb-0">BTC</h5>
-                        <small>BTC - Bitcoin</small>
+                        <h5 class="mb-0">Return</h5>
+                        <small>Total Returned</small>
                     </div>
                 </div>
                 <div class="right-side">
@@ -34,15 +35,15 @@
             </div>
             <div class="wallet-item">
                 <div class="left-side">
-                    <a href="https://coinectra.bugfinder.app/user/deposit/XRP" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
+                    <a href="javascript:void(0)" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
                 </div>
                 <div class="middle-side">
-                    <div class="img-box">
-                        <img src="https://coinectra.bugfinder.app/assets/upload/cryptoCurrency/Nf6sjTqtrB4b5vD9SKwsvjw1XUXSen.webp" alt="...">
-                    </div>
+                    <div class="icon-wrapper">
+                    <i class="fa-regular fa-coins"></i>
+                </div>
                     <div>
-                        <h5 class="mb-0">XRP</h5>
-                        <small>XRP - XRP</small>
+                        <h5 class="mb-0">Total Outcome</h5>
+                        <small>(return + stake)</small>
                     </div>
                 </div>
                 <div class="right-side">
@@ -52,15 +53,15 @@
             </div>
             <div class="wallet-item">
                 <div class="left-side">
-                    <a href="https://coinectra.bugfinder.app/user/deposit/SOL" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
+                    <a href="javascript:void(0)" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
                 </div>
                 <div class="middle-side">
-                    <div class="img-box">
-                        <img src="https://coinectra.bugfinder.app/assets/upload/cryptoCurrency/mMSPYBahEZ3GKlTX1OqZBuyBqBBqjb.webp" alt="...">
-                    </div>
+                    <div class="icon-wrapper">
+                    <i class="fa-regular fa-coins"></i>
+                </div>
                     <div>
-                        <h5 class="mb-0">SOL</h5>
-                        <small>SOL - Solana</small>
+                        <h5 class="mb-0">Referral</h5>
+                        <small>Referral Bonus</small>
                     </div>
                 </div>
                 <div class="right-side">
@@ -70,15 +71,15 @@
             </div>
             <div class="wallet-item">
                 <div class="left-side">
-                    <a href="https://coinectra.bugfinder.app/user/deposit/BCH" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
+                    <a href="javascript:void(0)" class="deposit-btn" title="Deposit"><i class="fa-regular fa-arrow-up"></i></a>
                 </div>
                 <div class="middle-side">
-                    <div class="img-box">
-                        <img src="https://coinectra.bugfinder.app/assets/upload/cryptoCurrency/yhHtKBhurH5TnRt7I3xizs9MNpbEmA.webp" alt="...">
-                    </div>
+                    <div class="icon-wrapper">
+                    <i class="fa-regular fa-coins"></i>
+                </div>
                     <div>
-                        <h5 class="mb-0">BCH</h5>
-                        <small>BCH - Bitcoin Cash</small>
+                        <h5 class="mb-0">Referral</h5>
+                        <small>Total Referrals</small>
                     </div>
                 </div>
                 <div class="right-side">
