@@ -5,7 +5,7 @@
         <h4 class="mb-20">Assets</h4>
         <div class="d-flex justify-content-between gap-4 mb-30">
             <div>
-                <h5 class="mb-0" id="accountLevel"></h5>
+                <h5 class="mb-0" id="accountLevel">$</h5>
                 <small>Account Level</small>
             </div>
             <div class="text-end">
@@ -25,7 +25,7 @@
 
                     <div>
                         <h5 class="mb-0">Return</h5>
-                        <small>Total Returned</small>
+                        <small>Tot. Return</small>
                     </div>
                 </div>
                 <div class="right-side">
@@ -42,7 +42,7 @@
                     <i class="fa-regular fa-coins"></i>
                 </div>
                     <div>
-                        <h5 class="mb-0">Total Outcome</h5>
+                        <h5 class="mb-0">Outcome</h5>
                         <small>(return + stake)</small>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                 </div>
                     <div>
                         <h5 class="mb-0">Referral</h5>
-                        <small>Referral Bonus</small>
+                        <small>Ref. Bonus</small>
                     </div>
                 </div>
                 <div class="right-side">
@@ -79,7 +79,7 @@
                 </div>
                     <div>
                         <h5 class="mb-0">Referral</h5>
-                        <small>Total Referrals</small>
+                        <small>Tot. Referrals</small>
                     </div>
                 </div>
                 <div class="right-side">
