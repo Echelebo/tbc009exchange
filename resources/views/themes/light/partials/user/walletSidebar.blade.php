@@ -15,10 +15,13 @@
         </div>
         <div class="wallet-item-container" id="showAssetsBalance">
             <div class="wallet-item">
-                <div class="middle-side">
+                <div class="left-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
+                </div>
+                <div class="middle-side">
+
 
                     <div>
                         <h5 class="mb-0">Tot. Return</h5>
@@ -29,11 +32,13 @@
                 </div>
             </div>
             <div class="wallet-item">
-
-                <div class="middle-side">
+                <div class="left-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
+                </div>
+                <div class="middle-side">
+
                     <div>
                         <h5 class="mb-0">PNL</h5>
                         <small>(return + stake)</small>
@@ -46,10 +51,13 @@
                 </div>
             </div>
             <div class="wallet-item">
-                <div class="middle-side">
+                <div class="left-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
+                </div>
+                <div class="middle-side">
+
                     <div>
                         <h5 class="mb-0">Ref. Bonus</h5>
                     </div>
@@ -59,10 +67,13 @@
                 </div>
             </div>
             <div class="wallet-item">
-                <div class="middle-side">
+                <div class="left-side">
                     <div class="icon-wrapper">
                     <i class="fa-regular fa-coins"></i>
                 </div>
+                </div>
+                <div class="middle-side">
+
                     <div>
                         <h5 class="mb-0">Referrals</h5>
                     </div>
