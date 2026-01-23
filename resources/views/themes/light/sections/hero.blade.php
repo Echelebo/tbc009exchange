@@ -73,7 +73,9 @@
             </div>
         </div>
     </div>
-
+    <div class="shape shape1">
+        <img src="{{$themeTrue.'img/coin/coin-2.png'}}" alt="...">
+    </div>
 </div>
 @include($theme.'partials.modal')
 
