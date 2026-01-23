@@ -12,23 +12,7 @@
                         </div>
 
                             <div class="row g-3">
-                                @foreach ($exchanges as $exchange)
-                                    <div class="col-12">
-                                        <div class="cmn-box">
-                                            <div class="icon-box">
-                                                <i class="fa-light fa-chart-line-up"></i>
-                                            </div>
-                                            <div class="text-box">
-                                                <h5>Amount: ${{ $exchange->send_amount }} / Stake: {{ $exchange->total_stake }} USDT</h5>
-                                                <span>Released Outcome: ${{ $exchange->released_stake + $exchange->released_return }}</span>
-                                                <span>Daily Outcome: ${{ $exchange->daily_return + $exchange->stake_daily_release }}</span>
-                                                <span>Next Outcome: ${{ $exchange->daily_timestamp }}</span>
-                                                <span>Expected Outcome: ${{ $exchange->total_return + $exchange->total_stake }}</span>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
                             </div>
 
                     </div>
