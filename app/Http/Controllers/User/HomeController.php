@@ -7,6 +7,7 @@ use App\Models\TopUpRequest;
 use App\Models\Deposit;
 use App\Models\ExchangeRequest;
 use App\Models\ExchangeActivation;
+use App\Models\AccountLevel;
 use App\Models\Gateway;
 use App\Models\Kyc;
 use App\Models\PayoutRequest;
@@ -654,12 +655,18 @@ class HomeController extends Controller
 
         try {
             $user = Auth::user();
+            $accountLevel = Auth::user()->account_level;
+            $accountLevelx = AccountLevel::where('level_name', $accountLevel)->first();
             $amount = $request->amount;
             $method = $request->method;
             $selectedAddress = $request->address;
 
             if ($user->balance < $amount) {
                 return back()->withInput()->with('error', 'Insufficient balance');
+            }
+
+            if ($accountLevelx->min_payout > $amount) {
+                return back()->withInput()->with('error', 'Amount is below minimum payout');
             }
 
             $user->balance -= $amount;
