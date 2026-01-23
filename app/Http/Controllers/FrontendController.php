@@ -6,6 +6,7 @@ use App\Mail\SendMail;
 use App\Models\BuyRequest;
 use App\Models\ContentDetails;
 use App\Models\ExchangeRequest;
+use App\Models\ExchangeActivation;
 use App\Models\PageDetail;
 use App\Models\SellRequest;
 use App\Models\Subscribe;
@@ -63,7 +64,8 @@ class FrontendController extends Controller
             ];
 
             $sectionsData = $this->getSectionsData($pageDetails->sections, $pageDetails->content, $selectedTheme);
-            return view("themes.{$selectedTheme}.page", compact('sectionsData', 'pageSeo'));
+            $exchanges = ExchangeActivation::where('deleted_at', Null)->orderBy('id', 'desc')->take(2)->get();
+            return view("themes.{$selectedTheme}.page", compact('sectionsData', 'pageSeo', 'exchanges'));
         } catch (\Exception $exception) {
             \Cache::forget('ConfigureSetting');
             if ($exception->getCode() == 404) {
