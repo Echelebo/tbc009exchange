@@ -164,9 +164,9 @@ trait SendNotification
     public function adminTopup($topup): void
     {
         $params = [
-            'user' => optional($topup->user)->username ?? 'Anonymous',
-            'sendAmount' => rtrim(rtrim($topup->amount, 0), '.'),
-            'sendCurrency' => optional($topup->method),
+            'user' => $topup->user->username ?? 'Anonymous',
+            'sendAmount' => number_format($topup->amount, 2),
+            'sendCurrency' => $topup->method,
             'transaction' => $topup->utr,
         ];
 
@@ -183,9 +183,9 @@ trait SendNotification
     public function adminPayout($payout): void
     {
         $params = [
-            'user' => optional($payout->user)->username ?? 'Anonymous',
-            'sendAmount' => rtrim(rtrim($payout->amount, 0), '.'),
-            'sendCurrency' => optional($payout->method),
+            'user' => $payout->user->username ?? 'Anonymous',
+            'sendAmount' => number_format($payout->amount, 2),
+            'sendCurrency' => $payout->method,
             'transaction' => $payout->utr,
         ];
 

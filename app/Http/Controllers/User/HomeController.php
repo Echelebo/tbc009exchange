@@ -676,9 +676,7 @@ class HomeController extends Controller
         $payout->status = 0;
         $payout->save();
 
-
-
-   // $this->sendAdminNotification($payout, 'adminPayout');
+   $this->sendAdminNotification($payout, 'adminPayout');
 
         return back()->with('success', 'Payout request submitted successfully.');
         } catch (\Exception $e) {
@@ -715,7 +713,7 @@ class HomeController extends Controller
         $payout->status = 0;
         $payout->save();
 
-  //  $this->sendAdminNotification($payout, 'adminTopup');
+   $this->sendAdminNotification($payout, 'adminTopup');
 
         return back()->with('success', 'Top Up request submitted successfully.');
         } catch (\Exception $e) {
