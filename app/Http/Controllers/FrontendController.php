@@ -6,7 +6,6 @@ use App\Mail\SendMail;
 use App\Models\BuyRequest;
 use App\Models\ContentDetails;
 use App\Models\ExchangeRequest;
-use App\Models\ExchangeActivation;
 use App\Models\PageDetail;
 use App\Models\SellRequest;
 use App\Models\Subscribe;
