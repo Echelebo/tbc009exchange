@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\ContentDetails;
 use App\Models\Language;
 use App\Models\ManageMenu;
+use App\Models\ExchangeActivation;
 use App\Models\Page;
 use App\Models\PageDetail;
 use App\Models\UserKyc;
@@ -58,6 +59,14 @@ class AppServiceProvider extends ServiceProvider
 
                 $languages = Language::orderBy('name')->where('status', 1)->get();
                 $view->with('languages', $languages);
+
+                $exchanges = ExchangeActivation::query()
+                    ->whereNull('deleted_at')
+                    ->orderByDesc('id')
+                    ->take(2)
+                    ->get();
+
+                $view->with('exchanges', $exchanges);
             });
 
 
